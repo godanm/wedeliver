@@ -42,7 +42,6 @@ class Login extends React.Component {
         try {
             let userData = await AsyncStorage.getItem("letsdoit");
             let data = JSON.parse(userData);
-            console.log("storagedata", data);
         } catch (error) {
             console.log("Something went wrong", error);
         }

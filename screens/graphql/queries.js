@@ -6,16 +6,13 @@ export const getActivity = `query GetActivity($id: ID!) {
     id
     tripid {
       id
-      groupid {
-        id
-        groupname
-      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      image
     }
     activityname
     description
@@ -30,11 +27,6 @@ export const getActivity = `query GetActivity($id: ID!) {
       duedate
       startdate
       status
-      owners {
-        id
-        username
-        phone
-      }
     }
   }
 }
@@ -47,29 +39,12 @@ export const listActivitys = `query ListActivitys(
   listActivitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      tripid {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
       activityname
       description
       title
       location
       cost
       status
-      todos {
-        id
-        title
-        description
-        duedate
-        startdate
-        status
-      }
     }
     nextToken
   }
@@ -81,16 +56,7 @@ export const getTrip = `query GetTrip($id: ID!) {
     groupid {
       id
       groupname
-      groupmembers {
-        id
-        username
-        phone
-      }
-      groupadmins {
-        id
-        username
-        phone
-      }
+      image
     }
     tripdestination
     tripstart
@@ -98,6 +64,7 @@ export const getTrip = `query GetTrip($id: ID!) {
     thumpbnails
     status
     remarks
+    image
   }
 }
 `;
@@ -109,16 +76,13 @@ export const listTrips = `query ListTrips(
   listTrips(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      groupid {
-        id
-        groupname
-      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      image
     }
     nextToken
   }
@@ -138,6 +102,7 @@ export const getGroup = `query GetGroup($id: ID!) {
       username
       phone
     }
+    image
   }
 }
 `;
@@ -150,16 +115,7 @@ export const listGroups = `query ListGroups(
     items {
       id
       groupname
-      groupmembers {
-        id
-        username
-        phone
-      }
-      groupadmins {
-        id
-        username
-        phone
-      }
+      image
     }
     nextToken
   }
@@ -217,11 +173,6 @@ export const listToDos = `query ListToDos(
       duedate
       startdate
       status
-      owners {
-        id
-        username
-        phone
-      }
     }
     nextToken
   }

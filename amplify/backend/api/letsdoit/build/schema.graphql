@@ -28,6 +28,7 @@ type Group {
   groupname: String!
   groupmembers: [Users]
   groupadmins: [Users]
+  image: String!
 }
 
 type Users {
@@ -247,6 +248,7 @@ type ModelGroupConnection {
 input ModelGroupFilterInput {
   id: ModelIDFilterInput
   groupname: ModelStringFilterInput
+  image: ModelStringFilterInput
   and: [ModelGroupFilterInput]
   or: [ModelGroupFilterInput]
   not: ModelGroupFilterInput
@@ -255,11 +257,13 @@ input ModelGroupFilterInput {
 input CreateGroupInput {
   id: ID
   groupname: String!
+  image: String!
 }
 
 input UpdateGroupInput {
   id: ID!
   groupname: String
+  image: String
 }
 
 input DeleteGroupInput {

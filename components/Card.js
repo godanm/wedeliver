@@ -9,8 +9,7 @@ import { argonTheme } from '../constants';
 
 class Card extends React.Component {
   render() {
-    const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
-    
+    const { navigation, image, title, cta , horizontal, full, style, ctaColor, imageStyle } = this.props;
     const imageStyles = [
       full ? styles.fullImage : styles.horizontalImage,
       imageStyle
@@ -25,13 +24,12 @@ class Card extends React.Component {
       <Block row={horizontal} card flex style={cardContainer}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
           <Block flex style={imgContainer}>
-            <Image source={{uri: item.image}} style={imageStyles} />
+              <Image source={{uri: image}} style={imageStyles} />
           </Block>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
           <Block flex space="between" style={styles.cardDescription}>
-            <Text size={14} style={styles.cardTitle}>{item.title}</Text>
-            <Text size={12} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>{item.cta}</Text>
+            <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>{title}</Text>
           </Block>
         </TouchableWithoutFeedback>
       </Block>
@@ -40,11 +38,13 @@ class Card extends React.Component {
 }
 
 Card.propTypes = {
-  item: PropTypes.object,
-  horizontal: PropTypes.bool,
-  full: PropTypes.bool,
-  ctaColor: PropTypes.string,
-  imageStyle: PropTypes.any,
+    image: PropTypes.string,
+    title: PropTypes.string,
+    cta: PropTypes.string,
+    horizontal: PropTypes.bool,
+    full: PropTypes.bool,
+    ctaColor: PropTypes.string,
+    imageStyle: PropTypes.any,
 }
 
 const styles = StyleSheet.create({
@@ -58,7 +58,9 @@ const styles = StyleSheet.create({
   cardTitle: {
     flex: 1,
     flexWrap: 'wrap',
-    paddingBottom: 6
+    paddingBottom: 6,
+    justifyContent: 'center'
+
   },
   cardDescription: {
     padding: theme.SIZES.BASE / 2

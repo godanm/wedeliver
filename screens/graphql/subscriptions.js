@@ -6,16 +6,13 @@ export const onCreateActivity = `subscription OnCreateActivity {
     id
     tripid {
       id
-      groupid {
-        id
-        groupname
-      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      image
     }
     activityname
     description
@@ -30,11 +27,6 @@ export const onCreateActivity = `subscription OnCreateActivity {
       duedate
       startdate
       status
-      owners {
-        id
-        username
-        phone
-      }
     }
   }
 }
@@ -44,16 +36,13 @@ export const onUpdateActivity = `subscription OnUpdateActivity {
     id
     tripid {
       id
-      groupid {
-        id
-        groupname
-      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      image
     }
     activityname
     description
@@ -68,11 +57,6 @@ export const onUpdateActivity = `subscription OnUpdateActivity {
       duedate
       startdate
       status
-      owners {
-        id
-        username
-        phone
-      }
     }
   }
 }
@@ -82,16 +66,13 @@ export const onDeleteActivity = `subscription OnDeleteActivity {
     id
     tripid {
       id
-      groupid {
-        id
-        groupname
-      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      image
     }
     activityname
     description
@@ -106,11 +87,6 @@ export const onDeleteActivity = `subscription OnDeleteActivity {
       duedate
       startdate
       status
-      owners {
-        id
-        username
-        phone
-      }
     }
   }
 }
@@ -121,16 +97,7 @@ export const onCreateTrip = `subscription OnCreateTrip {
     groupid {
       id
       groupname
-      groupmembers {
-        id
-        username
-        phone
-      }
-      groupadmins {
-        id
-        username
-        phone
-      }
+      image
     }
     tripdestination
     tripstart
@@ -138,6 +105,7 @@ export const onCreateTrip = `subscription OnCreateTrip {
     thumpbnails
     status
     remarks
+    image
   }
 }
 `;
@@ -147,16 +115,7 @@ export const onUpdateTrip = `subscription OnUpdateTrip {
     groupid {
       id
       groupname
-      groupmembers {
-        id
-        username
-        phone
-      }
-      groupadmins {
-        id
-        username
-        phone
-      }
+      image
     }
     tripdestination
     tripstart
@@ -164,6 +123,7 @@ export const onUpdateTrip = `subscription OnUpdateTrip {
     thumpbnails
     status
     remarks
+    image
   }
 }
 `;
@@ -173,16 +133,7 @@ export const onDeleteTrip = `subscription OnDeleteTrip {
     groupid {
       id
       groupname
-      groupmembers {
-        id
-        username
-        phone
-      }
-      groupadmins {
-        id
-        username
-        phone
-      }
+      image
     }
     tripdestination
     tripstart
@@ -190,6 +141,7 @@ export const onDeleteTrip = `subscription OnDeleteTrip {
     thumpbnails
     status
     remarks
+    image
   }
 }
 `;
@@ -207,6 +159,7 @@ export const onCreateGroup = `subscription OnCreateGroup {
       username
       phone
     }
+    image
   }
 }
 `;
@@ -224,6 +177,7 @@ export const onUpdateGroup = `subscription OnUpdateGroup {
       username
       phone
     }
+    image
   }
 }
 `;
@@ -241,6 +195,7 @@ export const onDeleteGroup = `subscription OnDeleteGroup {
       username
       phone
     }
+    image
   }
 }
 `;

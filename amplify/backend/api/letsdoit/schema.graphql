@@ -25,6 +25,7 @@ type Group @model {
     groupname: String!
     groupmembers: [Users]
     groupadmins: [Users]
+    image: String!
 }
 type Users @model {
     id: ID!

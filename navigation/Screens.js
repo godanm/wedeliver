@@ -10,12 +10,12 @@ import { Block } from "galio-framework";
 
 // screens
 import Home from "../screens/Home";
-import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 import Elements from "../screens/Elements";
-import Articles from "../screens/Articles";
+import MyTodo from "../screens/MyTodo";
 import Login from "../screens/Login";
+import Adddata from "../screens/Adddata"
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -23,6 +23,7 @@ import DrawerItem from "../components/DrawerItem";
 // header for screens
 import Header from "../components/Header";
 import Signup from "../screens/Signup";
+import MyTrips from "../screens/MyTrips";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
@@ -76,11 +77,11 @@ const ElementsStack = createStackNavigator({
   transitionConfig
 });
 
-const ArticlesStack = createStackNavigator({
-  Articles: {
-    screen: Articles,
+const TodoStack = createStackNavigator({
+    MyTodo: {
+    screen: MyTodo,
     navigationOptions: ({ navigation }) => ({
-      header: <Header title="Articles" navigation={navigation} />
+      header: <Header title="My Todo" navigation={navigation} />
     })
   }
 },{
@@ -109,11 +110,11 @@ const ProfileStack = createStackNavigator(
 );
 
 const HomeStack = createStackNavigator(
-  {
+    {
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
-        header: <Header search options title="Home" navigation={navigation} />
+        header: <Header search options title="My Groups" navigation={navigation} />
       })
     },
     Signup: {
@@ -125,15 +126,18 @@ const HomeStack = createStackNavigator(
           headerTransparent: true
       })
     },
-    Pro: {
-      screen: Pro,
+    MyTrips: {
+      screen: MyTrips,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header left={<Block />} white transparent title="" navigation={navigation} />
-        ),
-        headerTransparent: true
+          header: <Header search options title="My Trips" navigation={navigation} />
       })
-    }
+    },
+        MyTodo: {
+            screen: MyTodo,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header search options title="My Todo" navigation={navigation} />
+            })
+        },
   },
   {
     cardStyle: {
@@ -142,22 +146,20 @@ const HomeStack = createStackNavigator(
     transitionConfig
   }
 );
-// divideru se baga ca si cum ar fi un ecrna dar nu-i nimic duh
+
 const AppStack = createDrawerNavigator(
   {
     Login: {
-      screen: Login,
+      /*screen: Login,
       navigationOptions: {
         drawerLabel: () => {}
-      }
-    },
-    Home: {
-      screen: HomeStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} title="Home" />
-        )
-      })
+      }*/
+        screen: HomeStack,
+        navigationOptions: navOpt => ({
+            drawerLabel: ({ focused }) => (
+                <DrawerItem focused={focused} title="Home" />
+            )
+        })
     },
     Profile: {
       screen: ProfileStack,
@@ -167,27 +169,19 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-    Account: {
-      screen: Register,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Register" title="Account" />
-        )
-      })
-    },
     Elements: {
       screen: ElementsStack,
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Elements" title="Elements" />
+          <DrawerItem focused={focused} screen="Elements" title="My Todos" />
         )
       })
     },
-    Articles: {
-      screen: ArticlesStack,
+    MyTodo: {
+      screen: MyTodo,
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Articles" title="Articles" />
+          <DrawerItem focused={focused} screen="MyTodo" title="My Todo" />
         )
       })
     },

@@ -1,63 +1,83 @@
 {
-	"providers": {
-		"awscloudformation": {
-			"AuthRoleName": "amplify-letsdoit-dev-213028-authRole",
-			"UnauthRoleArn": "arn:aws:iam::879822602086:role/amplify-letsdoit-dev-213028-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::879822602086:role/amplify-letsdoit-dev-213028-authRole",
-			"Region": "us-west-2",
-			"DeploymentBucketName": "amplify-letsdoit-dev-213028-deployment",
-			"UnauthRoleName": "amplify-letsdoit-dev-213028-unauthRole",
-			"StackName": "amplify-letsdoit-dev-213028",
-			"StackId": "arn:aws:cloudformation:us-west-2:879822602086:stack/amplify-letsdoit-dev-213028/51032470-0a85-11ea-93e5-0a13a2454304"
-		}
-	},
-	"api": {
-		"letsdoit": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"additionalAuthenticationProviders": [],
-					"defaultAuthentication": {
-						"authenticationType": "API_KEY",
-						"apiKeyConfig": {
-							"description": "",
-							"apiKeyExpirationDays": "365"
-						}
-					}
-				},
-				"GraphQLAPIIdOutput": "2b2ge5bwongv3dqted2wfuwvpm",
-				"GraphQLAPIEndpointOutput": "https://f5rsakmq2ngvtfxvmrnps3zs5e.appsync-api.us-west-2.amazonaws.com/graphql",
-				"GraphQLAPIKeyOutput": "da2-mzbpio5swzaqhmdwr22qg6d6cu"
-			},
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-letsdoit-dev-213028-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-				"logicalId": "apiletsdoit"
-			},
-			"lastPushTimeStamp": "2019-11-19T04:35:51.174Z",
-			"lastPushDirHash": "fHtohbreSUl2+3xNaF5JUM7e++U="
-		}
-	},
-	"auth": {
-		"letsdoitb6b075fd": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-letsdoit-dev-213028-deployment/amplify-cfn-templates/auth/letsdoitb6b075fd-cloudformation-template.yml",
-				"logicalId": "authletsdoitb6b075fd"
-			},
-			"lastPushTimeStamp": "2019-11-19T04:35:51.174Z",
-			"output": {
-				"AppClientSecret": "8dle643gn3ict60o03nvt9to0a04q5pr7nnoo911e4ojppfhkud",
-				"UserPoolId": "us-west-2_xP8rgVjHA",
-				"AppClientIDWeb": "2313md9qqutjuf9si7gdpgjtp2",
-				"AppClientID": "4ttcsaipo05adsbgl4t1ipian8",
-				"IdentityPoolId": "us-west-2:fc3c3dcd-d408-4e78-a0b0-f234f95c444b",
-				"IdentityPoolName": "letsdoitb6b075fd_identitypool_b6b075fd__dev",
-				"UserPoolName": "letsdoitb6b075fd_userpool_b6b075fd"
-			},
-			"lastPushDirHash": "dzUj2DsEsRw7FvKc4iidksqMlsE="
-		}
-	}
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-letsdoit-dev-213028-authRole",
+            "UnauthRoleArn": "arn:aws:iam::879822602086:role/amplify-letsdoit-dev-213028-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::879822602086:role/amplify-letsdoit-dev-213028-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-letsdoit-dev-213028-deployment",
+            "UnauthRoleName": "amplify-letsdoit-dev-213028-unauthRole",
+            "StackName": "amplify-letsdoit-dev-213028",
+            "StackId": "arn:aws:cloudformation:us-west-2:879822602086:stack/amplify-letsdoit-dev-213028/51032470-0a85-11ea-93e5-0a13a2454304"
+        },
+        "categories": {
+            "auth": {
+                "letsdoitb6b075fd": {}
+            }
+        }
+    },
+    "api": {
+        "letsdoit": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "additionalAuthenticationProviders": [],
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "description": "",
+                            "apiKeyExpirationDays": "365"
+                        }
+                    }
+                },
+                "GraphQLAPIIdOutput": "2b2ge5bwongv3dqted2wfuwvpm",
+                "GraphQLAPIEndpointOutput": "https://f5rsakmq2ngvtfxvmrnps3zs5e.appsync-api.us-west-2.amazonaws.com/graphql",
+                "GraphQLAPIKeyOutput": "da2-mzbpio5swzaqhmdwr22qg6d6cu"
+            },
+            "lastPushTimeStamp": "2019-11-24T07:50:12.676Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-letsdoit-dev-213028-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+                "logicalId": "apiletsdoit"
+            }
+        },
+        "letsdoit-dev": {
+            "service": "AppSync",
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY"
+                    },
+                    "additionalAuthenticationProviders": null
+                },
+                "GraphQLAPIIdOutput": "2b2ge5bwongv3dqted2wfuwvpm",
+                "GraphQLAPIEndpointOutput": "https://f5rsakmq2ngvtfxvmrnps3zs5e.appsync-api.us-west-2.amazonaws.com/graphql",
+                "name": "letsdoit-dev",
+                "region": "us-west-2",
+                "GraphQLAPIKeyOutput": "da2-mzbpio5swzaqhmdwr22qg6d6cu"
+            },
+            "lastPushTimeStamp": "2019-11-24T08:06:33.863Z"
+        }
+    },
+    "auth": {
+        "letsdoitb6b075fd": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "output": {
+                "AppClientSecret": "8dle643gn3ict60o03nvt9to0a04q5pr7nnoo911e4ojppfhkud",
+                "UserPoolId": "us-west-2_xP8rgVjHA",
+                "AppClientIDWeb": "2313md9qqutjuf9si7gdpgjtp2",
+                "AppClientID": "4ttcsaipo05adsbgl4t1ipian8",
+                "IdentityPoolId": "us-west-2:fc3c3dcd-d408-4e78-a0b0-f234f95c444b",
+                "IdentityPoolName": "letsdoitb6b075fd_identitypool_b6b075fd__dev",
+                "UserPoolName": "letsdoitb6b075fd_userpool_b6b075fd"
+            },
+            "lastPushTimeStamp": "2019-11-24T07:50:12.677Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-letsdoit-dev-213028-deployment/amplify-cfn-templates/auth/letsdoitb6b075fd-cloudformation-template.yml",
+                "logicalId": "authletsdoitb6b075fd"
+            }
+        }
+    }
 }

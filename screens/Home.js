@@ -1,46 +1,49 @@
 import React from 'react';
 import { StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { Block, theme } from 'galio-framework';
+import { Block, theme, Text } from 'galio-framework';
+
+import { listGroups } from './graphql/queries';
+import { Connect } from "aws-amplify-react-native";
+import API, { graphqlOperation } from '@aws-amplify/api';
+import config from './aws-exports'
+
 
 import { Card } from '../components';
 import articles from '../constants/articles';
+
 const { width } = Dimensions.get('screen');
+API.configure(config)             // Configure Amplify
 
 class Home extends React.Component {
-  renderArticles = () => {
-    return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.articles}>
-        <Block flex>
-          <Card item={articles[0]} horizontal  />
-          <Block flex row>
-            <Card item={articles[1]} style={{ marginRight: theme.SIZES.BASE }} />
-            <Card item={articles[2]} />
-          </Block>
-          <Card item={articles[3]} horizontal />
-          <Card item={articles[4]} full />
-        </Block>
-      </ScrollView>
-    )
-  }
-
-  render() {
-    return (
-      <Block flex center style={styles.home}>
-        {this.renderArticles()}
-      </Block>
-    );
-  }
+    render() {
+        const ListView = ({ groups }) => {
+            return <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.articles}>
+                <Block flex>
+                    {groups.map(group => <Card key={group.id} title={group.groupname} image={group.image}></Card>)}
+                </Block>
+            </ScrollView>;
+        };
+        return <Connect query={graphqlOperation(listGroups)}>
+            {({data: {listGroups}, loading, errors}) => {
+                if (loading || !listGroups) return (<Text>Loading...</Text>);
+                return (<ListView groups={listGroups.items}/>);
+            }}
+        </Connect>
+    }
 }
+
 
 const styles = StyleSheet.create({
   home: {
-    width: width,    
+    width: width,
   },
   articles: {
-    width: width - theme.SIZES.BASE * 2,
+    width: '90%',
+      marginHorizontal: 20,
     paddingVertical: theme.SIZES.BASE,
+      justifyContent: 'center'
   },
 });
 

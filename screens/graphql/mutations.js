@@ -6,16 +6,13 @@ export const createActivity = `mutation CreateActivity($input: CreateActivityInp
     id
     tripid {
       id
-      groupid {
-        id
-        groupname
-      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      image
     }
     activityname
     description
@@ -30,11 +27,6 @@ export const createActivity = `mutation CreateActivity($input: CreateActivityInp
       duedate
       startdate
       status
-      owners {
-        id
-        username
-        phone
-      }
     }
   }
 }
@@ -44,16 +36,13 @@ export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInp
     id
     tripid {
       id
-      groupid {
-        id
-        groupname
-      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      image
     }
     activityname
     description
@@ -68,11 +57,6 @@ export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInp
       duedate
       startdate
       status
-      owners {
-        id
-        username
-        phone
-      }
     }
   }
 }
@@ -82,16 +66,13 @@ export const deleteActivity = `mutation DeleteActivity($input: DeleteActivityInp
     id
     tripid {
       id
-      groupid {
-        id
-        groupname
-      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      image
     }
     activityname
     description
@@ -106,11 +87,6 @@ export const deleteActivity = `mutation DeleteActivity($input: DeleteActivityInp
       duedate
       startdate
       status
-      owners {
-        id
-        username
-        phone
-      }
     }
   }
 }
@@ -121,16 +97,7 @@ export const createTrip = `mutation CreateTrip($input: CreateTripInput!) {
     groupid {
       id
       groupname
-      groupmembers {
-        id
-        username
-        phone
-      }
-      groupadmins {
-        id
-        username
-        phone
-      }
+      image
     }
     tripdestination
     tripstart
@@ -138,6 +105,7 @@ export const createTrip = `mutation CreateTrip($input: CreateTripInput!) {
     thumpbnails
     status
     remarks
+    image
   }
 }
 `;
@@ -147,16 +115,7 @@ export const updateTrip = `mutation UpdateTrip($input: UpdateTripInput!) {
     groupid {
       id
       groupname
-      groupmembers {
-        id
-        username
-        phone
-      }
-      groupadmins {
-        id
-        username
-        phone
-      }
+      image
     }
     tripdestination
     tripstart
@@ -164,6 +123,7 @@ export const updateTrip = `mutation UpdateTrip($input: UpdateTripInput!) {
     thumpbnails
     status
     remarks
+    image
   }
 }
 `;
@@ -173,16 +133,7 @@ export const deleteTrip = `mutation DeleteTrip($input: DeleteTripInput!) {
     groupid {
       id
       groupname
-      groupmembers {
-        id
-        username
-        phone
-      }
-      groupadmins {
-        id
-        username
-        phone
-      }
+      image
     }
     tripdestination
     tripstart
@@ -190,6 +141,7 @@ export const deleteTrip = `mutation DeleteTrip($input: DeleteTripInput!) {
     thumpbnails
     status
     remarks
+    image
   }
 }
 `;
@@ -207,6 +159,7 @@ export const createGroup = `mutation CreateGroup($input: CreateGroupInput!) {
       username
       phone
     }
+    image
   }
 }
 `;
@@ -224,6 +177,7 @@ export const updateGroup = `mutation UpdateGroup($input: UpdateGroupInput!) {
       username
       phone
     }
+    image
   }
 }
 `;
@@ -241,6 +195,7 @@ export const deleteGroup = `mutation DeleteGroup($input: DeleteGroupInput!) {
       username
       phone
     }
+    image
   }
 }
 `;
