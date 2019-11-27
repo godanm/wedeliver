@@ -1,18 +1,36 @@
 scalar AWSDate
+
 type Activity @model {
     id: ID!
-    tripid: Trip
+    tripid: Trip @connection(name: "ActivityTrip")
     activityname: String!
     description: String!
     title: String!
     location: String!
     cost: Float
     status: Boolean!
-    todos: [ToDo]
+    todos: [ToDo]  @connection(name: "ActivityTodo")
 }
-type Trip @model {
+
+type Group @model {
     id: ID!
-    groupid: Group
+    groupname: String!
+    groupmembers: [Users] @connection(name: "GroupMembersAdmin")
+    image: String!
+}
+type ToDo @model {
+    id: ID! @connection(name: "ActivityTodo")
+    title: String!
+    description: String!
+    duedate: AWSDate!
+    startdate: AWSDate!
+    status: Boolean!
+    owners: [Users]  @connection(name: "TodoUsers")
+}
+
+type Trip @model {
+    id: ID! @connection(name: "ActivityTrip")
+    groupid: Group @connection(name: "TripGroup")
     tripdestination: String!
     tripstart: AWSDate!
     tripend: AWSDate!
@@ -20,25 +38,13 @@ type Trip @model {
     status: Boolean!
     remarks: String
 }
-type Group @model {
-    id: ID!
-    groupname: String!
-    groupmembers: [Users]
-    groupadmins: [Users]
-    image: String!
-}
+
 type Users @model {
     id: ID!
-    username: String!
+    username: String! @connection(name: "GroupMembersAdmin")
     phone: String!
+    email: String!
+    fname: String!
+    lname: String!
 }
 
-type ToDo @model {
-    id: ID!
-    title: String!
-    description: String!
-    duedate: AWSDate!
-    startdate: AWSDate!
-    status: Boolean!
-    owners: [Users]
-}

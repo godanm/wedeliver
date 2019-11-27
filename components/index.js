@@ -8,12 +8,12 @@ import Switch from './Switch';
 import Select from './Select';
 
 export {
-  Button,
-  Card,
-  DrawerItem,
-  Icon,
-  Input,
-  Header,
-  Switch, 
-  Select
+    Button,
+    Card,
+    DrawerItem,
+    Icon,
+    Input,
+    Header,
+    Switch,
+    Select
 };

@@ -16,6 +16,10 @@ import Elements from "../screens/Elements";
 import MyTodo from "../screens/MyTodo";
 import Login from "../screens/Login";
 import Adddata from "../screens/Adddata"
+import GroupDetails from "../screens/GroupDetails"
+import TripDetails from "../screens/TripDetails"
+
+
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -132,12 +136,25 @@ const HomeStack = createStackNavigator(
           header: <Header search options title="My Trips" navigation={navigation} />
       })
     },
-        MyTodo: {
-            screen: MyTodo,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header search options title="My Todo" navigation={navigation} />
-            })
-        },
+    MyTodo: {
+        screen: MyTodo,
+        navigationOptions: ({ navigation }) => ({
+            header: <Header search options title="My Todo" navigation={navigation} />
+        })
+    },
+    GroupDetails: {
+        screen: GroupDetails,
+        navigationOptions: ({ navigation }) => ({
+            header: <Header search options title="Group Details" navigation={navigation} />
+        })
+    },
+    TripDetails: {
+        screen: TripDetails,
+        navigationOptions: ({ navigation }) => ({
+            header: <Header search options title="Trip Details" navigation={navigation} />
+        })
+    },
+
   },
   {
     cardStyle: {
@@ -154,7 +171,7 @@ const AppStack = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: () => {}
       }*/
-        screen: HomeStack,
+        screen: Adddata,
         navigationOptions: navOpt => ({
             drawerLabel: ({ focused }) => (
                 <DrawerItem focused={focused} title="Home" />
@@ -169,19 +186,11 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-    Elements: {
-      screen: ElementsStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Elements" title="My Todos" />
-        )
-      })
-    },
     MyTodo: {
       screen: MyTodo,
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="MyTodo" title="My Todo" />
+          <DrawerItem focused={focused} screen="MyTodo" title="My To-do" />
         )
       })
     },

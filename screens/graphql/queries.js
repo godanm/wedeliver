@@ -12,7 +12,6 @@ export const getActivity = `query GetActivity($id: ID!) {
       thumpbnails
       status
       remarks
-      image
     }
     activityname
     description
@@ -64,7 +63,6 @@ export const getTrip = `query GetTrip($id: ID!) {
     thumpbnails
     status
     remarks
-    image
   }
 }
 `;
@@ -82,7 +80,6 @@ export const listTrips = `query ListTrips(
       thumpbnails
       status
       remarks
-      image
     }
     nextToken
   }
@@ -96,11 +93,17 @@ export const getGroup = `query GetGroup($id: ID!) {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     groupadmins {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     image
   }
@@ -126,6 +129,9 @@ export const getUsers = `query GetUsers($id: ID!) {
     id
     username
     phone
+    email
+    fname
+    lname
   }
 }
 `;
@@ -139,6 +145,9 @@ export const listUserss = `query ListUserss(
       id
       username
       phone
+      email
+      fname
+      lname
     }
     nextToken
   }
@@ -156,6 +165,9 @@ export const getToDo = `query GetToDo($id: ID!) {
       id
       username
       phone
+      email
+      fname
+      lname
     }
   }
 }

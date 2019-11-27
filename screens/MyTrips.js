@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View } from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
 
 import { listTrips } from './graphql/queries';
@@ -20,7 +20,14 @@ class MyTrips extends React.Component {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.articles}>
                 <Block flex>
-                    {trips.map(trip => <Card key={trip.id} title={trip.tripdestination} image={trip.image}></Card>)}
+                    {trips.map(trip =>
+                        <TouchableOpacity key={trip.id} onPress={() => this.props.navigation.navigate("TripDetails", {id:trip.id}
+                        )}>
+                            <View>
+                                <Card key={trip.id} title={trip.tripdestination} image={trip.image}></Card>
+                            </View>
+                        </TouchableOpacity>
+                    )}
                 </Block>
             </ScrollView>;
         };

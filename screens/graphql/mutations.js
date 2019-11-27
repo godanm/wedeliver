@@ -12,7 +12,6 @@ export const createActivity = `mutation CreateActivity($input: CreateActivityInp
       thumpbnails
       status
       remarks
-      image
     }
     activityname
     description
@@ -42,7 +41,6 @@ export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInp
       thumpbnails
       status
       remarks
-      image
     }
     activityname
     description
@@ -72,7 +70,6 @@ export const deleteActivity = `mutation DeleteActivity($input: DeleteActivityInp
       thumpbnails
       status
       remarks
-      image
     }
     activityname
     description
@@ -105,7 +102,6 @@ export const createTrip = `mutation CreateTrip($input: CreateTripInput!) {
     thumpbnails
     status
     remarks
-    image
   }
 }
 `;
@@ -123,7 +119,6 @@ export const updateTrip = `mutation UpdateTrip($input: UpdateTripInput!) {
     thumpbnails
     status
     remarks
-    image
   }
 }
 `;
@@ -141,7 +136,6 @@ export const deleteTrip = `mutation DeleteTrip($input: DeleteTripInput!) {
     thumpbnails
     status
     remarks
-    image
   }
 }
 `;
@@ -153,11 +147,17 @@ export const createGroup = `mutation CreateGroup($input: CreateGroupInput!) {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     groupadmins {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     image
   }
@@ -171,11 +171,17 @@ export const updateGroup = `mutation UpdateGroup($input: UpdateGroupInput!) {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     groupadmins {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     image
   }
@@ -189,11 +195,17 @@ export const deleteGroup = `mutation DeleteGroup($input: DeleteGroupInput!) {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     groupadmins {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     image
   }
@@ -204,6 +216,9 @@ export const createUsers = `mutation CreateUsers($input: CreateUsersInput!) {
     id
     username
     phone
+    email
+    fname
+    lname
   }
 }
 `;
@@ -212,6 +227,9 @@ export const updateUsers = `mutation UpdateUsers($input: UpdateUsersInput!) {
     id
     username
     phone
+    email
+    fname
+    lname
   }
 }
 `;
@@ -220,6 +238,9 @@ export const deleteUsers = `mutation DeleteUsers($input: DeleteUsersInput!) {
     id
     username
     phone
+    email
+    fname
+    lname
   }
 }
 `;
@@ -235,6 +256,9 @@ export const createToDo = `mutation CreateToDo($input: CreateToDoInput!) {
       id
       username
       phone
+      email
+      fname
+      lname
     }
   }
 }
@@ -251,6 +275,9 @@ export const updateToDo = `mutation UpdateToDo($input: UpdateToDoInput!) {
       id
       username
       phone
+      email
+      fname
+      lname
     }
   }
 }
@@ -267,6 +294,9 @@ export const deleteToDo = `mutation DeleteToDo($input: DeleteToDoInput!) {
       id
       username
       phone
+      email
+      fname
+      lname
     }
   }
 }

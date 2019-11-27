@@ -12,7 +12,6 @@ export const onCreateActivity = `subscription OnCreateActivity {
       thumpbnails
       status
       remarks
-      image
     }
     activityname
     description
@@ -42,7 +41,6 @@ export const onUpdateActivity = `subscription OnUpdateActivity {
       thumpbnails
       status
       remarks
-      image
     }
     activityname
     description
@@ -72,7 +70,6 @@ export const onDeleteActivity = `subscription OnDeleteActivity {
       thumpbnails
       status
       remarks
-      image
     }
     activityname
     description
@@ -105,7 +102,6 @@ export const onCreateTrip = `subscription OnCreateTrip {
     thumpbnails
     status
     remarks
-    image
   }
 }
 `;
@@ -123,7 +119,6 @@ export const onUpdateTrip = `subscription OnUpdateTrip {
     thumpbnails
     status
     remarks
-    image
   }
 }
 `;
@@ -141,7 +136,6 @@ export const onDeleteTrip = `subscription OnDeleteTrip {
     thumpbnails
     status
     remarks
-    image
   }
 }
 `;
@@ -153,11 +147,17 @@ export const onCreateGroup = `subscription OnCreateGroup {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     groupadmins {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     image
   }
@@ -171,11 +171,17 @@ export const onUpdateGroup = `subscription OnUpdateGroup {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     groupadmins {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     image
   }
@@ -189,11 +195,17 @@ export const onDeleteGroup = `subscription OnDeleteGroup {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     groupadmins {
       id
       username
       phone
+      email
+      fname
+      lname
     }
     image
   }
@@ -204,6 +216,9 @@ export const onCreateUsers = `subscription OnCreateUsers {
     id
     username
     phone
+    email
+    fname
+    lname
   }
 }
 `;
@@ -212,6 +227,9 @@ export const onUpdateUsers = `subscription OnUpdateUsers {
     id
     username
     phone
+    email
+    fname
+    lname
   }
 }
 `;
@@ -220,6 +238,9 @@ export const onDeleteUsers = `subscription OnDeleteUsers {
     id
     username
     phone
+    email
+    fname
+    lname
   }
 }
 `;
@@ -235,6 +256,9 @@ export const onCreateToDo = `subscription OnCreateToDo {
       id
       username
       phone
+      email
+      fname
+      lname
     }
   }
 }
@@ -251,6 +275,9 @@ export const onUpdateToDo = `subscription OnUpdateToDo {
       id
       username
       phone
+      email
+      fname
+      lname
     }
   }
 }
@@ -267,6 +294,9 @@ export const onDeleteToDo = `subscription OnDeleteToDo {
       id
       username
       phone
+      email
+      fname
+      lname
     }
   }
 }
