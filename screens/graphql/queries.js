@@ -6,12 +6,26 @@ export const getActivity = `query GetActivity($id: ID!) {
     id
     tripid {
       id
+      groupid {
+        id
+        groupname
+        image
+      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     activityname
     description
@@ -20,12 +34,15 @@ export const getActivity = `query GetActivity($id: ID!) {
     cost
     status
     todos {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
+      items {
+        id
+        title
+        description
+        duedate
+        startdate
+        status
+      }
+      nextToken
     }
   }
 }
@@ -38,48 +55,24 @@ export const listActivitys = `query ListActivitys(
   listActivitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
       activityname
       description
       title
       location
       cost
       status
-    }
-    nextToken
-  }
-}
-`;
-export const getTrip = `query GetTrip($id: ID!) {
-  getTrip(id: $id) {
-    id
-    groupid {
-      id
-      groupname
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
-  }
-}
-`;
-export const listTrips = `query ListTrips(
-  $filter: ModelTripFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listTrips(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
-      remarks
+      todos {
+        nextToken
+      }
     }
     nextToken
   }
@@ -90,20 +83,38 @@ export const getGroup = `query GetGroup($id: ID!) {
     id
     groupname
     groupmembers {
-      id
-      username
-      phone
-      email
-      fname
-      lname
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
-    groupadmins {
+    trip {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      groupid {
+        id
+        groupname
+        image
+      }
+      tripdestination
+      tripstart
+      tripend
+      thumpbnails
+      status
+      remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     image
   }
@@ -118,36 +129,19 @@ export const listGroups = `query ListGroups(
     items {
       id
       groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
       image
-    }
-    nextToken
-  }
-}
-`;
-export const getUsers = `query GetUsers($id: ID!) {
-  getUsers(id: $id) {
-    id
-    username
-    phone
-    email
-    fname
-    lname
-  }
-}
-`;
-export const listUserss = `query ListUserss(
-  $filter: ModelUsersFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listUserss(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      username
-      phone
-      email
-      fname
-      lname
     }
     nextToken
   }
@@ -161,13 +155,37 @@ export const getToDo = `query GetToDo($id: ID!) {
     duedate
     startdate
     status
-    owners {
+    activity {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+    owners {
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
   }
 }
@@ -185,6 +203,180 @@ export const listToDos = `query ListToDos(
       duedate
       startdate
       status
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
+      owners {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getTrip = `query GetTrip($id: ID!) {
+  getTrip(id: $id) {
+    id
+    groupid {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    tripdestination
+    tripstart
+    tripend
+    thumpbnails
+    status
+    remarks
+    activity {
+      id
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const listTrips = `query ListTrips(
+  $filter: ModelTripFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTrips(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      groupid {
+        id
+        groupname
+        image
+      }
+      tripdestination
+      tripstart
+      tripend
+      thumpbnails
+      status
+      remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getUsers = `query GetUsers($id: ID!) {
+  getUsers(id: $id) {
+    id
+    username
+    groupmembers {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    todoowner {
+      id
+      title
+      description
+      duedate
+      startdate
+      status
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
+      owners {
+        nextToken
+      }
+    }
+    phone
+    email
+    fname
+    lname
+  }
+}
+`;
+export const listUserss = `query ListUserss(
+  $filter: ModelUsersFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUserss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      username
+      groupmembers {
+        id
+        groupname
+        image
+      }
+      todoowner {
+        id
+        title
+        description
+        duedate
+        startdate
+        status
+      }
+      phone
+      email
+      fname
+      lname
     }
     nextToken
   }

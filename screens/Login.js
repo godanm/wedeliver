@@ -18,6 +18,8 @@ const { height, width } = Dimensions.get("screen");
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
 
+import Home from "../screens/Home";
+
 class Login extends React.Component {
 
     constructor(props) {
@@ -53,7 +55,7 @@ class Login extends React.Component {
             .then(user => {
                 this.setState({ user })
                 this.storeToken(user);
-                this.props.navigation.navigate('Home')
+                this.props.navigation.navigate("Home")
             })
             .catch(err => {
                 if (! err.message) {

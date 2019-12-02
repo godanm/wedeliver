@@ -24,7 +24,7 @@ class MyTrips extends React.Component {
                         <TouchableOpacity key={trip.id} onPress={() => this.props.navigation.navigate("TripDetails", {id:trip.id}
                         )}>
                             <View>
-                                <Card key={trip.id} title={trip.tripdestination} image={trip.image}></Card>
+                                <Card key={trip.id} title={trip.tripdestination} image={trip.thumpbnails[0]}></Card>
                             </View>
                         </TouchableOpacity>
                     )}

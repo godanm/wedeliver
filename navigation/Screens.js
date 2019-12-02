@@ -1,9 +1,9 @@
 import React from "react";
 import { Easing, Animated } from "react-native";
 import {
-  createStackNavigator,
-  createDrawerNavigator,
-  createAppContainer
+    createStackNavigator,
+    createDrawerNavigator,
+    createAppContainer
 } from "react-navigation";
 
 import { Block } from "galio-framework";
@@ -15,11 +15,9 @@ import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import MyTodo from "../screens/MyTodo";
 import Login from "../screens/Login";
-import Adddata from "../screens/Adddata"
 import GroupDetails from "../screens/GroupDetails"
 import TripDetails from "../screens/TripDetails"
-
-
+import Adddata from "../screens/Adddata"
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -30,180 +28,195 @@ import Signup from "../screens/Signup";
 import MyTrips from "../screens/MyTrips";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
-  transitionSpec: {
-    duration: 400,
-    easing: Easing.out(Easing.poly(4)),
-    timing: Animated.timing
-  },
-  screenInterpolator: sceneProps => {
-    const { layout, position, scene } = sceneProps;
-    const thisSceneIndex = scene.index;
-    const width = layout.initWidth;
+    transitionSpec: {
+        duration: 400,
+        easing: Easing.out(Easing.poly(4)),
+        timing: Animated.timing
+    },
+    screenInterpolator: sceneProps => {
+        const { layout, position, scene } = sceneProps;
+        const thisSceneIndex = scene.index;
+        const width = layout.initWidth;
 
-    const scale = position.interpolate({
-      inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-      outputRange: [4, 1, 1]
-    });
-    const opacity = position.interpolate({
-      inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-      outputRange: [0, 1, 1]
-    });
-    const translateX = position.interpolate({
-      inputRange: [thisSceneIndex - 1, thisSceneIndex],
-      outputRange: [width, 0]
-    });
+        const scale = position.interpolate({
+            inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+            outputRange: [4, 1, 1]
+        });
+        const opacity = position.interpolate({
+            inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+            outputRange: [0, 1, 1]
+        });
+        const translateX = position.interpolate({
+            inputRange: [thisSceneIndex - 1, thisSceneIndex],
+            outputRange: [width, 0]
+        });
 
-    const scaleWithOpacity = { opacity };
-    const screenName = "Search";
+        const scaleWithOpacity = { opacity };
+        const screenName = "Search";
 
-    if (
-      screenName === transitionProps.scene.route.routeName ||
-      (prevTransitionProps &&
-        screenName === prevTransitionProps.scene.route.routeName)
-    ) {
-      return scaleWithOpacity;
+        if (
+            screenName === transitionProps.scene.route.routeName ||
+            (prevTransitionProps &&
+                screenName === prevTransitionProps.scene.route.routeName)
+        ) {
+            return scaleWithOpacity;
+        }
+        return { transform: [{ translateX }] };
     }
-    return { transform: [{ translateX }] };
-  }
 });
 
 const ElementsStack = createStackNavigator({
-  Elements: {
-    screen: Elements,
-    navigationOptions: ({ navigation }) => ({
-      header: <Header title="Elements" navigation={navigation} />
-    })
-  }
+    Elements: {
+        screen: Elements,
+        navigationOptions: ({ navigation }) => ({
+            header: <Header title="Elements" navigation={navigation} />
+        })
+    }
 },{
-  cardStyle: {
-    backgroundColor: "#F8F9FE"
-  },
-  transitionConfig
+    cardStyle: {
+        backgroundColor: "#F8F9FE"
+    },
+    transitionConfig
 });
 
 const TodoStack = createStackNavigator({
     MyTodo: {
-    screen: MyTodo,
-    navigationOptions: ({ navigation }) => ({
-      header: <Header title="My Todo" navigation={navigation} />
-    })
-  }
+        screen: MyTodo,
+        navigationOptions: ({ navigation }) => ({
+            header: <Header title="My Todo" navigation={navigation} />
+        })
+    }
 },{
-  cardStyle: {
-    backgroundColor: "#F8F9FE"
-  },
-  transitionConfig
+    cardStyle: {
+        backgroundColor: "#F8F9FE"
+    },
+    transitionConfig
 });
 
 const ProfileStack = createStackNavigator(
-  {
-    Profile: {
-      screen: Profile,
-      navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header white transparent title="Profile" iconColor={'#FFF'} navigation={navigation} />
-        ),
-        headerTransparent: true
-      })
+    {
+        Profile: {
+            screen: Profile,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <Header white transparent title="Profile" iconColor={'#FFF'} navigation={navigation} />
+                ),
+                headerTransparent: true
+            })
+        }
+    },
+    {
+        cardStyle: { backgroundColor: "#FFFFFF" },
+        transitionConfig
     }
-  },
-  {
-    cardStyle: { backgroundColor: "#FFFFFF" },
-    transitionConfig
-  }
 );
 
 const HomeStack = createStackNavigator(
     {
-    Home: {
-      screen: Home,
-      navigationOptions: ({ navigation }) => ({
-        header: <Header search options title="My Groups" navigation={navigation} />
-      })
+        Home: {
+            screen: Home,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header search options title="My Groups" navigation={navigation} />
+            })
+        },
+        Signup: {
+            screen: Signup,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <Header left={<Block />} white transparent title="" navigation={navigation} />
+                ),
+                headerTransparent: true
+            })
+        },
+        MyTrips: {
+            screen: MyTrips,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header search options title="My Trips" navigation={navigation} />
+            })
+        },
+        MyTodo: {
+            screen: MyTodo,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header search options title="My Todo" navigation={navigation} />
+            })
+        },
+        GroupDetails: {
+            screen: GroupDetails,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header search options title="Group Details" navigation={navigation} />
+            })
+        },
+        TripDetails: {
+            screen: TripDetails,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header search options title="Trip Details" navigation={navigation} />
+            })
+        },
     },
-    Signup: {
-      screen: Signup,
-      navigationOptions: ({ navigation }) => ({
-          header: (
-              <Header left={<Block />} white transparent title="" navigation={navigation} />
-          ),
-          headerTransparent: true
-      })
-    },
-    MyTrips: {
-      screen: MyTrips,
-      navigationOptions: ({ navigation }) => ({
-          header: <Header search options title="My Trips" navigation={navigation} />
-      })
-    },
-    MyTodo: {
-        screen: MyTodo,
-        navigationOptions: ({ navigation }) => ({
-            header: <Header search options title="My Todo" navigation={navigation} />
-        })
-    },
-    GroupDetails: {
-        screen: GroupDetails,
-        navigationOptions: ({ navigation }) => ({
-            header: <Header search options title="Group Details" navigation={navigation} />
-        })
-    },
-    TripDetails: {
-        screen: TripDetails,
-        navigationOptions: ({ navigation }) => ({
-            header: <Header search options title="Trip Details" navigation={navigation} />
-        })
-    },
-
-  },
-  {
-    cardStyle: {
-      backgroundColor: "#F8F9FE"
-    },
-    transitionConfig
-  }
+    {
+        cardStyle: {
+            backgroundColor: "#F8F9FE"
+        },
+        transitionConfig
+    }
 );
 
 const AppStack = createDrawerNavigator(
-  {
-    Login: {
-      /*screen: Login,
-      navigationOptions: {
-        drawerLabel: () => {}
-      }*/
-        screen: Adddata,
-        navigationOptions: navOpt => ({
-            drawerLabel: ({ focused }) => (
-                <DrawerItem focused={focused} title="Home" />
-            )
-        })
+    {
+        Login: {
+            /* screen: Login,
+            navigationOptions: {
+              drawerLabel: () => {}
+            } */
+            screen: HomeStack,
+            navigationOptions: navOpt => ({
+                drawerLabel: ({ focused }) => (
+                    <DrawerItem focused={focused} title="Home" />
+                )
+            })
+        },
+        Profile: {
+            screen: ProfileStack,
+            navigationOptions: navOpt => ({
+                drawerLabel: ({ focused }) => (
+                    <DrawerItem focused={focused} screen="Profile" title="Profile" />
+                )
+            })
+        },
+        Home: {
+            screen: HomeStack,
+            navigationOptions: navOpt => ({
+                drawerLabel: ({ focused }) => (
+                    <DrawerItem focused={focused} screen="Home" title="My Groups" />
+                )
+            })
+        },
+        MyTrips: {
+            screen: ElementsStack,
+            navigationOptions: navOpt => ({
+                drawerLabel: ({ focused }) => (
+                    <DrawerItem focused={focused} screen="MyTrips" title="My Trips" />
+                )
+            })
+        },
+        MyTodo: {
+            screen: MyTodo,
+            navigationOptions: navOpt => ({
+                drawerLabel: ({ focused }) => (
+                    <DrawerItem focused={focused} screen="MyTodo" title="My Todo" />
+                )
+            })
+        },
+        Logout: {
+            screen: Login,
+            navigationOptions: navOpt => ({
+                drawerLabel: ({ focused }) => (
+                    <DrawerItem focused={focused} screen="Logout" title="Logout" />
+                )
+            })
+        }
     },
-    Profile: {
-      screen: ProfileStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Profile" title="Profile" />
-        )
-      })
-    },
-    MyTodo: {
-      screen: MyTodo,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="MyTodo" title="My To-do" />
-        )
-      })
-    },
-      Logout: {
-          screen: Login,
-          navigationOptions: navOpt => ({
-              drawerLabel: ({ focused }) => (
-                  <DrawerItem focused={focused} screen="Logout" title="Logout" />
-              )
-          })
-      }
-  },
-  Menu
+    Menu
 );
 
 const AppContainer = createAppContainer(AppStack);

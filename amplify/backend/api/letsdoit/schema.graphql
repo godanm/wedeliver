@@ -1,50 +1,66 @@
 scalar AWSDate
 
 type Activity @model {
-    id: ID!
-    tripid: Trip @connection(name: "ActivityTrip")
-    activityname: String!
-    description: String!
-    title: String!
-    location: String!
-    cost: Float
-    status: Boolean!
-    todos: [ToDo]  @connection(name: "ActivityTodo")
+	id: ID!
+	tripid: Trip
+		@connection(name: "ActivityTrip")
+	activityname: String!
+	description: String!
+	title: String!
+	location: String!
+	cost: Float
+	status: Boolean!
+	todos: [ToDo]
+		@connection(name: "ActivityTodo")
 }
 
+
 type Group @model {
-    id: ID!
-    groupname: String!
-    groupmembers: [Users] @connection(name: "GroupMembersAdmin")
-    image: String!
+	id: ID!
+	groupname: String!
+	groupmembers: [Users]
+		@connection(name: "GroupMembersAdmin")
+    trip: Trip
+    		@connection(name: "TripGroup")
+	image: String!
 }
+
 type ToDo @model {
-    id: ID! @connection(name: "ActivityTodo")
-    title: String!
-    description: String!
-    duedate: AWSDate!
-    startdate: AWSDate!
-    status: Boolean!
-    owners: [Users]  @connection(name: "TodoUsers")
+	id: ID!
+	title: String!
+	description: String!
+	duedate: AWSDate!
+	startdate: AWSDate!
+	status: Boolean!
+	activity: Activity
+	    @connection(name: "ActivityTodo")
+	owners: [Users]
+		@connection(name: "TodoUsers")
 }
 
 type Trip @model {
-    id: ID! @connection(name: "ActivityTrip")
-    groupid: Group @connection(name: "TripGroup")
-    tripdestination: String!
-    tripstart: AWSDate!
-    tripend: AWSDate!
-    thumpbnails: [String]
-    status: Boolean!
-    remarks: String
+	id: ID!
+	groupid: Group
+		@connection(name: "TripGroup")
+	tripdestination: String!
+	tripstart: AWSDate!
+	tripend: AWSDate!
+	thumpbnails: [String]
+	status: Boolean!
+	remarks: String
+	activity: Activity
+    	    @connection(name: "ActivityTrip")
 }
 
 type Users @model {
-    id: ID!
-    username: String! @connection(name: "GroupMembersAdmin")
-    phone: String!
-    email: String!
-    fname: String!
-    lname: String!
+	id: ID!
+	username: String!
+	groupmembers: Group
+			@connection(name: "GroupMembersAdmin")
+	todoowner: ToDo
+			@connection(name: "TodoUsers")
+	phone: String!
+	email: String!
+	fname: String!
+	lname: String!
 }
-

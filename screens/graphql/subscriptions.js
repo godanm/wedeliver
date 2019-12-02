@@ -6,12 +6,26 @@ export const onCreateActivity = `subscription OnCreateActivity {
     id
     tripid {
       id
+      groupid {
+        id
+        groupname
+        image
+      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     activityname
     description
@@ -20,12 +34,15 @@ export const onCreateActivity = `subscription OnCreateActivity {
     cost
     status
     todos {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
+      items {
+        id
+        title
+        description
+        duedate
+        startdate
+        status
+      }
+      nextToken
     }
   }
 }
@@ -35,12 +52,26 @@ export const onUpdateActivity = `subscription OnUpdateActivity {
     id
     tripid {
       id
+      groupid {
+        id
+        groupname
+        image
+      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     activityname
     description
@@ -49,12 +80,15 @@ export const onUpdateActivity = `subscription OnUpdateActivity {
     cost
     status
     todos {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
+      items {
+        id
+        title
+        description
+        duedate
+        startdate
+        status
+      }
+      nextToken
     }
   }
 }
@@ -64,12 +98,26 @@ export const onDeleteActivity = `subscription OnDeleteActivity {
     id
     tripid {
       id
+      groupid {
+        id
+        groupname
+        image
+      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     activityname
     description
@@ -78,64 +126,16 @@ export const onDeleteActivity = `subscription OnDeleteActivity {
     cost
     status
     todos {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
+      items {
+        id
+        title
+        description
+        duedate
+        startdate
+        status
+      }
+      nextToken
     }
-  }
-}
-`;
-export const onCreateTrip = `subscription OnCreateTrip {
-  onCreateTrip {
-    id
-    groupid {
-      id
-      groupname
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
-  }
-}
-`;
-export const onUpdateTrip = `subscription OnUpdateTrip {
-  onUpdateTrip {
-    id
-    groupid {
-      id
-      groupname
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
-  }
-}
-`;
-export const onDeleteTrip = `subscription OnDeleteTrip {
-  onDeleteTrip {
-    id
-    groupid {
-      id
-      groupname
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
   }
 }
 `;
@@ -144,20 +144,38 @@ export const onCreateGroup = `subscription OnCreateGroup {
     id
     groupname
     groupmembers {
-      id
-      username
-      phone
-      email
-      fname
-      lname
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
-    groupadmins {
+    trip {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      groupid {
+        id
+        groupname
+        image
+      }
+      tripdestination
+      tripstart
+      tripend
+      thumpbnails
+      status
+      remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     image
   }
@@ -168,20 +186,38 @@ export const onUpdateGroup = `subscription OnUpdateGroup {
     id
     groupname
     groupmembers {
-      id
-      username
-      phone
-      email
-      fname
-      lname
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
-    groupadmins {
+    trip {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      groupid {
+        id
+        groupname
+        image
+      }
+      tripdestination
+      tripstart
+      tripend
+      thumpbnails
+      status
+      remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     image
   }
@@ -192,55 +228,40 @@ export const onDeleteGroup = `subscription OnDeleteGroup {
     id
     groupname
     groupmembers {
-      id
-      username
-      phone
-      email
-      fname
-      lname
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
-    groupadmins {
+    trip {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      groupid {
+        id
+        groupname
+        image
+      }
+      tripdestination
+      tripstart
+      tripend
+      thumpbnails
+      status
+      remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     image
-  }
-}
-`;
-export const onCreateUsers = `subscription OnCreateUsers {
-  onCreateUsers {
-    id
-    username
-    phone
-    email
-    fname
-    lname
-  }
-}
-`;
-export const onUpdateUsers = `subscription OnUpdateUsers {
-  onUpdateUsers {
-    id
-    username
-    phone
-    email
-    fname
-    lname
-  }
-}
-`;
-export const onDeleteUsers = `subscription OnDeleteUsers {
-  onDeleteUsers {
-    id
-    username
-    phone
-    email
-    fname
-    lname
   }
 }
 `;
@@ -252,13 +273,37 @@ export const onCreateToDo = `subscription OnCreateToDo {
     duedate
     startdate
     status
-    owners {
+    activity {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+    owners {
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
   }
 }
@@ -271,13 +316,37 @@ export const onUpdateToDo = `subscription OnUpdateToDo {
     duedate
     startdate
     status
-    owners {
+    activity {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+    owners {
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
   }
 }
@@ -290,14 +359,332 @@ export const onDeleteToDo = `subscription OnDeleteToDo {
     duedate
     startdate
     status
-    owners {
+    activity {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
     }
+    owners {
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onCreateTrip = `subscription OnCreateTrip {
+  onCreateTrip {
+    id
+    groupid {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    tripdestination
+    tripstart
+    tripend
+    thumpbnails
+    status
+    remarks
+    activity {
+      id
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onUpdateTrip = `subscription OnUpdateTrip {
+  onUpdateTrip {
+    id
+    groupid {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    tripdestination
+    tripstart
+    tripend
+    thumpbnails
+    status
+    remarks
+    activity {
+      id
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onDeleteTrip = `subscription OnDeleteTrip {
+  onDeleteTrip {
+    id
+    groupid {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    tripdestination
+    tripstart
+    tripend
+    thumpbnails
+    status
+    remarks
+    activity {
+      id
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onCreateUsers = `subscription OnCreateUsers {
+  onCreateUsers {
+    id
+    username
+    groupmembers {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    todoowner {
+      id
+      title
+      description
+      duedate
+      startdate
+      status
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
+      owners {
+        nextToken
+      }
+    }
+    phone
+    email
+    fname
+    lname
+  }
+}
+`;
+export const onUpdateUsers = `subscription OnUpdateUsers {
+  onUpdateUsers {
+    id
+    username
+    groupmembers {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    todoowner {
+      id
+      title
+      description
+      duedate
+      startdate
+      status
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
+      owners {
+        nextToken
+      }
+    }
+    phone
+    email
+    fname
+    lname
+  }
+}
+`;
+export const onDeleteUsers = `subscription OnDeleteUsers {
+  onDeleteUsers {
+    id
+    username
+    groupmembers {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    todoowner {
+      id
+      title
+      description
+      duedate
+      startdate
+      status
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
+      owners {
+        nextToken
+      }
+    }
+    phone
+    email
+    fname
+    lname
   }
 }
 `;

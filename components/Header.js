@@ -11,7 +11,7 @@ import argonTheme from '../constants/Theme';
 const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
 
-const BellButton = ({isWhite, style, navigation}) => (
+const BellButton = ({todoClicked, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('MyTodo')}
         accessible={true}
         accessibilityLabel={"My Todo"}>
@@ -19,13 +19,12 @@ const BellButton = ({isWhite, style, navigation}) => (
       family="ArgonExtra"
       size={16}
       name="bell"
-      color={argonTheme.COLORS[isWhite ? 'WHITE' : 'ICON']}
+      color={argonTheme.COLORS[todoClicked ? 'RED' : 'ICON']}
     />
-    <Block middle style={styles.notify} />
   </TouchableOpacity>
 );
 
-const BasketButton = ({isWhite, style, navigation}) => (
+/* const BasketButton = ({isWhite, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Pro')}>
     <Icon
       family="ArgonExtra"
@@ -34,15 +33,15 @@ const BasketButton = ({isWhite, style, navigation}) => (
       color={argonTheme.COLORS[isWhite ? 'WHITE' : 'ICON']}
     />
   </TouchableOpacity>
-);
+); */
 
-const SearchButton = ({isWhite, style, navigation}) => (
+const SearchButton = ({todoClicked, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Pro')}>
     <Icon
       size={16}
       family="Galio"
       name="search-zoom-in"
-      color={theme.COLORS[isWhite ? 'WHITE' : 'ICON']}
+      color={theme.COLORS[todoClicked ? 'WHITE' : 'ICON']}
     />
   </TouchableOpacity>
 );
@@ -53,56 +52,38 @@ class Header extends React.Component {
     return (back ? navigation.goBack() : navigation.openDrawer());
   }
   renderRight = () => {
-    const { white, title, navigation } = this.props;
+    const { title, navigation } = this.props;
     const { routeName } = navigation.state;
 
     if (title === 'Title') {
       return [
-        <BellButton key='chat-title' navigation={navigation} isWhite={white} />,
-        <BasketButton key='basket-title' navigation={navigation} isWhite={white} />
+        <BellButton key='chat-title' navigation={navigation}/>,
       ]
     }
-
     switch (routeName) {
       case 'Home':
         return ([
-          <BellButton key='chat-home' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-home' navigation={navigation} isWhite={white} />
+          <BellButton key='chat-home' navigation={navigation} />,
         ]);
       case 'MyTrips':
         return ([
           <BellButton key='chat-categories' navigation={navigation} />,
-          <BasketButton key='basket-categories' navigation={navigation} />
         ]);
       case 'MyTodo':
         return ([
-          <BellButton key='chat-categories' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-categories' navigation={navigation} isWhite={white} />
-        ]);
-      case 'Category':
-        return ([
-          <BellButton key='chat-deals' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-deals' navigation={navigation} isWhite={white} />
+          <BellButton key='chat-categories' navigation={navigation} todoClicked={true} />,
         ]);
       case 'Profile':
         return ([
-          <BellButton key='chat-profile' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-deals' navigation={navigation} isWhite={white} />
-        ]);
-      case 'Product':
-        return ([
-          <SearchButton key='search-product' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-product' navigation={navigation} isWhite={white} />
+          <BellButton key='chat-profile' navigation={navigation} />,
         ]);
       case 'Search':
         return ([
-          <BellButton key='chat-search' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-search' navigation={navigation} isWhite={white} />
+          <BellButton key='chat-search' navigation={navigation} />,
         ]);
       case 'Settings':
         return ([
-          <BellButton key='chat-search' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-search' navigation={navigation} isWhite={white} />
+          <BellButton key='chat-search' navigation={navigation} />,
         ]);
       default:
         break;
@@ -124,19 +105,20 @@ class Header extends React.Component {
   }
   renderOptions = () => {
     const { navigation, optionLeft, optionRight } = this.props;
-
+    const { routeName } = navigation.state;
+    console.log(routeName)
     return (
       <Block row style={styles.options}>
         <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Home')}>
           <Block row middle>
-            <Icon name="diamond" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
-            <Text size={16} style={styles.tabTitle}>{optionLeft || 'My Groups'}</Text>
+            <Icon name="diamond" family="ArgonExtra" style={{ paddingRight: 8 }}  />
+                <Text color={routeName === 'Home' ? theme.COLORS.ERROR : theme.COLORS.ICON} size={16} style={styles.tabTitle}>{optionLeft || 'My Groups'}</Text>
           </Block>
         </Button>
         <Button shadowless style={styles.tab} onPress={() => navigation.navigate('MyTrips')}>
           <Block row middle>
               <Icon size={16} name="bag-17" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
-            <Text size={16} style={styles.tabTitle}>{optionRight || 'My Trips'}</Text>
+            <Text color={routeName === 'MyTrips' ? theme.COLORS.ERROR : theme.COLORS.ICON} size={16} style={styles.tabTitle}>{optionRight || 'My Trips'}</Text>
           </Block>
         </Button>
       </Block>
@@ -273,8 +255,7 @@ const styles = StyleSheet.create({
   },
   tabTitle: {
     lineHeight: 19,
-    fontWeight: '400',
-    color: argonTheme.COLORS.HEADER
+    fontWeight: '400'
   },
 });
 

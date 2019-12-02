@@ -1,5 +1,5 @@
 projects:
-  letsdoit-dev:
+  letsdoit:
     schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.js
@@ -10,9 +10,3 @@ projects:
         codeGenTarget: javascript
         generatedFileName: ''
         docsFilePath: src/graphql
-        region: us-west-2
-        apiId: 2b2ge5bwongv3dqted2wfuwvpm
-        maxDepth: 2
-extensions:
-  amplify:
-    version: 3

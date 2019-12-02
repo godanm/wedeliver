@@ -6,12 +6,26 @@ export const createActivity = `mutation CreateActivity($input: CreateActivityInp
     id
     tripid {
       id
+      groupid {
+        id
+        groupname
+        image
+      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     activityname
     description
@@ -20,12 +34,15 @@ export const createActivity = `mutation CreateActivity($input: CreateActivityInp
     cost
     status
     todos {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
+      items {
+        id
+        title
+        description
+        duedate
+        startdate
+        status
+      }
+      nextToken
     }
   }
 }
@@ -35,12 +52,26 @@ export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInp
     id
     tripid {
       id
+      groupid {
+        id
+        groupname
+        image
+      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     activityname
     description
@@ -49,12 +80,15 @@ export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInp
     cost
     status
     todos {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
+      items {
+        id
+        title
+        description
+        duedate
+        startdate
+        status
+      }
+      nextToken
     }
   }
 }
@@ -64,12 +98,26 @@ export const deleteActivity = `mutation DeleteActivity($input: DeleteActivityInp
     id
     tripid {
       id
+      groupid {
+        id
+        groupname
+        image
+      }
       tripdestination
       tripstart
       tripend
       thumpbnails
       status
       remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     activityname
     description
@@ -78,64 +126,16 @@ export const deleteActivity = `mutation DeleteActivity($input: DeleteActivityInp
     cost
     status
     todos {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
+      items {
+        id
+        title
+        description
+        duedate
+        startdate
+        status
+      }
+      nextToken
     }
-  }
-}
-`;
-export const createTrip = `mutation CreateTrip($input: CreateTripInput!) {
-  createTrip(input: $input) {
-    id
-    groupid {
-      id
-      groupname
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
-  }
-}
-`;
-export const updateTrip = `mutation UpdateTrip($input: UpdateTripInput!) {
-  updateTrip(input: $input) {
-    id
-    groupid {
-      id
-      groupname
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
-  }
-}
-`;
-export const deleteTrip = `mutation DeleteTrip($input: DeleteTripInput!) {
-  deleteTrip(input: $input) {
-    id
-    groupid {
-      id
-      groupname
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
   }
 }
 `;
@@ -144,20 +144,38 @@ export const createGroup = `mutation CreateGroup($input: CreateGroupInput!) {
     id
     groupname
     groupmembers {
-      id
-      username
-      phone
-      email
-      fname
-      lname
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
-    groupadmins {
+    trip {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      groupid {
+        id
+        groupname
+        image
+      }
+      tripdestination
+      tripstart
+      tripend
+      thumpbnails
+      status
+      remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     image
   }
@@ -168,20 +186,38 @@ export const updateGroup = `mutation UpdateGroup($input: UpdateGroupInput!) {
     id
     groupname
     groupmembers {
-      id
-      username
-      phone
-      email
-      fname
-      lname
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
-    groupadmins {
+    trip {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      groupid {
+        id
+        groupname
+        image
+      }
+      tripdestination
+      tripstart
+      tripend
+      thumpbnails
+      status
+      remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     image
   }
@@ -192,55 +228,40 @@ export const deleteGroup = `mutation DeleteGroup($input: DeleteGroupInput!) {
     id
     groupname
     groupmembers {
-      id
-      username
-      phone
-      email
-      fname
-      lname
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
-    groupadmins {
+    trip {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      groupid {
+        id
+        groupname
+        image
+      }
+      tripdestination
+      tripstart
+      tripend
+      thumpbnails
+      status
+      remarks
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
     }
     image
-  }
-}
-`;
-export const createUsers = `mutation CreateUsers($input: CreateUsersInput!) {
-  createUsers(input: $input) {
-    id
-    username
-    phone
-    email
-    fname
-    lname
-  }
-}
-`;
-export const updateUsers = `mutation UpdateUsers($input: UpdateUsersInput!) {
-  updateUsers(input: $input) {
-    id
-    username
-    phone
-    email
-    fname
-    lname
-  }
-}
-`;
-export const deleteUsers = `mutation DeleteUsers($input: DeleteUsersInput!) {
-  deleteUsers(input: $input) {
-    id
-    username
-    phone
-    email
-    fname
-    lname
   }
 }
 `;
@@ -252,13 +273,37 @@ export const createToDo = `mutation CreateToDo($input: CreateToDoInput!) {
     duedate
     startdate
     status
-    owners {
+    activity {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+    owners {
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
   }
 }
@@ -271,13 +316,37 @@ export const updateToDo = `mutation UpdateToDo($input: UpdateToDoInput!) {
     duedate
     startdate
     status
-    owners {
+    activity {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+    owners {
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
     }
   }
 }
@@ -290,14 +359,332 @@ export const deleteToDo = `mutation DeleteToDo($input: DeleteToDoInput!) {
     duedate
     startdate
     status
-    owners {
+    activity {
       id
-      username
-      phone
-      email
-      fname
-      lname
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
     }
+    owners {
+      items {
+        id
+        username
+        phone
+        email
+        fname
+        lname
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const createTrip = `mutation CreateTrip($input: CreateTripInput!) {
+  createTrip(input: $input) {
+    id
+    groupid {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    tripdestination
+    tripstart
+    tripend
+    thumpbnails
+    status
+    remarks
+    activity {
+      id
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const updateTrip = `mutation UpdateTrip($input: UpdateTripInput!) {
+  updateTrip(input: $input) {
+    id
+    groupid {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    tripdestination
+    tripstart
+    tripend
+    thumpbnails
+    status
+    remarks
+    activity {
+      id
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const deleteTrip = `mutation DeleteTrip($input: DeleteTripInput!) {
+  deleteTrip(input: $input) {
+    id
+    groupid {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    tripdestination
+    tripstart
+    tripend
+    thumpbnails
+    status
+    remarks
+    activity {
+      id
+      tripid {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      activityname
+      description
+      title
+      location
+      cost
+      status
+      todos {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const createUsers = `mutation CreateUsers($input: CreateUsersInput!) {
+  createUsers(input: $input) {
+    id
+    username
+    groupmembers {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    todoowner {
+      id
+      title
+      description
+      duedate
+      startdate
+      status
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
+      owners {
+        nextToken
+      }
+    }
+    phone
+    email
+    fname
+    lname
+  }
+}
+`;
+export const updateUsers = `mutation UpdateUsers($input: UpdateUsersInput!) {
+  updateUsers(input: $input) {
+    id
+    username
+    groupmembers {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    todoowner {
+      id
+      title
+      description
+      duedate
+      startdate
+      status
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
+      owners {
+        nextToken
+      }
+    }
+    phone
+    email
+    fname
+    lname
+  }
+}
+`;
+export const deleteUsers = `mutation DeleteUsers($input: DeleteUsersInput!) {
+  deleteUsers(input: $input) {
+    id
+    username
+    groupmembers {
+      id
+      groupname
+      groupmembers {
+        nextToken
+      }
+      trip {
+        id
+        tripdestination
+        tripstart
+        tripend
+        thumpbnails
+        status
+        remarks
+      }
+      image
+    }
+    todoowner {
+      id
+      title
+      description
+      duedate
+      startdate
+      status
+      activity {
+        id
+        activityname
+        description
+        title
+        location
+        cost
+        status
+      }
+      owners {
+        nextToken
+      }
+    }
+    phone
+    email
+    fname
+    lname
   }
 }
 `;
