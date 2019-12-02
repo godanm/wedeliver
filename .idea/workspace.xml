@@ -2,30 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e99973ad-c258-4e81-93cc-d2b82e33d54a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.graphqlconfig.yml" afterPath="$PROJECT_DIR$/.graphqlconfig.yml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/screens/GroupDetails.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/screens/TripDetails.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/amplify-meta.json" afterPath="$PROJECT_DIR$/amplify/#current-cloud-backend/amplify-meta.json" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/schema.graphql" afterPath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/schema.graphql" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/amplify-meta.json" afterPath="$PROJECT_DIR$/amplify/backend/amplify-meta.json" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/cloudformation-template.json" afterPath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/cloudformation-template.json" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/parameters.json" afterPath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/parameters.json" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/schema.graphql" afterPath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/schema.graphql" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/stacks/ToDo.json" afterPath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/stacks/ToDo.json" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/stacks/Users.json" afterPath="$PROJECT_DIR$/amplify/backend/api/letsdoit/build/stacks/Users.json" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/api/letsdoit/schema.graphql" afterPath="$PROJECT_DIR$/amplify/backend/api/letsdoit/schema.graphql" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/awscloudformation/nested-cloudformation-stack.yml" afterPath="$PROJECT_DIR$/amplify/backend/awscloudformation/nested-cloudformation-stack.yml" />
-      <change beforePath="$PROJECT_DIR$/components/Header.js" afterPath="$PROJECT_DIR$/components/Header.js" />
-      <change beforePath="$PROJECT_DIR$/constants/Theme.js" afterPath="$PROJECT_DIR$/constants/Theme.js" />
-      <change beforePath="$PROJECT_DIR$/navigation/Screens.js" afterPath="$PROJECT_DIR$/navigation/Screens.js" />
-      <change beforePath="$PROJECT_DIR$/schema.graphql" afterPath="$PROJECT_DIR$/schema.graphql" />
-      <change beforePath="$PROJECT_DIR$/screens/Adddata.js" afterPath="$PROJECT_DIR$/screens/Adddata.js" />
-      <change beforePath="$PROJECT_DIR$/screens/Login.js" afterPath="$PROJECT_DIR$/screens/Login.js" />
-      <change beforePath="$PROJECT_DIR$/screens/MyTrips.js" afterPath="$PROJECT_DIR$/screens/MyTrips.js" />
-      <change beforePath="$PROJECT_DIR$/screens/aws-exports.js" afterPath="$PROJECT_DIR$/screens/aws-exports.js" />
-      <change beforePath="$PROJECT_DIR$/screens/graphql/mutations.js" afterPath="$PROJECT_DIR$/screens/graphql/mutations.js" />
-      <change beforePath="$PROJECT_DIR$/screens/graphql/queries.js" afterPath="$PROJECT_DIR$/screens/graphql/queries.js" />
-      <change beforePath="$PROJECT_DIR$/screens/graphql/schema.json" afterPath="$PROJECT_DIR$/screens/graphql/schema.json" />
-      <change beforePath="$PROJECT_DIR$/screens/graphql/subscriptions.js" afterPath="$PROJECT_DIR$/screens/graphql/subscriptions.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -325,7 +304,7 @@
       <updated>1574368164556</updated>
       <workItem from="1574368165757" duration="443000" />
       <workItem from="1574373609597" duration="53895000" />
-      <workItem from="1574653835717" duration="30291000" />
+      <workItem from="1574653835717" duration="30379000" />
     </task>
     <task id="LOCAL-00001" summary="Chaanges done">
       <created>1574587735105</created>
@@ -348,11 +327,18 @@
       <option name="project" value="LOCAL" />
       <updated>1574882093428</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="New schema">
+      <created>1575264749996</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1575264749996</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84629000" />
+    <option name="totallyTimeSpent" value="84717000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -417,7 +403,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Chaanges done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chaanges done" />
+    <MESSAGE value="New schema" />
+    <option name="LAST_COMMIT_MESSAGE" value="New schema" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
