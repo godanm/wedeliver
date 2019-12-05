@@ -7,6 +7,7 @@ import { Connect } from "aws-amplify-react-native";
 import API, { graphqlOperation } from '@aws-amplify/api';
 import config from './aws-exports'
 
+import GroupDetails from './GroupDetails'
 
 import { Card, Button } from '../components';
 import argonTheme from "../constants/Theme";

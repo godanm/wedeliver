@@ -11,6 +11,7 @@ import { Block, Text, theme } from "galio-framework";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 // AWS Amplify modular import
 import Auth from '@aws-amplify/auth'
+import firebase from 'firebase';
 
 const { height, width } = Dimensions.get("screen");
 import argonTheme from "../constants/Theme";
@@ -33,8 +34,8 @@ class Signup extends React.Component {
         })
     }
     async signUp()  {
-        const { username, password, email, phone_number, name, given_name} = this.state
-        await Auth.signUp({
+        const {password, email, phone_number, name, given_name} = this.state
+        /* await Auth.signUp({
             username,
             password,
             attributes: { email, phone_number, name, given_name}
@@ -53,7 +54,13 @@ class Signup extends React.Component {
                     console.log('Error when signing up: ', err.message)
                     Alert.alert('Error when signing up: ', err.message)
                 }
-            })
+            }) */
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(() => this.props.navigation.navigate('Home'))
+            .catch(error => Alert.alert('Error when signing up: ', error.message))
+
     }
     // Confirm users and redirect them to the SignIn page
     async confirmSignUp() {
@@ -102,19 +109,10 @@ class Signup extends React.Component {
                         <Block ref="signupblock">
                             <Input
                                 right
-                                ref="username"
-                                autoFocus={true}
-                                placeholder="User Name"
+                                ref="email"
+                                placeholder="Email"
                                 autoCapitalize = 'none'
-                                onChangeText={value => this.onChangeText('username', value)}
-                                iconContent={
-                                    <Icon
-                                        size={11}
-                                        color={argonTheme.COLORS.ICON}
-                                        name="search-zoom-in"
-                                        family="ArgonExtra"
-                                    />
-                                }
+                                onChangeText={value => this.onChangeText('email', value)}
                             />
                             <Input
                                 right
@@ -122,13 +120,6 @@ class Signup extends React.Component {
                                 placeholder="Password"
                                 onChangeText={value => this.onChangeText('password', value)}
                                 password viewPass/>
-                            <Input
-                                right
-                                ref="email"
-                                placeholder="Email"
-                                autoCapitalize = 'none'
-                                onChangeText={value => this.onChangeText('email', value)}
-                            />
                             <Input
                                 right
                                 ref="firstname"
@@ -160,26 +151,8 @@ class Signup extends React.Component {
                                     Sign Up
                                 </Text>
                             </Button>
+                            </Block>
                         </Block>
-                        <Block ref="confirmblock">
-                            <Input
-                                right
-                                ref="authCode"
-                                placeholder="Confirmation code"
-                                onSubmitEditing={this.confirmSignUp}
-                                onChangeText={value => this.onChangeText('authCode', value)}
-                            />
-                            <Button color="primary" size="small"
-                                    style={styles.button}
-                                    onPress={() => this.confirmSignUp()}
-
-                            >
-                                <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                                    Confirm Sign Up
-                                </Text>
-                            </Button>
-                        </Block>
-                    </Block>
                 </Block>
             </Block>
         );
@@ -208,7 +181,7 @@ const styles = StyleSheet.create({
         height: 60,
         zIndex: 2,
         position: 'relative',
-        marginTop: '-50%'
+        marginTop: '-100%'
     },
     title: {
         marginTop:'-100%'

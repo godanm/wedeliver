@@ -16,52 +16,6 @@
 			}
 		}
 	},
-	"api": {
-		"letsdoit": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"additionalAuthenticationProviders": [],
-					"defaultAuthentication": {
-						"authenticationType": "API_KEY",
-						"apiKeyConfig": {
-							"description": "",
-							"apiKeyExpirationDays": "365"
-						}
-					}
-				},
-				"GraphQLAPIIdOutput": "dkbjbdakcjeidnd2b6lz2e5iq4",
-				"GraphQLAPIEndpointOutput": "https://tiv5zi3vondxldqq3uoixzvvaq.appsync-api.us-west-2.amazonaws.com/graphql",
-				"GraphQLAPIKeyOutput": "da2-oohqod2teffedakhdnyfzyk5na"
-			},
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-letsdoit-dev-213028-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-				"logicalId": "apiletsdoit"
-			},
-			"lastPushTimeStamp": "2019-11-27T19:52:04.467Z",
-			"lastPushDirHash": "P/TcvmMMEOJN7fZHX87Cyh7qpMU="
-		}
-	},
-	"auth": {
-		"letsdoitb6b075fd": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"output": {
-				"AppClientSecret": "8dle643gn3ict60o03nvt9to0a04q5pr7nnoo911e4ojppfhkud",
-				"UserPoolId": "us-west-2_xP8rgVjHA",
-				"AppClientIDWeb": "2313md9qqutjuf9si7gdpgjtp2",
-				"AppClientID": "4ttcsaipo05adsbgl4t1ipian8",
-				"IdentityPoolId": "us-west-2:fc3c3dcd-d408-4e78-a0b0-f234f95c444b",
-				"IdentityPoolName": "letsdoitb6b075fd_identitypool_b6b075fd__dev",
-				"UserPoolName": "letsdoitb6b075fd_userpool_b6b075fd"
-			},
-			"lastPushTimeStamp": "2019-11-27T19:52:02.686Z",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-letsdoit-dev-213028-deployment/amplify-cfn-templates/auth/letsdoitb6b075fd-cloudformation-template.yml",
-				"logicalId": "authletsdoitb6b075fd"
-			}
-		}
-	}
+	"api": {},
+	"auth": {}
 }

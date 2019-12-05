@@ -9,11 +9,6 @@
             "UnauthRoleName": "amplify-letsdoit-dev-213028-unauthRole",
             "StackName": "amplify-letsdoit-dev-213028",
             "StackId": "arn:aws:cloudformation:us-west-2:879822602086:stack/amplify-letsdoit-dev-213028/51032470-0a85-11ea-93e5-0a13a2454304"
-        },
-        "categories": {
-            "auth": {
-                "letsdoitb6b075fd": {}
-            }
         }
     }
 }

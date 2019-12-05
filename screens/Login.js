@@ -11,7 +11,7 @@ import {
 import { Block, Text, theme } from "galio-framework";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 // AWS Amplify modular import
-import Auth from '@aws-amplify/auth'
+import firebase from 'firebase';
 
 const { height, width } = Dimensions.get("screen");
 
@@ -26,6 +26,9 @@ class Login extends React.Component {
         super(props);
         const { navigation:navigate } = this.props;
         this._onPressButton = this._onPressButton.bind(this);
+        this.state = {
+            isAuthenticated: false,
+        };
     }
 
     onChangeText(key, value) {
@@ -50,8 +53,8 @@ class Login extends React.Component {
     }
         // Sign in users with Auth
     async _onPressButton() {
-        const { username, password } = this.state
-        await Auth.signIn(username, password)
+        const { email, password } = this.state
+        /* await Auth.signIn(username, password)
             .then(user => {
                 this.setState({ user })
                 this.storeToken(user);
@@ -75,7 +78,13 @@ class Login extends React.Component {
                         Alert.alert('Error when signing in: ', err.message)
                     }
                 }
-            })
+            }) */
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => this.props.navigation.navigate('Home'))
+            .catch(error => Alert.alert('Error when signing in: ', error.message))
+
     }
     componentWillUnmount() {
         if (!this.getToken()) {
@@ -111,9 +120,9 @@ class Login extends React.Component {
                         right
                         ref="username"
                         autoFocus={true}
-                        placeholder="User Name"
+                        placeholder="Email"
                         autoCapitalize = 'none'
-                        onChangeText={value => this.onChangeText('username', value)}
+                        onChangeText={value => this.onChangeText('email', value)}
                         iconContent={
                             <Icon
                                 size={11}

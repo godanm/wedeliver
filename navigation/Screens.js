@@ -168,7 +168,7 @@ const AppStack = createDrawerNavigator(
             navigationOptions: {
               drawerLabel: () => {}
             } */
-            screen: HomeStack,
+            screen: Adddata,
             navigationOptions: navOpt => ({
                 drawerLabel: ({ focused }) => (
                     <DrawerItem focused={focused} title="Home" />

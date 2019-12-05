@@ -1,66 +1,374 @@
-scalar AWSDate
-
-type Activity @model {
-	id: ID!
-	tripid: Trip
-		@connection(name: "ActivityTrip")
-	activityname: String!
-	description: String!
-	title: String!
-	location: String!
-	cost: Float
-	status: Boolean!
-	todos: [ToDo]
-		@connection(name: "ActivityTodo")
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
 }
 
-
-type Group @model {
-	id: ID!
-	groupname: String!
-	groupmembers: [Users]
-		@connection(name: "GroupMembersAdmin")
-    trip: Trip
-    		@connection(name: "TripGroup")
-	image: String!
+type Activity {
+  activityname: String!
+  cost: Float
+  description: String!
+  id: ID!
+  location: String!
+  status: Boolean!
+  title: String!
+  todos(filter: ModelToDoFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelToDoConnection
+  tripid: Trip
 }
 
-type ToDo @model {
-	id: ID!
-	title: String!
-	description: String!
-	duedate: AWSDate!
-	startdate: AWSDate!
-	status: Boolean!
-	activity: Activity
-	    @connection(name: "ActivityTodo")
-	owners: [Users]
-		@connection(name: "TodoUsers")
+type Group {
+  groupmembers: [Users]
+  groupname: String!
+  id: ID!
+  image: String!
+  trip: Trip
 }
 
-type Trip @model {
-	id: ID!
-	groupid: Group
-		@connection(name: "TripGroup")
-	tripdestination: String!
-	tripstart: AWSDate!
-	tripend: AWSDate!
-	thumpbnails: [String]
-	status: Boolean!
-	remarks: String
-	activity: Activity
-    	    @connection(name: "ActivityTrip")
+type ModelActivityConnection {
+  items: [Activity]
+  nextToken: String
 }
 
-type Users @model {
-	id: ID!
-	username: String!
-	groupmembers: Group
-			@connection(name: "GroupMembersAdmin")
-	todoowner: ToDo
-			@connection(name: "TodoUsers")
-	phone: String!
-	email: String!
-	fname: String!
-	lname: String!
+type ModelGroupConnection {
+  items: [Group]
+  nextToken: String
+}
+
+type ModelToDoConnection {
+  items: [ToDo]
+  nextToken: String
+}
+
+type ModelTripConnection {
+  items: [Trip]
+  nextToken: String
+}
+
+type ModelUsersConnection {
+  items: [Users]
+  nextToken: String
+}
+
+type Mutation {
+  createActivity(input: CreateActivityInput!): Activity
+  createGroup(input: CreateGroupInput!): Group
+  createToDo(input: CreateToDoInput!): ToDo
+  createTrip(input: CreateTripInput!): Trip
+  createUsers(input: CreateUsersInput!): Users
+  deleteActivity(input: DeleteActivityInput!): Activity
+  deleteGroup(input: DeleteGroupInput!): Group
+  deleteToDo(input: DeleteToDoInput!): ToDo
+  deleteTrip(input: DeleteTripInput!): Trip
+  deleteUsers(input: DeleteUsersInput!): Users
+  updateActivity(input: UpdateActivityInput!): Activity
+  updateGroup(input: UpdateGroupInput!): Group
+  updateToDo(input: UpdateToDoInput!): ToDo
+  updateTrip(input: UpdateTripInput!): Trip
+  updateUsers(input: UpdateUsersInput!): Users
+}
+
+type Query {
+  getActivity(id: ID!): Activity
+  getGroup(id: ID!): Group
+  getToDo(id: ID!): ToDo
+  getTrip(id: ID!): Trip
+  getUsers(id: ID!): Users
+  listActivitys(filter: ModelActivityFilterInput, limit: Int, nextToken: String): ModelActivityConnection
+  listGroups(filter: ModelGroupFilterInput, limit: Int, nextToken: String): ModelGroupConnection
+  listToDos(filter: ModelToDoFilterInput, limit: Int, nextToken: String): ModelToDoConnection
+  listTrips(filter: ModelTripFilterInput, limit: Int, nextToken: String): ModelTripConnection
+  listUserss(filter: ModelUsersFilterInput, limit: Int, nextToken: String): ModelUsersConnection
+}
+
+type Subscription {
+  onCreateActivity: Activity @aws_subscribe(mutations : ["createActivity"])
+  onCreateGroup: Group @aws_subscribe(mutations : ["createGroup"])
+  onCreateToDo: ToDo @aws_subscribe(mutations : ["createToDo"])
+  onCreateTrip: Trip @aws_subscribe(mutations : ["createTrip"])
+  onCreateUsers: Users @aws_subscribe(mutations : ["createUsers"])
+  onDeleteActivity: Activity @aws_subscribe(mutations : ["deleteActivity"])
+  onDeleteGroup: Group @aws_subscribe(mutations : ["deleteGroup"])
+  onDeleteToDo: ToDo @aws_subscribe(mutations : ["deleteToDo"])
+  onDeleteTrip: Trip @aws_subscribe(mutations : ["deleteTrip"])
+  onDeleteUsers: Users @aws_subscribe(mutations : ["deleteUsers"])
+  onUpdateActivity: Activity @aws_subscribe(mutations : ["updateActivity"])
+  onUpdateGroup: Group @aws_subscribe(mutations : ["updateGroup"])
+  onUpdateToDo: ToDo @aws_subscribe(mutations : ["updateToDo"])
+  onUpdateTrip: Trip @aws_subscribe(mutations : ["updateTrip"])
+  onUpdateUsers: Users @aws_subscribe(mutations : ["updateUsers"])
+}
+
+type ToDo {
+  activity: Activity
+  description: String!
+  duedate: AWSDate!
+  id: ID!
+  owners(filter: ModelUsersFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelUsersConnection
+  startdate: AWSDate!
+  status: Boolean!
+  title: String!
+}
+
+type Trip {
+  activity: Activity
+  groupid: Group
+  id: ID!
+  remarks: String
+  status: Boolean!
+  thumpbnails: [String]
+  tripdestination: String!
+  tripend: AWSDate!
+  tripstart: AWSDate!
+}
+
+type Users {
+  email: String!
+  fname: String!
+  groupmembers: Group
+  id: ID!
+  lname: String!
+  phone: String!
+  todoowner: ToDo
+  username: String!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+input CreateActivityInput {
+  activityTripidId: ID
+  activityname: String!
+  cost: Float
+  description: String!
+  id: ID
+  location: String!
+  status: Boolean!
+  title: String!
+}
+
+input CreateGroupInput {
+  groupTripId: ID
+  groupname: String!
+  id: ID
+  image: String!
+}
+
+input CreateToDoInput {
+  description: String!
+  duedate: AWSDate!
+  id: ID
+  startdate: AWSDate!
+  status: Boolean!
+  title: String!
+  toDoActivityId: ID
+}
+
+input CreateTripInput {
+  id: ID
+  remarks: String
+  status: Boolean!
+  thumpbnails: [String]
+  tripActivityId: ID
+  tripGroupidId: ID
+  tripdestination: String!
+  tripend: AWSDate!
+  tripstart: AWSDate!
+}
+
+input CreateUsersInput {
+  email: String!
+  fname: String!
+  id: ID
+  lname: String!
+  phone: String!
+  username: String!
+  usersGroupmembersId: ID
+  usersTodoownerId: ID
+}
+
+input DeleteActivityInput {
+  id: ID
+}
+
+input DeleteGroupInput {
+  id: ID
+}
+
+input DeleteToDoInput {
+  id: ID
+}
+
+input DeleteTripInput {
+  id: ID
+}
+
+input DeleteUsersInput {
+  id: ID
+}
+
+input ModelActivityFilterInput {
+  activityname: ModelStringFilterInput
+  and: [ModelActivityFilterInput]
+  cost: ModelFloatFilterInput
+  description: ModelStringFilterInput
+  id: ModelIDFilterInput
+  location: ModelStringFilterInput
+  not: ModelActivityFilterInput
+  or: [ModelActivityFilterInput]
+  status: ModelBooleanFilterInput
+  title: ModelStringFilterInput
+}
+
+input ModelBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input ModelFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input ModelGroupFilterInput {
+  and: [ModelGroupFilterInput]
+  groupname: ModelStringFilterInput
+  id: ModelIDFilterInput
+  image: ModelStringFilterInput
+  not: ModelGroupFilterInput
+  or: [ModelGroupFilterInput]
+}
+
+input ModelIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input ModelIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input ModelStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input ModelToDoFilterInput {
+  and: [ModelToDoFilterInput]
+  description: ModelStringFilterInput
+  duedate: ModelStringFilterInput
+  id: ModelIDFilterInput
+  not: ModelToDoFilterInput
+  or: [ModelToDoFilterInput]
+  startdate: ModelStringFilterInput
+  status: ModelBooleanFilterInput
+  title: ModelStringFilterInput
+}
+
+input ModelTripFilterInput {
+  and: [ModelTripFilterInput]
+  id: ModelIDFilterInput
+  not: ModelTripFilterInput
+  or: [ModelTripFilterInput]
+  remarks: ModelStringFilterInput
+  status: ModelBooleanFilterInput
+  thumpbnails: ModelStringFilterInput
+  tripdestination: ModelStringFilterInput
+  tripend: ModelStringFilterInput
+  tripstart: ModelStringFilterInput
+}
+
+input ModelUsersFilterInput {
+  and: [ModelUsersFilterInput]
+  email: ModelStringFilterInput
+  fname: ModelStringFilterInput
+  id: ModelIDFilterInput
+  lname: ModelStringFilterInput
+  not: ModelUsersFilterInput
+  or: [ModelUsersFilterInput]
+  phone: ModelStringFilterInput
+  username: ModelStringFilterInput
+}
+
+input UpdateActivityInput {
+  activityTripidId: ID
+  activityname: String
+  cost: Float
+  description: String
+  id: ID!
+  location: String
+  status: Boolean
+  title: String
+}
+
+input UpdateGroupInput {
+  groupTripId: ID
+  groupname: String
+  id: ID!
+  image: String
+}
+
+input UpdateToDoInput {
+  description: String
+  duedate: AWSDate
+  id: ID!
+  startdate: AWSDate
+  status: Boolean
+  title: String
+  toDoActivityId: ID
+}
+
+input UpdateTripInput {
+  id: ID!
+  remarks: String
+  status: Boolean
+  thumpbnails: [String]
+  tripActivityId: ID
+  tripGroupidId: ID
+  tripdestination: String
+  tripend: AWSDate
+  tripstart: AWSDate
+}
+
+input UpdateUsersInput {
+  email: String
+  fname: String
+  id: ID!
+  lname: String
+  phone: String
+  username: String
+  usersGroupmembersId: ID
+  usersTodoownerId: ID
 }

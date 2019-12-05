@@ -39,8 +39,8 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-letsdoit-dev-213028-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiletsdoit"
 			},
-			"lastPushTimeStamp": "2019-11-27T19:52:04.467Z",
-			"lastPushDirHash": "P/TcvmMMEOJN7fZHX87Cyh7qpMU="
+			"lastPushTimeStamp": "2019-12-03T04:39:05.291Z",
+			"lastPushDirHash": "K7gEE5JjcGap9kDOFwko3G+TqlI="
 		}
 	},
 	"auth": {
@@ -57,7 +57,7 @@
 				"IdentityPoolName": "letsdoitb6b075fd_identitypool_b6b075fd__dev",
 				"UserPoolName": "letsdoitb6b075fd_userpool_b6b075fd"
 			},
-			"lastPushTimeStamp": "2019-11-27T19:52:02.686Z",
+			"lastPushTimeStamp": "2019-12-03T04:39:03.320Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-letsdoit-dev-213028-deployment/amplify-cfn-templates/auth/letsdoitb6b075fd-cloudformation-template.yml",
 				"logicalId": "authletsdoitb6b075fd"

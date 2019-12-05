@@ -8,10 +8,6 @@ import Screens from './navigation/Screens';
 import { Images, articles, argonTheme } from './constants';
 
 
-import Amplify from '@aws-amplify/core'
-import config from './screens/aws-exports'
-Amplify.configure(config)
-
 // cache app images
 const assetImages = [
   Images.Onboarding,

@@ -3,15 +3,11 @@ import { StyleSheet, Dimensions, ScrollView, View } from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
 
 import { listToDos } from './graphql/queries';
-import { Connect } from "aws-amplify-react-native";
-import API, { graphqlOperation } from '@aws-amplify/api';
-import config from './aws-exports'
 
 
 import { Tile } from 'react-native-elements';
 
 const { width } = Dimensions.get('screen');
-API.configure(config)             // Configure Amplify
 
 class MyTodo extends React.Component {
     render() {

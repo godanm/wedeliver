@@ -14,11 +14,13 @@
     "url": "git+https://github.com/creativetimofficial/argon-react-native.git"
   },
   "dependencies": {
+    "@react-native-firebase/database": "^6.1.0",
     "aws-amplify": "^1.2.4",
     "aws-amplify-react-native": "^2.2.3",
     "expo": "^35.0.0",
     "expo-asset": "~7.0.0",
     "expo-font": "~7.0.0",
+    "firebase": "^7.5.0",
     "galio-framework": "^0.6.3",
     "graphql": "^14.5.8",
     "prop-types": "^15.7.2",

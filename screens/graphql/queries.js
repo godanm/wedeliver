@@ -3,47 +3,250 @@
 
 export const getActivity = `query GetActivity($id: ID!) {
   getActivity(id: $id) {
-    id
-    tripid {
-      id
-      groupid {
-        id
-        groupname
-        image
-      }
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
-      remarks
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
-    }
     activityname
-    description
-    title
-    location
     cost
+    description
+    id
+    location
     status
+    title
     todos {
       items {
-        id
-        title
         description
         duedate
+        id
         startdate
         status
+        title
       }
       nextToken
     }
+    tripid {
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
+      groupid {
+        groupname
+        id
+        image
+      }
+      id
+      remarks
+      status
+      thumpbnails
+      tripdestination
+      tripend
+      tripstart
+    }
+  }
+}
+`;
+export const getGroup = `query GetGroup($id: ID!) {
+  getGroup(id: $id) {
+    groupmembers {
+      email
+      fname
+      groupmembers {
+        groupname
+        id
+        image
+      }
+      id
+      lname
+      phone
+      todoowner {
+        description
+        duedate
+        id
+        startdate
+        status
+        title
+      }
+      username
+    }
+    groupname
+    id
+    image
+    trip {
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
+      groupid {
+        groupname
+        id
+        image
+      }
+      id
+      remarks
+      status
+      thumpbnails
+      tripdestination
+      tripend
+      tripstart
+    }
+  }
+}
+`;
+export const getToDo = `query GetToDo($id: ID!) {
+  getToDo(id: $id) {
+    activity {
+      activityname
+      cost
+      description
+      id
+      location
+      status
+      title
+      todos {
+        nextToken
+      }
+      tripid {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    description
+    duedate
+    id
+    owners {
+      items {
+        email
+        fname
+        id
+        lname
+        phone
+        username
+      }
+      nextToken
+    }
+    startdate
+    status
+    title
+  }
+}
+`;
+export const getTrip = `query GetTrip($id: ID!) {
+  getTrip(id: $id) {
+    activity {
+      activityname
+      cost
+      description
+      id
+      location
+      status
+      title
+      todos {
+        nextToken
+      }
+      tripid {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    groupid {
+      groupmembers {
+        email
+        fname
+        id
+        lname
+        phone
+        username
+      }
+      groupname
+      id
+      image
+      trip {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    id
+    remarks
+    status
+    thumpbnails
+    tripdestination
+    tripend
+    tripstart
+  }
+}
+`;
+export const getUsers = `query GetUsers($id: ID!) {
+  getUsers(id: $id) {
+    email
+    fname
+    groupmembers {
+      groupmembers {
+        email
+        fname
+        id
+        lname
+        phone
+        username
+      }
+      groupname
+      id
+      image
+      trip {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    id
+    lname
+    phone
+    todoowner {
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
+      description
+      duedate
+      id
+      owners {
+        nextToken
+      }
+      startdate
+      status
+      title
+    }
+    username
   }
 }
 `;
@@ -54,69 +257,27 @@ export const listActivitys = `query ListActivitys(
 ) {
   listActivitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
-      tripid {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
       activityname
-      description
-      title
-      location
       cost
+      description
+      id
+      location
       status
+      title
       todos {
         nextToken
       }
+      tripid {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
     }
     nextToken
-  }
-}
-`;
-export const getGroup = `query GetGroup($id: ID!) {
-  getGroup(id: $id) {
-    id
-    groupname
-    groupmembers {
-      items {
-        id
-        username
-        phone
-        email
-        fname
-        lname
-      }
-      nextToken
-    }
-    trip {
-      id
-      groupid {
-        id
-        groupname
-        image
-      }
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
-      remarks
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
-    }
-    image
   }
 }
 `;
@@ -127,66 +288,28 @@ export const listGroups = `query ListGroups(
 ) {
   listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
-      groupname
       groupmembers {
-        nextToken
-      }
-      trip {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      image
-    }
-    nextToken
-  }
-}
-`;
-export const getToDo = `query GetToDo($id: ID!) {
-  getToDo(id: $id) {
-    id
-    title
-    description
-    duedate
-    startdate
-    status
-    activity {
-      id
-      tripid {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      activityname
-      description
-      title
-      location
-      cost
-      status
-      todos {
-        nextToken
-      }
-    }
-    owners {
-      items {
-        id
-        username
-        phone
         email
         fname
+        id
         lname
+        phone
+        username
       }
-      nextToken
+      groupname
+      id
+      image
+      trip {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
     }
+    nextToken
   }
 }
 `;
@@ -197,76 +320,26 @@ export const listToDos = `query ListToDos(
 ) {
   listToDos(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
-      title
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
       description
       duedate
-      startdate
-      status
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
+      id
       owners {
         nextToken
       }
+      startdate
+      status
+      title
     }
     nextToken
-  }
-}
-`;
-export const getTrip = `query GetTrip($id: ID!) {
-  getTrip(id: $id) {
-    id
-    groupid {
-      id
-      groupname
-      groupmembers {
-        nextToken
-      }
-      trip {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
-    activity {
-      id
-      tripid {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      activityname
-      description
-      title
-      location
-      cost
-      status
-      todos {
-        nextToken
-      }
-    }
   }
 }
 `;
@@ -277,77 +350,29 @@ export const listTrips = `query ListTrips(
 ) {
   listTrips(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
-      groupid {
+      activity {
+        activityname
+        cost
+        description
         id
+        location
+        status
+        title
+      }
+      groupid {
         groupname
+        id
         image
       }
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
+      id
       remarks
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
+      status
+      thumpbnails
+      tripdestination
+      tripend
+      tripstart
     }
     nextToken
-  }
-}
-`;
-export const getUsers = `query GetUsers($id: ID!) {
-  getUsers(id: $id) {
-    id
-    username
-    groupmembers {
-      id
-      groupname
-      groupmembers {
-        nextToken
-      }
-      trip {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      image
-    }
-    todoowner {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
-      owners {
-        nextToken
-      }
-    }
-    phone
-    email
-    fname
-    lname
   }
 }
 `;
@@ -358,25 +383,25 @@ export const listUserss = `query ListUserss(
 ) {
   listUserss(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
-      username
-      groupmembers {
-        id
-        groupname
-        image
-      }
-      todoowner {
-        id
-        title
-        description
-        duedate
-        startdate
-        status
-      }
-      phone
       email
       fname
+      groupmembers {
+        groupname
+        id
+        image
+      }
+      id
       lname
+      phone
+      todoowner {
+        description
+        duedate
+        id
+        startdate
+        status
+        title
+      }
+      username
     }
     nextToken
   }

@@ -1,151 +1,151 @@
-import React from 'react';
-import {ScrollView, View, Image, SafeAreaView, TouchableOpacity, StyleSheet} from 'react-native';
-import { Tile, List, ListItem } from 'react-native-elements';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import PubSub from '@aws-amplify/pubsub';
-import { Ionicons } from '@expo/vector-icons';
-import config from './aws-exports'
-import { createActivity, createGroup, createTrip, createToDo } from './graphql/mutations'
-import { Button, Select, Icon, Input, Header, Switch } from "../components";
-import { Block, Text, theme } from "galio-framework";
-import argonTheme from "../constants/Theme";
+import React, { Component } from 'react';
+import { StyleSheet, ScrollView, ActivityIndicator, View, Text } from 'react-native';
+import { List, ListItem, Button, Icon } from 'react-native-elements';
+import onCollectionUpdate from '../loaddata';
+import retrieveData from "../loaddata";
 
 
-API.configure(config)             // Configure Amplify
+
 class Adddata extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    async submit() {
-
-        /* Add Group */
-        /* try {
-            const {onCreate} = this.props;
-            var CreateInput = {
-                groupname: "Yo.Yo. Yowwanam",
-                image:"https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-            }
-            console.log(CreateInput);
-            await API.graphql(graphqlOperation(createGroup, {input: CreateInput}))
-        } catch (err) {
-            console.log(err)
-        } */
-
-        /* Add Trip */
-        /* try {
-            const {onCreate} = this.props;
-            var CreateInput = {
-                tripdestination: "Yosemite national park",
-                tripstart:"2020-06-04",
-                tripend:"2020-06-08",
-                thumpbnails:"https://images.unsplash.com/photo-1518623380242-d992d3c57b37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-                status:true,
-                remarks:"24 member trip to Yosemite",
-                tripGroupidId:"7d341ccd-f1c4-404f-9c31-c41a83ba1652",
-            }
-            console.log(CreateInput);
-            await API.graphql(graphqlOperation(createTrip, {input: CreateInput}))
-        } catch (err) {
-            console.log(err)
-        } */
-
-        /* Add Activity */
-        /* try {
-            const {onCreate} = this.props;
-            var CreateInput = {
-                activityname: "Half-dome hike",
-                description:"14 mile hike to Yosemite half-dome",
-                title:"Half-dome hike",
-                location:"Happy Isle Loop Road, Yosemite National Park, CA 95389",
-                cost:80.0,
-                status:true,
-                activityTripidId:"45dab503-4e1c-4251-a721-1584d07c9968",
-            }
-            console.log(CreateInput);
-            await API.graphql(graphqlOperation(createActivity, {input: CreateInput}))
-        } catch (err) {
-            console.log(err)
-        } */
-
-        /* Add To Do */
-        try {
-            const {onCreate} = this.props;
-            var CreateInput = {
-                title: "Book flight tickets",
-                description:"Make group reservation for 24 people",
-                duedate:"2019-12-31",
-                startdate:"2019-11-01",
-                status:true,
-                toDoActivityId:"f1482f2e-acd8-4a8b-ba1d-24ffc6d470af",
-            }
-            console.log(CreateInput);
-            await API.graphql(graphqlOperation(createToDo, {input: CreateInput}))
-        } catch (err) {
-            console.log(err)
+        this.state = {
+            users: null
         }
+        this.state = {
+            isLoading: true,
+            boards: []
+        };
+    }
+    componentDidMount() {
+        retrieveData('-1LvHs2Rw3_WK1sM127i8','trips', 'grouptrips', snap => console.log('TRIPS', snap));
+        retrieveData('-1LvHs2Rw3_WK1sM127i8','members', 'groupmembers', snap => console.log('MEMBERS', snap));
 
-
+    }
+    submit() {
+        /* Update Group */
+        const {onCreate} = this.props;
+        var Group = {
+            groupName: "Christmas outing group",
+            avatar: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+            trips:
+                [{
+                    tripdestination: "Kohls Ranch",
+                    tripstart: "12/24/2019",
+                    tripend: "12/27/2019",
+                    thumpbnails: "https://images.unsplash.com/photo-1450226840871-893c2e0bf620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+                    status:true,
+                    remarks:"Trip to Kohls Ranch",
+                    activity:
+                        [{
+                            activityName: "Hike near cabin",
+                            plannedDate: "12/25/2019",
+                            cost:0.0,
+                            location: ""
+                        },
+                            {
+                                activityName: "Visit Sedona",
+                                plannedDate: "12/26/2019",
+                                cost:0.0,
+                                location: ""
+                            }],
+                    todo:
+                        [{
+                            task: "Finalize on food",
+                            dueDate: "12/10/2019",
+                            owner:"knsudha@gmail.com",
+                            status: "pending"
+                        },
+                            {
+                                task: "Buy groceries",
+                                dueDate: "12/23/2019",
+                                owner:"reachgodan@gmail.com",
+                                status: "pending"
+                            }]
+                }],
+            members:
+                [
+                    {
+                        email: "reachgodan@gmail.com",
+                        fName: "Godan",
+                        lName: "Mannazhi",
+                        phone: "609-996-2891",
+                        avatar:"https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
+                        status:true
+                    },
+                    {
+                        email: "knsudha@gmail.com",
+                        fName: "Sudha",
+                        lName: "Godan",
+                        avatar:"https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
+                        status:true
+                    }
+                ]
+        }
+        /* try {
+            const {onCreate} = this.props;
+            firebase.database().ref('Groups/').push({
+                Group
+            }).then((data)=>{
+                //success callback
+                console.log('data ' , data)
+            }).catch((error)=>{
+                //error callback
+                console.log('error ' , error)
+            })
+            console.log("DONE Updating Group")
+        } catch (err) {
+            console.log(err)
+        } */
 }
-
-render() {
-return (
-    <Block flex style={styles.container}>
-        <Block ref="confirmblock">
-            <Block ref="confirmblock">
-
-    <Button
-            onPress={() => this.submit()}
-
-    >
-        <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-            Add Data
-        </Text>
-    </Button>
-    </Block>
-        </Block>
-
-    </Block>
-
-)
-
-}
-
+    render() {
+        if(this.state.isLoading){
+            return(
+                <View style={styles.activity}>
+                    <ActivityIndicator size="large" color="#0000ff"/>
+                </View>
+            )
+        }
+        return (
+            <ScrollView style={styles.container}>
+                <List>
+                    {
+                        this.state.boards.map((item, i) => (
+                            <ListItem
+                                key={i}
+                                title={item.title}
+                                leftIcon={{name: 'book', type: 'font-awesome'}}
+                                onPress={() => {
+                                    this.props.navigation.navigate('BoardDetails', {
+                                        boardkey: `${JSON.stringify(item.key)}`,
+                                    });
+                                }}
+                            />
+                        ))
+                    }
+                </List>
+            </ScrollView>
+        );
+    }
 }
 const styles = StyleSheet.create({
-container: {
-backgroundColor: theme.COLORS.BLACK,
-top:100
-},
-padded: {
-paddingHorizontal: theme.SIZES.BASE * 2,
-position: "relative",
-bottom: theme.SIZES.BASE,
-zIndex: 2
-},
-button: {
-width: 200,
-height: theme.SIZES.BASE * 3,
-shadowRadius: 0,
-shadowOpacity: 0,
-justifyContent: 'center',
-alignSelf: 'center'
-},
-logo: {
-width: 200,
-height: 60,
-zIndex: 2,
-position: 'relative',
-marginTop: '-50%'
-},
-title: {
-marginTop:'-100%'
-},
-subTitle: {
-marginTop: 20
-},
-hiddenContainer: {
-bottom:-6000
-}
-});
+    container: {
+        flex: 1,
+        paddingBottom: 22
+    },
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+    },
+    activity: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+})
 export default Adddata

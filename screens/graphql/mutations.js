@@ -3,688 +3,748 @@
 
 export const createActivity = `mutation CreateActivity($input: CreateActivityInput!) {
   createActivity(input: $input) {
-    id
-    tripid {
-      id
-      groupid {
-        id
-        groupname
-        image
-      }
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
-      remarks
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
-    }
     activityname
-    description
-    title
-    location
     cost
+    description
+    id
+    location
     status
+    title
     todos {
       items {
-        id
-        title
         description
         duedate
+        id
         startdate
         status
+        title
       }
       nextToken
     }
-  }
-}
-`;
-export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInput!) {
-  updateActivity(input: $input) {
-    id
     tripid {
-      id
-      groupid {
+      activity {
+        activityname
+        cost
+        description
         id
+        location
+        status
+        title
+      }
+      groupid {
         groupname
+        id
         image
       }
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
-      remarks
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
-    }
-    activityname
-    description
-    title
-    location
-    cost
-    status
-    todos {
-      items {
-        id
-        title
-        description
-        duedate
-        startdate
-        status
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const deleteActivity = `mutation DeleteActivity($input: DeleteActivityInput!) {
-  deleteActivity(input: $input) {
-    id
-    tripid {
       id
-      groupid {
-        id
-        groupname
-        image
-      }
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
       remarks
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
-    }
-    activityname
-    description
-    title
-    location
-    cost
-    status
-    todos {
-      items {
-        id
-        title
-        description
-        duedate
-        startdate
-        status
-      }
-      nextToken
+      status
+      thumpbnails
+      tripdestination
+      tripend
+      tripstart
     }
   }
 }
 `;
 export const createGroup = `mutation CreateGroup($input: CreateGroupInput!) {
   createGroup(input: $input) {
-    id
-    groupname
     groupmembers {
-      items {
-        id
-        username
-        phone
-        email
-        fname
-        lname
-      }
-      nextToken
-    }
-    trip {
-      id
-      groupid {
-        id
+      email
+      fname
+      groupmembers {
         groupname
+        id
         image
       }
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
-      remarks
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
-    }
-    image
-  }
-}
-`;
-export const updateGroup = `mutation UpdateGroup($input: UpdateGroupInput!) {
-  updateGroup(input: $input) {
-    id
-    groupname
-    groupmembers {
-      items {
-        id
-        username
-        phone
-        email
-        fname
-        lname
-      }
-      nextToken
-    }
-    trip {
       id
-      groupid {
+      lname
+      phone
+      todoowner {
+        description
+        duedate
         id
+        startdate
+        status
+        title
+      }
+      username
+    }
+    groupname
+    id
+    image
+    trip {
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
+      groupid {
         groupname
+        id
         image
       }
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
-      remarks
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
-    }
-    image
-  }
-}
-`;
-export const deleteGroup = `mutation DeleteGroup($input: DeleteGroupInput!) {
-  deleteGroup(input: $input) {
-    id
-    groupname
-    groupmembers {
-      items {
-        id
-        username
-        phone
-        email
-        fname
-        lname
-      }
-      nextToken
-    }
-    trip {
       id
-      groupid {
-        id
-        groupname
-        image
-      }
-      tripdestination
-      tripstart
-      tripend
-      thumpbnails
-      status
       remarks
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
+      status
+      thumpbnails
+      tripdestination
+      tripend
+      tripstart
     }
-    image
   }
 }
 `;
 export const createToDo = `mutation CreateToDo($input: CreateToDoInput!) {
   createToDo(input: $input) {
-    id
-    title
-    description
-    duedate
-    startdate
-    status
     activity {
-      id
-      tripid {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
       activityname
-      description
-      title
-      location
       cost
+      description
+      id
+      location
       status
+      title
       todos {
         nextToken
       }
+      tripid {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
     }
+    description
+    duedate
+    id
     owners {
       items {
-        id
-        username
-        phone
         email
         fname
+        id
         lname
+        phone
+        username
       }
       nextToken
+    }
+    startdate
+    status
+    title
+  }
+}
+`;
+export const createTrip = `mutation CreateTrip($input: CreateTripInput!) {
+  createTrip(input: $input) {
+    activity {
+      activityname
+      cost
+      description
+      id
+      location
+      status
+      title
+      todos {
+        nextToken
+      }
+      tripid {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    groupid {
+      groupmembers {
+        email
+        fname
+        id
+        lname
+        phone
+        username
+      }
+      groupname
+      id
+      image
+      trip {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    id
+    remarks
+    status
+    thumpbnails
+    tripdestination
+    tripend
+    tripstart
+  }
+}
+`;
+export const createUsers = `mutation CreateUsers($input: CreateUsersInput!) {
+  createUsers(input: $input) {
+    email
+    fname
+    groupmembers {
+      groupmembers {
+        email
+        fname
+        id
+        lname
+        phone
+        username
+      }
+      groupname
+      id
+      image
+      trip {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    id
+    lname
+    phone
+    todoowner {
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
+      description
+      duedate
+      id
+      owners {
+        nextToken
+      }
+      startdate
+      status
+      title
+    }
+    username
+  }
+}
+`;
+export const deleteActivity = `mutation DeleteActivity($input: DeleteActivityInput!) {
+  deleteActivity(input: $input) {
+    activityname
+    cost
+    description
+    id
+    location
+    status
+    title
+    todos {
+      items {
+        description
+        duedate
+        id
+        startdate
+        status
+        title
+      }
+      nextToken
+    }
+    tripid {
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
+      groupid {
+        groupname
+        id
+        image
+      }
+      id
+      remarks
+      status
+      thumpbnails
+      tripdestination
+      tripend
+      tripstart
     }
   }
 }
 `;
-export const updateToDo = `mutation UpdateToDo($input: UpdateToDoInput!) {
-  updateToDo(input: $input) {
-    id
-    title
-    description
-    duedate
-    startdate
-    status
-    activity {
+export const deleteGroup = `mutation DeleteGroup($input: DeleteGroupInput!) {
+  deleteGroup(input: $input) {
+    groupmembers {
+      email
+      fname
+      groupmembers {
+        groupname
+        id
+        image
+      }
       id
-      tripid {
+      lname
+      phone
+      todoowner {
+        description
+        duedate
         id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
+        startdate
         status
-        remarks
+        title
       }
-      activityname
-      description
-      title
-      location
-      cost
-      status
-      todos {
-        nextToken
-      }
+      username
     }
-    owners {
-      items {
+    groupname
+    id
+    image
+    trip {
+      activity {
+        activityname
+        cost
+        description
         id
-        username
-        phone
-        email
-        fname
-        lname
+        location
+        status
+        title
       }
-      nextToken
+      groupid {
+        groupname
+        id
+        image
+      }
+      id
+      remarks
+      status
+      thumpbnails
+      tripdestination
+      tripend
+      tripstart
     }
   }
 }
 `;
 export const deleteToDo = `mutation DeleteToDo($input: DeleteToDoInput!) {
   deleteToDo(input: $input) {
-    id
-    title
-    description
-    duedate
-    startdate
-    status
     activity {
-      id
-      tripid {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
       activityname
-      description
-      title
-      location
       cost
+      description
+      id
+      location
       status
+      title
       todos {
         nextToken
       }
+      tripid {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
     }
+    description
+    duedate
+    id
     owners {
       items {
-        id
-        username
-        phone
         email
         fname
+        id
         lname
+        phone
+        username
       }
       nextToken
     }
-  }
-}
-`;
-export const createTrip = `mutation CreateTrip($input: CreateTripInput!) {
-  createTrip(input: $input) {
-    id
-    groupid {
-      id
-      groupname
-      groupmembers {
-        nextToken
-      }
-      trip {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
+    startdate
     status
-    remarks
-    activity {
-      id
-      tripid {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      activityname
-      description
-      title
-      location
-      cost
-      status
-      todos {
-        nextToken
-      }
-    }
-  }
-}
-`;
-export const updateTrip = `mutation UpdateTrip($input: UpdateTripInput!) {
-  updateTrip(input: $input) {
-    id
-    groupid {
-      id
-      groupname
-      groupmembers {
-        nextToken
-      }
-      trip {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
-    activity {
-      id
-      tripid {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      activityname
-      description
-      title
-      location
-      cost
-      status
-      todos {
-        nextToken
-      }
-    }
+    title
   }
 }
 `;
 export const deleteTrip = `mutation DeleteTrip($input: DeleteTripInput!) {
   deleteTrip(input: $input) {
-    id
-    groupid {
-      id
-      groupname
-      groupmembers {
-        nextToken
-      }
-      trip {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      image
-    }
-    tripdestination
-    tripstart
-    tripend
-    thumpbnails
-    status
-    remarks
     activity {
-      id
-      tripid {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
       activityname
-      description
-      title
-      location
       cost
+      description
+      id
+      location
       status
+      title
       todos {
         nextToken
       }
-    }
-  }
-}
-`;
-export const createUsers = `mutation CreateUsers($input: CreateUsersInput!) {
-  createUsers(input: $input) {
-    id
-    username
-    groupmembers {
-      id
-      groupname
-      groupmembers {
-        nextToken
+      tripid {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
       }
+    }
+    groupid {
+      groupmembers {
+        email
+        fname
+        id
+        lname
+        phone
+        username
+      }
+      groupname
+      id
+      image
       trip {
         id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
         remarks
-      }
-      image
-    }
-    todoowner {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
         status
-      }
-      owners {
-        nextToken
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
       }
     }
-    phone
-    email
-    fname
-    lname
-  }
-}
-`;
-export const updateUsers = `mutation UpdateUsers($input: UpdateUsersInput!) {
-  updateUsers(input: $input) {
     id
-    username
-    groupmembers {
-      id
-      groupname
-      groupmembers {
-        nextToken
-      }
-      trip {
-        id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
-        remarks
-      }
-      image
-    }
-    todoowner {
-      id
-      title
-      description
-      duedate
-      startdate
-      status
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
-      owners {
-        nextToken
-      }
-    }
-    phone
-    email
-    fname
-    lname
+    remarks
+    status
+    thumpbnails
+    tripdestination
+    tripend
+    tripstart
   }
 }
 `;
 export const deleteUsers = `mutation DeleteUsers($input: DeleteUsersInput!) {
   deleteUsers(input: $input) {
-    id
-    username
+    email
+    fname
     groupmembers {
-      id
-      groupname
       groupmembers {
-        nextToken
+        email
+        fname
+        id
+        lname
+        phone
+        username
       }
+      groupname
+      id
+      image
       trip {
         id
-        tripdestination
-        tripstart
-        tripend
-        thumpbnails
-        status
         remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
       }
-      image
     }
+    id
+    lname
+    phone
     todoowner {
-      id
-      title
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
       description
       duedate
-      startdate
-      status
-      activity {
-        id
-        activityname
-        description
-        title
-        location
-        cost
-        status
-      }
+      id
       owners {
         nextToken
       }
+      startdate
+      status
+      title
     }
-    phone
+    username
+  }
+}
+`;
+export const updateActivity = `mutation UpdateActivity($input: UpdateActivityInput!) {
+  updateActivity(input: $input) {
+    activityname
+    cost
+    description
+    id
+    location
+    status
+    title
+    todos {
+      items {
+        description
+        duedate
+        id
+        startdate
+        status
+        title
+      }
+      nextToken
+    }
+    tripid {
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
+      groupid {
+        groupname
+        id
+        image
+      }
+      id
+      remarks
+      status
+      thumpbnails
+      tripdestination
+      tripend
+      tripstart
+    }
+  }
+}
+`;
+export const updateGroup = `mutation UpdateGroup($input: UpdateGroupInput!) {
+  updateGroup(input: $input) {
+    groupmembers {
+      email
+      fname
+      groupmembers {
+        groupname
+        id
+        image
+      }
+      id
+      lname
+      phone
+      todoowner {
+        description
+        duedate
+        id
+        startdate
+        status
+        title
+      }
+      username
+    }
+    groupname
+    id
+    image
+    trip {
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
+      groupid {
+        groupname
+        id
+        image
+      }
+      id
+      remarks
+      status
+      thumpbnails
+      tripdestination
+      tripend
+      tripstart
+    }
+  }
+}
+`;
+export const updateToDo = `mutation UpdateToDo($input: UpdateToDoInput!) {
+  updateToDo(input: $input) {
+    activity {
+      activityname
+      cost
+      description
+      id
+      location
+      status
+      title
+      todos {
+        nextToken
+      }
+      tripid {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    description
+    duedate
+    id
+    owners {
+      items {
+        email
+        fname
+        id
+        lname
+        phone
+        username
+      }
+      nextToken
+    }
+    startdate
+    status
+    title
+  }
+}
+`;
+export const updateTrip = `mutation UpdateTrip($input: UpdateTripInput!) {
+  updateTrip(input: $input) {
+    activity {
+      activityname
+      cost
+      description
+      id
+      location
+      status
+      title
+      todos {
+        nextToken
+      }
+      tripid {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    groupid {
+      groupmembers {
+        email
+        fname
+        id
+        lname
+        phone
+        username
+      }
+      groupname
+      id
+      image
+      trip {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    id
+    remarks
+    status
+    thumpbnails
+    tripdestination
+    tripend
+    tripstart
+  }
+}
+`;
+export const updateUsers = `mutation UpdateUsers($input: UpdateUsersInput!) {
+  updateUsers(input: $input) {
     email
     fname
+    groupmembers {
+      groupmembers {
+        email
+        fname
+        id
+        lname
+        phone
+        username
+      }
+      groupname
+      id
+      image
+      trip {
+        id
+        remarks
+        status
+        thumpbnails
+        tripdestination
+        tripend
+        tripstart
+      }
+    }
+    id
     lname
+    phone
+    todoowner {
+      activity {
+        activityname
+        cost
+        description
+        id
+        location
+        status
+        title
+      }
+      description
+      duedate
+      id
+      owners {
+        nextToken
+      }
+      startdate
+      status
+      title
+    }
+    username
   }
 }
 `;
