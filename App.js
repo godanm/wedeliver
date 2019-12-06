@@ -36,7 +36,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    if(!this.state.isLoadingComplete) {
+    /* if(!this.state.isLoadingComplete) {
       return (
         <AppLoading
           startAsync={this._loadResourcesAsync}
@@ -44,7 +44,7 @@ export default class App extends React.Component {
           onFinish={this._handleFinishLoading}
         />
       );
-    } else {
+    } else { */
       return (
         <GalioProvider theme={argonTheme}>
           <Block flex>
@@ -52,7 +52,7 @@ export default class App extends React.Component {
           </Block>
         </GalioProvider>
       );
-    }
+    //}
   }
 
 

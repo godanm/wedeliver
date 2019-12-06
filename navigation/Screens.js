@@ -164,16 +164,16 @@ const HomeStack = createStackNavigator(
 const AppStack = createDrawerNavigator(
     {
         Login: {
-            /* screen: Login,
+            screen: Login,
             navigationOptions: {
               drawerLabel: () => {}
-            } */
-            screen: Adddata,
+            }
+            /*screen: Home,
             navigationOptions: navOpt => ({
                 drawerLabel: ({ focused }) => (
                     <DrawerItem focused={focused} title="Home" />
                 )
-            })
+            }) */
         },
         Profile: {
             screen: ProfileStack,

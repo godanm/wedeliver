@@ -2,23 +2,33 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import ItemComponent from '../components/ItemComponent';
 import { Block, Text, theme } from "galio-framework";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import firebase from '../Firebase';
 import {argonTheme} from "../constants";
 
 let itemsRef = firebase.database().ref('groups/-1LvHs2Rw3_WK1sM127i8');
 
-export default class List extends Component {
+class Adddata extends Component {
     state = {
         items: []
     };
 
     componentDidMount() {
-        itemsRef.on('value', snapshot => {
+        var list = [];
+        itemsRef.once('value', snapshot => {
             let data = snapshot.val();
-            let items = Object.values(data);
-            console.log(items)
-            this.setState({ items });
+            //let items = Object.values(data);
+            //let items = data.splice(1,1);
+
+            var item = snapshot.val();
+            item.key = snapshot.key;
+            list.push(item);
+
+            this.setState({items: list });
+
+
         });
     }
 
@@ -34,7 +44,7 @@ export default class List extends Component {
                         </Block>
                     </Block>
                 ) : (
-                    <Text>No items</Text>
+                    <Text>No asw</Text>
                 )}
             </View>
         );
@@ -48,3 +58,6 @@ const styles = StyleSheet.create({
         backgroundColor: theme.COLORS.RED
     }
 });
+
+
+export default Adddata
