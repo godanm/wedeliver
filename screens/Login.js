@@ -79,11 +79,16 @@ class Login extends React.Component {
                     }
                 }
             }) */
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(() => this.props.navigation.navigate('Home'))
-            .catch(error => Alert.alert('Error when signing in: ', error.message))
+        try {
+            firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password)
+                .then(() => this.props.navigation.navigate('Home'))
+                .catch(error => Alert.alert('Error when signing in: ', error.message))
+        }
+        catch (err){
+            Alert.alert('Error when signing in: ', err)
+        }
 
     }
     componentWillUnmount() {

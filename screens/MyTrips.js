@@ -1,45 +1,55 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator} from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
-
-import { listTrips } from './graphql/queries';
-import { Connect } from "aws-amplify-react-native";
-import API, { graphqlOperation } from '@aws-amplify/api';
-import config from './aws-exports'
+import ItemComponent from '../components/ItemComponent';
 
 
-import { Card } from '../components';
+import GroupDetails from './GroupDetails'
+
+import { Card, Button } from '../components';
+import argonTheme from "../constants/Theme";
+import firebase from "../Firebase";
+let itemsRef = firebase.database().ref('trips');
 
 const { width } = Dimensions.get('screen');
-API.configure(config)             // Configure Amplify
 
 class MyTrips extends React.Component {
+    state = {
+        items: []
+    };
+    componentDidMount() {
+        var list = [];
+        itemsRef.once('value', snapshot => {
+            let data = snapshot.val();
+            let keys = Object.keys(data);
+            keys.forEach((key) => {
+                var temp = {
+                    currentitem: data[key],
+                    id : key
+                };
+                list.push(temp)
+            });
+            this.setState({items: list });
+        });
+    }
     render() {
-        const ListView = ({ trips }) => {
-            return <ScrollView
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.articles}>
-                <Block flex>
-                    {trips.map(trip =>
-                        <TouchableOpacity key={trip.id} onPress={() => this.props.navigation.navigate("TripDetails", {id:trip.id}
-                        )}>
-                            <View>
-                                <Card key={trip.id} title={trip.tripdestination} image={trip.thumpbnails[0]}></Card>
-                            </View>
-                        </TouchableOpacity>
-                    )}
-                </Block>
-            </ScrollView>;
-        };
-        return <Connect query={graphqlOperation(listTrips)}>
-            {({data: {listTrips}, loading, errors}) => {
-                if (loading || !listTrips) return (<Text>Loading...</Text>);
-                return (<ListView trips={listTrips.items}/>);
-            }}
-        </Connect>
+        return (
+            <View style={styles.container}>
+                {this.state.items.length > 0 ? (
+                    <Block flex space="between" style={styles.padded}>
+                        <Block flex space="around" style={{ zIndex: 2 }}>
+                            <ScrollView>
+                                <ItemComponent items={this.state.items} cta="TripDetails" />
+                            </ScrollView>
+                        </Block>
+                    </Block>
+                ) : (
+                    <ActivityIndicator size="large" color="#0000ff" />
+                )}
+            </View>
+        );
     }
 }
-
 
 const styles = StyleSheet.create({
     home: {
@@ -51,6 +61,11 @@ const styles = StyleSheet.create({
         paddingVertical: theme.SIZES.BASE,
         justifyContent: 'center'
     },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: theme.COLORS.RED
+    }
 });
 
 export default MyTrips;

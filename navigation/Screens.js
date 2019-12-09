@@ -166,7 +166,7 @@ const AppStack = createDrawerNavigator(
         Login: {
             screen: Login,
             navigationOptions: {
-              drawerLabel: () => {}
+                drawerLabel: () => {}
             }
             /*screen: Home,
             navigationOptions: navOpt => ({
