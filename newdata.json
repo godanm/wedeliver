@@ -1,0 +1,67 @@
+{
+  "groups": {
+    "-1LvHs2Rw3_WK1sM127i8": {
+      "thumbnail": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "name": "Christmas outing group"
+    }
+  },
+  "members": {
+    "-2LvHs2Rw3_WK1sM127i8": {
+      "thumbnail": "https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
+      "email": "reachgodan@gmail.com",
+      "fname": "Godan",
+      "lname": "Mannazhi",
+      "name": "Godan Mannazhi",
+      "phone": "609-996-2891",
+      "status": true
+    },
+    "-3LvHs2R13_WK1sM127i8": {
+      "thumbnail": "https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
+      "email": "knsudha@gmail.com",
+      "fname": "Sudha",
+      "lname": "Godan",
+      "name": "Sudha Godan",
+      "status": true
+    }
+  },
+  "trips": {
+    "-4LvHs2Rw4_WK1sM127i8": {
+      "name": "Trip to Kohls Ranch",
+      "status": true,
+      "thumbnail": "https://images.unsplash.com/photo-1450226840871-893c2e0bf620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+    }
+  },
+  "grouptrips": {
+    "-1LvHs2Rw3_WK1sM127i8": {
+      "-4LvHs2Rw4_WK1sM127i8": true
+    }
+  },
+  "tripmembers": {
+    "-4LvHs2Rw4_WK1sM127i8": {
+      "-2LvHs2Rw3_WK1sM127i8": true,
+      "-3LvHs2R13_WK1sM127i8": true
+    }
+  },
+  "groupmembers": {
+    "-1LvHs2Rw3_WK1sM127i8": {
+      "-2LvHs2Rw3_WK1sM127i8": true,
+      "-3LvHs2R13_WK1sM127i8": true
+    }
+  },
+  "mytrips": {
+    "-2LvHs2Rw3_WK1sM127i8": {
+      "-4LvHs2Rw4_WK1sM127i8": true
+    },
+    "-3LvHs2R13_WK1sM127i8": {
+      "-4LvHs2Rw4_WK1sM127i8": true
+    }
+  },
+  "mygroups": {
+    "-2LvHs2Rw3_WK1sM127i8": {
+      "-1LvHs2Rw3_WK1sM127i8": true
+    },
+    "-3LvHs2R13_WK1sM127i8": {
+      "-1LvHs2Rw3_WK1sM127i8": true
+    }
+  }
+}

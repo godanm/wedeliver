@@ -1,0 +1,52 @@
+{
+  "Groups" : {
+    "Group" : {
+      "avatar" : "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "groupName" : "Christmas outing group",
+      "members" : [ {
+        "avatar" : "https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
+        "email" : "reachgodan@gmail.com",
+        "fName" : "Godan",
+        "lName" : "Mannazhi",
+        "phone" : "609-996-2891",
+        "status" : true
+      }, {
+        "avatar" : "https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
+        "email" : "knsudha@gmail.com",
+        "fName" : "Sudha",
+        "lName" : "Godan",
+        "status" : true
+      } ],
+      "trips" : [ {
+        "activity" : [ {
+          "activityName" : "Hike near cabin",
+          "cost" : 0,
+          "location" : "",
+          "plannedDate" : "12/25/2019"
+        }, {
+          "activityName" : "Visit Sedona",
+          "cost" : 0,
+          "location" : "",
+          "plannedDate" : "12/26/2019"
+        } ],
+        "remarks" : "Trip to Kohls Ranch",
+        "status" : true,
+        "thumpbnails" : "https://images.unsplash.com/photo-1450226840871-893c2e0bf620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        "todo" : [ {
+          "dueDate" : "12/10/2019",
+          "owner" : "knsudha@gmail.com",
+          "status" : "pending",
+          "task" : "Finalize on food"
+        }, {
+          "dueDate" : "12/23/2019",
+          "owner" : "reachgodan@gmail.com",
+          "status" : "pending",
+          "task" : "Buy groceries"
+        } ],
+        "tripdestination" : "Kohls Ranch",
+        "tripend" : "12/27/2019",
+        "tripstart" : "12/24/2019"
+      } ]
+    }
+  }
+}

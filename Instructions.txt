@@ -1,0 +1,62 @@
+
+npm set registry https://registry.npmjs.org/
+rm -f package-lock.json
+
+watchman watch-del-all
+rm -rf node_modules && npm install
+rm -rf /tmp/metro-bundler-cache-*`
+rm -rf /tmp/haste-map-react-native-packager-*
+
+export HTTP_PROXY=
+export HTTPS_PROXY=
+
+- node_modules/react-native/Libraries/BatchedBridge/NativeModules.js:104:55 in <unknown>
+
+
+
+//Stash commit -- git reset --hard origin/release/v1.1.0
+
+//SQUASH Commits
+
+git reset --soft origin/develop
+git commit -m "feat(MRM):MRM Campaign for Edit Address"
+git push origin feature/mrmcampaign -f
+
+//End Squash
+
+//TAG version
+
+git checkout master
+git pull origin master
+git tag v1.2.0
+git push origin --tags
+
+//End Tag version
+
+
+lsof -t -i :3001
+    kill -9
+
+
+
+// Remove node module
+export HTTPS_PROXY="gmannaz:Freaky-6@http://proxy.aexp.com:8080"
+
+watchman watch-del-all && react-native start --reset-cache
+
+export HTTP_PROXY=http://gmannazh:Freaky@6@proxy.aexp.com:8080
+export HTTPS_PROXY=http://gmannazh:Freaky@6@proxy.aexp.com:8080
+
+
+To find guids that matches and outputs
+grep -i "E131" guids.txt >> output.txt
+
+
+to extract unique values in 4th column and store in a file
+cat guids.txt | cut -d',' -f 4 | sort -n | uniq >> unique.txt
+
+
+
+WAC1821951477
+Achan@123
+ Architecture
