@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, SectionList} from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, SectionList, Image} from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
-import ItemComponent from '../components/ItemComponent';
 
 import argonTheme from "../constants/Theme";
 import firebase from "../Firebase";
@@ -11,54 +10,66 @@ const { width } = Dimensions.get('screen');
 const DATA = [
     {
         title: 'Members',
-        data: ['Pizza', 'Burger', 'Risotto'],
-    },
-    {
-        title: 'Trips',
-        data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-    },
-];
+        data: ['Sudha Godan', 'Godan Mannazhi'],
+    }
+    ];
+//let DATA = [];
+let list = [];
 
 class Adddata extends React.Component {
     state = {
         items: [],
-        listmembers:[]
+        loaded:false
     };
     componentDidMount() {
         //const groupId = JSON.stringify(navigation.getParam('id', 'NO-ID'))
         const groupId = '-1LvHs2Rw3_WK1sM127i8';
-        let itemsRef = firebase.database().ref('groups').orderByKey().equalTo(groupId);
-        var list = [];
-        itemsRef.once('value', snapshot => {
+        let groupmembersref = firebase.database().ref('groupmembers/'+groupId);
+        groupmembersref.once('value', snapshot => {
             let data = snapshot.val();
             let keys = Object.keys(data);
-            keys.forEach((key) => {
-                var temp = {
-                    currentitem: data[key],
-                    id: key
-                };
-                list.push(temp)
-            });
-            this.setState({items: list});
+            let name = "";
+                keys.forEach((key, index) => {
+                    let membersref = firebase.database().ref('members').orderByKey().equalTo(key);
+                    membersref.on("child_added", function(snapshot) {
+                        var memberData = snapshot.val();
+                        //console.log('mem', memberData)
+                        list.push(memberData)
+                    });
+                });
+            this.setState({loaded: true });
         });
-       const rootref = firebase.database().ref();
-       const groupmembersref = rootref.child('groupmembers');
-       const memberref = rootref.child('members');
-       groupmembersref.child(groupId).once('value', snap => {
-            console.log(snap.val());
-        });
+
     }
-
-
-
     render() {
+        const { navigation, image, title, cta , horizontal, full, style, ctaColor, imageStyle } = this.props;
+        const imageStyles = [
+            full ? styles.fullImage : styles.horizontalImage,
+            imageStyle
+        ];
+        const cardContainer = [styles.card, styles.shadow, style];
+        const imgContainer = [styles.imageContainer,
+            horizontal ? styles.horizontalStyles : styles.verticalStyles,
+            styles.shadow
+        ];
+        if (this.state.loaded)
+        {
+            console.log("DATA", list)
+        }
         return (
             <View style={styles.container}>
-                {this.state.items.length > 0 ? (
-                    <Block flex space="between" style={styles.padded}>
+                <Block flex space="between" style={styles.padded}>
+                {this.state.loaded ? (
+                    <View style={styles.itemsList}>
                         <Block flex space="around" style={{ zIndex: 2 }}>
                             <ScrollView>
-                                <ItemComponent items={this.state.items} />
+                                <Block card flex style={cardContainer} >
+                                    <Block flex style={imgContainer}>
+                                    </Block>
+                                    <Block flex space="between" style={styles.cardDescription}>
+                                        <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Group Name -</Text>
+                                    </Block>
+                                </Block>
                                 <SectionList
                                     sections={DATA}
                                     keyExtractor={(item, index) => item + index}
@@ -71,10 +82,11 @@ class Adddata extends React.Component {
                                 />
                             </ScrollView>
                         </Block>
-                    </Block>
+                    </View>
                 ) : (
                     <ActivityIndicator size="large" color="#0000ff" />
                 )}
+            </Block>
             </View>
         );
     }
@@ -125,6 +137,71 @@ const styles = StyleSheet.create({
         padding: 15,
         color: '#000',
         backgroundColor: '#F5F5F5',
+    },
+    itemsList: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        width: '90%',
+        marginHorizontal: 20,
+        paddingVertical: theme.SIZES.BASE,
+        justifyContent: 'center'
+    },
+    itemtext: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        width: '90%',
+        marginHorizontal: 20,
+        paddingVertical: theme.SIZES.BASE,
+        justifyContent: 'center'
+    },
+    card: {
+        backgroundColor: theme.COLORS.WHITE,
+        marginVertical: theme.SIZES.BASE,
+        borderWidth: 0,
+        minHeight: 114,
+        marginBottom: 16
+    },
+    cardTitle: {
+        flex: 1,
+        flexWrap: 'wrap',
+        paddingBottom: 6,
+        justifyContent: 'center'
+
+    },
+    cardDescription: {
+        padding: theme.SIZES.BASE / 2
+    },
+    imageContainer: {
+        borderRadius: 3,
+        elevation: 1,
+        overflow: 'hidden',
+    },
+    image: {
+        // borderRadius: 3,
+    },
+    horizontalImage: {
+        height: 122,
+        width: 'auto',
+    },
+    horizontalStyles: {
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0,
+    },
+    verticalStyles: {
+        borderBottomRightRadius: 0,
+        borderBottomLeftRadius: 0
+    },
+    fullImage: {
+        height: 215
+    },
+    shadow: {
+        shadowColor: theme.COLORS.BLACK,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 4,
+        shadowOpacity: 0.1,
+        elevation: 2,
     },
 });
 
