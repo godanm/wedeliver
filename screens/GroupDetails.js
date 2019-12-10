@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, SectionList, Image} from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, FlatList, Image} from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
 import ItemComponent from '../components/ItemComponent';
 
@@ -8,25 +8,62 @@ import firebase from "../Firebase";
 
 const { width } = Dimensions.get('screen');
 
-const DATA = [
-    {
-        title: 'Members',
-        data: ['Sudha Godan', 'Godan Mannazhi'],
-    },
-    {
-        title: 'Trips',
-        data: ['Trip to Yosemite'],
-    },
-];
-
 class GroupDetails extends React.Component {
-    state = {
-        items: []
-    };
-    componentDidMount() {
-        //const groupId = JSON.stringify(navigation.getParam('id', 'NO-ID'))
-        const groupId = '-1LvHs2Rw3_WK1sM127i8';
+    constructor(props) {
+        super(props);
     }
+    state = {
+        tripdata: [],
+        memberdata: [],
+        loaded:false
+    };
+
+    componentDidMount() {
+        this.fetchData();
+        //const groupId = '-1LvHs2Rw3_WK1sM127i8';
+    }
+
+    renderHeader = (header) => {
+        //View to set in Header
+        return (
+            <View style={styles.SectionHeaderStyle}>
+                <Text style={styles.SectionHeaderStyle}>{header} </Text>
+            </View>
+        );
+    };
+
+    fetchData = async () => {
+        //const groupId = '-1LvHs2Rw3_WK1sM127i8';
+
+        const { navigation:navigate } = this.props;
+        const groupId = this.props.navigation.state.params.id;
+
+        let memberslist = [];
+        let tripslist = [];
+        let groupmembersref = firebase.database().ref('groups/'+groupId+"/members");
+        let grouptripsref = firebase.database().ref('groups/'+groupId+"/trips");
+        groupmembersref.on('child_added', snapshot => {
+            let data = snapshot.val();
+            let keys = Object.keys(data).toString();
+            var temp = {
+                data: snapshot.val()
+            };
+            memberslist.push(temp)
+            this.setState({ memberdata: memberslist });
+        });
+        grouptripsref.on('child_added', snapshot => {
+            let data = snapshot.val();
+            let keys = Object.keys(data).toString();
+            var temp = {
+                data: snapshot.val()
+            };
+            tripslist.push(temp)
+            this.setState({ tripdata: tripslist });
+            this.setState({ loaded: true });
+        });
+
+    };
+
     render() {
         const { navigation, image, title, cta , horizontal, full, style, ctaColor, imageStyle } = this.props;
         const imageStyles = [
@@ -49,19 +86,45 @@ class GroupDetails extends React.Component {
                                         <Image source={{uri: this.props.navigation.state.params.thumbnail}} style={imageStyles} />
                                     </Block>
                                     <Block flex space="between" style={styles.cardDescription}>
-                                        <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Group Name - {this.props.navigation.state.params.name}</Text>
+                                        <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Group Name -{this.props.navigation.state.params.name}</Text>
                                     </Block>
                                 </Block>
-                                <SectionList
-                                    sections={DATA}
-                                    keyExtractor={(item, index) => item + index}
-                                    renderItem={({ item }) => <Item style={styles.SectionListItemStyle}
-                                                                    title={item} />}
-                                    renderSectionHeader={({ section: { title } }) => (
-                                        <Text style={styles.SectionHeaderStyle} bold size={24} color="#32325D">
-                                            {title}</Text>
-                                    )}
-                                />
+                                {this.state.loaded ? (
+                                    <View>
+                                        <FlatList
+                                            data={this.state.memberdata}
+                                            ListHeaderComponent={() => this.renderHeader('Members')}
+                                            keyExtractor={(item, index) => index.toString()}
+                                            renderItem={({ item, index }) =>
+                                                <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
+                                                    <Text style={styles.SectionListItemStyle}>
+                                                        {`${item.data}`}
+                                                    </Text>
+                                                </View>}
+                                        />
+                                    </View>
+                                ) : (
+                                    <ActivityIndicator size="large" color="#0000ff" />
+                                )}
+                                <Text/>
+                                <Text/>
+                                {this.state.loaded ? (
+                                    <View>
+                                        <FlatList
+                                            data={this.state.tripdata}
+                                            ListHeaderComponent={() => this.renderHeader('Trips')}
+                                            keyExtractor={(item, index) => index.toString()}
+                                            renderItem={({ item, index }) =>
+                                                <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
+                                                    <Text style={styles.SectionListItemStyle}>
+                                                        {`${item.data}`}
+                                                    </Text>
+                                                </View>}
+                                        />
+                                    </View>
+                                ) : (
+                                    <ActivityIndicator size="large" color="#0000ff" />
+                                )}
                             </ScrollView>
                         </Block>
                     </View>
@@ -107,15 +170,16 @@ const styles = StyleSheet.create({
     },
     SectionHeaderStyle: {
         backgroundColor: '#5E72E4',
-        fontSize: 20,
+        fontSize: 16,
         padding: 5,
         color: '#fff',
+        fontWeight: 'bold',
     },
     SectionListItemStyle: {
-        fontSize: 15,
-        padding: 15,
+        fontSize: 13,
+        padding: 10,
         color: '#000',
-        backgroundColor: '#F5F5F5',
+        fontWeight: 'bold',
     },
     itemsList: {
         flex: 1,

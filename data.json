@@ -2,11 +2,25 @@
   "groups": {
     "-1LvHs2Rw3_WK1sM127i8": {
       "thumbnail": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      "name": "Christmas outing group"
+      "name": "Christmas outing group",
+      "members": {
+        "-2LvHs2Rw3_WK1sM127i8" : "Godan Mannazhi",
+        "-3LvHs2R13_WK1sM127i8" : "Sudha Godan"
+      },
+      "trips": {
+        "-2LvHs2Rw3_WK1sM127i8" : "Trip to Kohls Ranch"
+      }
     },
     "-2LvHs2Rw3_WK1sM127i8": {
       "thumbnail": "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      "name": "Yo.Yo.Yowwanam"
+      "name": "Yo.Yo.Yowwanam",
+      "members": {
+        "-2LvHs2Rw3_WK1sM127i8" : "Godan Mannazhi",
+        "-3LvHs2R13_WK1sM127i8" : "Sudha Godan"
+      },
+      "trips": {
+        "-2LvHs2Rw3_WK1sM127i8" : "Trip to Yosemite"
+      }
     }
   },
   "members": {

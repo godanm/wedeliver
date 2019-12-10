@@ -106,7 +106,6 @@ class Header extends React.Component {
   renderOptions = () => {
     const { navigation, optionLeft, optionRight } = this.props;
     const { routeName } = navigation.state;
-    console.log(routeName)
     return (
       <Block row style={styles.options}>
         <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Home')}>

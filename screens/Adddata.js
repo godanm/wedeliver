@@ -1,46 +1,69 @@
-import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, SectionList, Image} from 'react-native';
+import React, { Component } from "react";
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, FlatList, SectionList, Image} from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
 
 import argonTheme from "../constants/Theme";
 import firebase from "../Firebase";
 
 const { width } = Dimensions.get('screen');
-
-const DATA = [
-    {
-        title: 'Members',
-        data: ['Sudha Godan', 'Godan Mannazhi'],
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+        const { navigation:navigate } = this.props;
     }
-    ];
-//let DATA = [];
-let list = [];
-
-class Adddata extends React.Component {
     state = {
-        items: [],
+        tripdata: [],
+        memberdata: [],
         loaded:false
     };
-    componentDidMount() {
-        //const groupId = JSON.stringify(navigation.getParam('id', 'NO-ID'))
+
+    componentWillMount() {
+        this.fetchData();
+    }
+
+    renderHeader = (header) => {
+        //View to set in Header
+        return (
+            <View style={styles.SectionHeaderStyle}>
+                <Text style={styles.SectionHeaderStyle}>{header} </Text>
+            </View>
+        );
+    };
+
+    fetchData = async () => {
         const groupId = '-1LvHs2Rw3_WK1sM127i8';
-        let groupmembersref = firebase.database().ref('groupmembers/'+groupId);
-        groupmembersref.once('value', snapshot => {
+
+        const response = await fetch("https://randomuser.me/api?results=10");
+        //const response = await fetch("https://letsdoit-dcf60.firebaseio.com/groups//members.json?$key="+groupId);
+        const json = await response.json();
+        //this.setState({ data: json.results });
+
+        let memberslist = [];
+        let tripslist = [];
+        let groupmembersref = firebase.database().ref('groups/'+groupId+"/members");
+        let grouptripsref = firebase.database().ref('groups/'+groupId+"/trips");
+        groupmembersref.on('child_added', snapshot => {
             let data = snapshot.val();
-            let keys = Object.keys(data);
-            let name = "";
-                keys.forEach((key, index) => {
-                    let membersref = firebase.database().ref('members').orderByKey().equalTo(key);
-                    membersref.on("child_added", function(snapshot) {
-                        var memberData = snapshot.val();
-                        //console.log('mem', memberData)
-                        list.push(memberData)
-                    });
-                });
-            this.setState({loaded: true });
+            let keys = Object.keys(data).toString();
+            var temp = {
+                data: snapshot.val()
+            };
+            memberslist.push(temp)
+            this.setState({ memberdata: memberslist });
+        });
+        grouptripsref.on('child_added', snapshot => {
+            let data = snapshot.val();
+            let keys = Object.keys(data).toString();
+            var temp = {
+                data: snapshot.val()
+            };
+            tripslist.push(temp)
+            this.setState({ tripdata: tripslist });
+            this.setState({ loaded: true });
         });
 
-    }
+    };
+
     render() {
         const { navigation, image, title, cta , horizontal, full, style, ctaColor, imageStyle } = this.props;
         const imageStyles = [
@@ -52,14 +75,9 @@ class Adddata extends React.Component {
             horizontal ? styles.horizontalStyles : styles.verticalStyles,
             styles.shadow
         ];
-        if (this.state.loaded)
-        {
-            console.log("DATA", list)
-        }
         return (
             <View style={styles.container}>
                 <Block flex space="between" style={styles.padded}>
-                {this.state.loaded ? (
                     <View style={styles.itemsList}>
                         <Block flex space="around" style={{ zIndex: 2 }}>
                             <ScrollView>
@@ -70,35 +88,49 @@ class Adddata extends React.Component {
                                         <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Group Name -</Text>
                                     </Block>
                                 </Block>
-                                <SectionList
-                                    sections={DATA}
-                                    keyExtractor={(item, index) => item + index}
-                                    renderItem={({ item }) => <Item style={styles.SectionListItemStyle}
-                                                                    title={item} />}
-                                    renderSectionHeader={({ section: { title } }) => (
-                                        <Text style={styles.SectionHeaderStyle} bold size={24} color="#32325D">
-                                            {title}</Text>
-                                    )}
-                                />
+                                {this.state.loaded ? (
+                                    <View>
+                                        <FlatList
+                                            data={this.state.memberdata}
+                                            ListHeaderComponent={() => this.renderHeader('Members')}
+                                            keyExtractor={(item, index) => index.toString()}
+                                            renderItem={({ item, index }) =>
+                                                <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
+                                                <Text style={styles.SectionListItemStyle}>
+                                                    {`${item.data}`}
+                                                </Text>
+                                                </View>}
+                                        />
+                                    </View>
+                                ) : (
+                                    <ActivityIndicator size="large" color="#0000ff" />
+                                )}
+                                <Text/>
+                                <Text/>
+                                {this.state.loaded ? (
+                                    <View>
+                                        <FlatList
+                                            data={this.state.tripdata}
+                                            ListHeaderComponent={() => this.renderHeader('Trips')}
+                                            keyExtractor={(item, index) => index.toString()}
+                                            renderItem={({ item, index }) =>
+                                                <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
+                                                    <Text style={styles.SectionListItemStyle}>
+                                                        {`${item.data}`}
+                                                    </Text>
+                                                </View>}
+                                        />
+                                    </View>
+                                ) : (
+                                    <ActivityIndicator size="large" color="#0000ff" />
+                                )}
                             </ScrollView>
                         </Block>
                     </View>
-                ) : (
-                    <ActivityIndicator size="large" color="#0000ff" />
-                )}
-            </Block>
+                </Block>
             </View>
         );
     }
-}
-
-function Item({ title }) {
-    return (
-        <View style={styles.item}>
-            <Text bold size={14} color="#32325D">
-                {title}</Text>
-        </View>
-    );
 }
 
 const styles = StyleSheet.create({
@@ -133,10 +165,10 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     SectionListItemStyle: {
-        fontSize: 15,
-        padding: 15,
+        fontSize: 13,
+        padding: 10,
         color: '#000',
-        backgroundColor: '#F5F5F5',
+        fontWeight: 'bold',
     },
     itemsList: {
         flex: 1,
@@ -204,5 +236,3 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
 });
-
-export default Adddata;
