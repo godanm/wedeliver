@@ -1,238 +1,176 @@
-import React, { Component } from "react";
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, FlatList, SectionList, Image} from 'react-native';
-import { Block, theme, Text } from 'galio-framework';
+import React from "react";
+import {
+    ImageBackground,
+    Image,
+    StyleSheet,
+    StatusBar,
+    Dimensions,
+    Alert
+} from "react-native";
+import { Block, Text, theme } from "galio-framework";
+import { Button, Select, Icon, Input, Header, Switch } from "../components/";
+// AWS Amplify modular import
+import firebase from 'firebase';
 
+const { height, width } = Dimensions.get("screen");
 import argonTheme from "../constants/Theme";
-import firebase from "../Firebase";
+import Images from "../constants/Images";
 
-const { width } = Dimensions.get('screen');
-export default class App extends Component {
-    constructor(props) {
-        super(props);
-        const { navigation:navigate } = this.props;
-    }
+class Adddata extends React.Component {
     state = {
-        tripdata: [],
-        memberdata: [],
-        loaded:false
-    };
-
-    componentWillMount() {
-        this.fetchData();
+        username: '',
+        password: '',
+        email: '',
+        phone_number: '',
+        authCode: '',
+        name:'',
+        given_name:'',
+        authcode:'',
     }
+    onChangeText(key, value) {
+        this.setState({
+            [key]: value
+        })
+    }
+    async signUp()  {
+        //const {password, email, phone_number, name, given_name} = this.state
+        const password = "freaky123";
+        const email = "knsudha@gmail.com";
+        const phone_number = "12332329329";
+        const name = "Sudha";
+        const given_name = "Godan";
 
-    renderHeader = (header) => {
-        //View to set in Header
-        return (
-            <View style={styles.SectionHeaderStyle}>
-                <Text style={styles.SectionHeaderStyle}>{header} </Text>
-            </View>
-        );
-    };
 
-    fetchData = async () => {
-        const groupId = '-1LvHs2Rw3_WK1sM127i8';
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(function(firebaseUser) {
+                // Success
+                let membersref = firebase.database().ref('members');
+                firebase.database().ref('members/'+firebaseUser.user.uid).set({
+                    email:email,
+                    fname:name,
+                    lname:given_name,
+                    name: name + ' ' + given_name,
+                    status:true,
+                })
+            })
+            .catch(error => Alert.alert('Error when signing up: ', error.message))
+        this.props.navigation.navigate('Login')
 
-        const response = await fetch("https://randomuser.me/api?results=10");
-        //const response = await fetch("https://letsdoit-dcf60.firebaseio.com/groups//members.json?$key="+groupId);
-        const json = await response.json();
-        //this.setState({ data: json.results });
-
-        let memberslist = [];
-        let tripslist = [];
-        let groupmembersref = firebase.database().ref('groups/'+groupId+"/members");
-        let grouptripsref = firebase.database().ref('groups/'+groupId+"/trips");
-        groupmembersref.on('child_added', snapshot => {
-            let data = snapshot.val();
-            let keys = Object.keys(data).toString();
-            var temp = {
-                data: snapshot.val()
-            };
-            memberslist.push(temp)
-            this.setState({ memberdata: memberslist });
-        });
-        grouptripsref.on('child_added', snapshot => {
-            let data = snapshot.val();
-            let keys = Object.keys(data).toString();
-            var temp = {
-                data: snapshot.val()
-            };
-            tripslist.push(temp)
-            this.setState({ tripdata: tripslist });
-            this.setState({ loaded: true });
-        });
-
-    };
+    }
+    componentDidMount() {
+    }
 
     render() {
-        const { navigation, image, title, cta , horizontal, full, style, ctaColor, imageStyle } = this.props;
-        const imageStyles = [
-            full ? styles.fullImage : styles.horizontalImage,
-            imageStyle
-        ];
-        const cardContainer = [styles.card, styles.shadow, style];
-        const imgContainer = [styles.imageContainer,
-            horizontal ? styles.horizontalStyles : styles.verticalStyles,
-            styles.shadow
-        ];
         return (
-            <View style={styles.container}>
-                <Block flex space="between" style={styles.padded}>
-                    <View style={styles.itemsList}>
-                        <Block flex space="around" style={{ zIndex: 2 }}>
-                            <ScrollView>
-                                <Block card flex style={cardContainer} >
-                                    <Block flex style={imgContainer}>
-                                    </Block>
-                                    <Block flex space="between" style={styles.cardDescription}>
-                                        <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Group Name -</Text>
-                                    </Block>
-                                </Block>
-                                {this.state.loaded ? (
-                                    <View>
-                                        <FlatList
-                                            data={this.state.memberdata}
-                                            ListHeaderComponent={() => this.renderHeader('Members')}
-                                            keyExtractor={(item, index) => index.toString()}
-                                            renderItem={({ item, index }) =>
-                                                <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
-                                                <Text style={styles.SectionListItemStyle}>
-                                                    {`${item.data}`}
-                                                </Text>
-                                                </View>}
-                                        />
-                                    </View>
-                                ) : (
-                                    <ActivityIndicator size="large" color="#0000ff" />
-                                )}
-                                <Text/>
-                                <Text/>
-                                {this.state.loaded ? (
-                                    <View>
-                                        <FlatList
-                                            data={this.state.tripdata}
-                                            ListHeaderComponent={() => this.renderHeader('Trips')}
-                                            keyExtractor={(item, index) => index.toString()}
-                                            renderItem={({ item, index }) =>
-                                                <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
-                                                    <Text style={styles.SectionListItemStyle}>
-                                                        {`${item.data}`}
-                                                    </Text>
-                                                </View>}
-                                        />
-                                    </View>
-                                ) : (
-                                    <ActivityIndicator size="large" color="#0000ff" />
-                                )}
-                            </ScrollView>
-                        </Block>
-                    </View>
+            <Block flex style={styles.container}>
+                <StatusBar hidden />
+                <Block flex center>
+                    <ImageBackground
+                        source={Images.Onboarding}
+                        style={{ height, width, zIndex: 1 }}
+                    />
                 </Block>
-            </View>
+                <Block flex space="between" style={styles.padded}>
+                    <Block flex space="around" style={{ zIndex: 2 }}>
+                        <Block style={styles.title}>
+                            <Block>
+                                <Text color="white" size={70}>
+                                    Let's do It!
+                                </Text>
+                            </Block>
+                            <Block style={styles.subTitle}>
+                                <Text color="white" size={24}>Your activities starts here.
+                                </Text>
+                            </Block>
+                        </Block>
+                        <Block ref="signupblock">
+                            <Input
+                                right
+                                ref="email"
+                                placeholder="Email"
+                                autoCapitalize = 'none'
+                                onChangeText={value => this.onChangeText('email', value)}
+                            />
+                            <Input
+                                right
+                                ref="password"
+                                placeholder="Password"
+                                onChangeText={value => this.onChangeText('password', value)}
+                                password viewPass/>
+                            <Input
+                                right
+                                ref="firstname"
+                                placeholder="First Name"
+                                autoCapitalize = 'words'
+                                onChangeText={value => this.onChangeText('firstname', value)}
+                            />
+                            <Input
+                                right
+                                ref="given_name"
+                                placeholder="Last Name"
+                                autoCapitalize = 'words'
+                                onChangeText={value => this.onChangeText('given_name', value)}
+                            />
+                            <Input
+                                right
+                                ref="phoneNumber"
+                                placeholder="Phone Number"
+                                onSubmitEditing={this._onPressButton}
+                                onChangeText={value => this.onChangeText('phoneNumber', value)}
+                            />
+                            <Text/>
+                            <Button color="primary" size="small"
+                                    style={styles.button}
+                                    onPress={() => this.signUp()}
+
+                            >
+                                <Text bold size={14} color={argonTheme.COLORS.WHITE}>
+                                    Sign Up
+                                </Text>
+                            </Button>
+                        </Block>
+                    </Block>
+                </Block>
+            </Block>
         );
     }
 }
-
 const styles = StyleSheet.create({
-    home: {
-        width: width,
-    },
-    articles: {
-        width: '90%',
-        marginHorizontal: 20,
-        paddingVertical: theme.SIZES.BASE,
-        justifyContent: 'center'
-    },
     container: {
-        flex: 1,
-        marginHorizontal: 16,
+        backgroundColor: theme.COLORS.BLACK
     },
-    item: {
-        padding: 8,
-        marginVertical: 8,
+    padded: {
+        paddingHorizontal: theme.SIZES.BASE * 2,
+        position: "relative",
+        bottom: theme.SIZES.BASE,
+        zIndex: 2
     },
-    header: {
-        fontSize: 18,
+    button: {
+        width: 200,
+        height: theme.SIZES.BASE * 3,
+        shadowRadius: 0,
+        shadowOpacity: 0,
+        justifyContent: 'center',
+        alignSelf: 'center'
+    },
+    logo: {
+        width: 200,
+        height: 60,
+        zIndex: 2,
+        position: 'relative',
+        marginTop: '-100%'
     },
     title: {
-        fontSize: 12,
-        backgroundColor: '#5E72E4',
+        marginTop:'-100%'
     },
-    SectionHeaderStyle: {
-        backgroundColor: '#5E72E4',
-        fontSize: 20,
-        padding: 5,
-        color: '#fff',
+    subTitle: {
+        marginTop: 20
     },
-    SectionListItemStyle: {
-        fontSize: 13,
-        padding: 10,
-        color: '#000',
-        fontWeight: 'bold',
-    },
-    itemsList: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        width: '90%',
-        marginHorizontal: 20,
-        paddingVertical: theme.SIZES.BASE,
-        justifyContent: 'center'
-    },
-    itemtext: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        width: '90%',
-        marginHorizontal: 20,
-        paddingVertical: theme.SIZES.BASE,
-        justifyContent: 'center'
-    },
-    card: {
-        backgroundColor: theme.COLORS.WHITE,
-        marginVertical: theme.SIZES.BASE,
-        borderWidth: 0,
-        minHeight: 114,
-        marginBottom: 16
-    },
-    cardTitle: {
-        flex: 1,
-        flexWrap: 'wrap',
-        paddingBottom: 6,
-        justifyContent: 'center'
-
-    },
-    cardDescription: {
-        padding: theme.SIZES.BASE / 2
-    },
-    imageContainer: {
-        borderRadius: 3,
-        elevation: 1,
-        overflow: 'hidden',
-    },
-    image: {
-        // borderRadius: 3,
-    },
-    horizontalImage: {
-        height: 122,
-        width: 'auto',
-    },
-    horizontalStyles: {
-        borderTopRightRadius: 0,
-        borderBottomRightRadius: 0,
-    },
-    verticalStyles: {
-        borderBottomRightRadius: 0,
-        borderBottomLeftRadius: 0
-    },
-    fullImage: {
-        height: 215
-    },
-    shadow: {
-        shadowColor: theme.COLORS.BLACK,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 4,
-        shadowOpacity: 0.1,
-        elevation: 2,
-    },
+    hiddenContainer: {
+        bottom:-6000
+    }
 });
+
+export default Adddata;

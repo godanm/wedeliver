@@ -19,24 +19,6 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
         );
-      case "Elements":
-        return (
-          <Icon
-            name="map-big"
-            family="ArgonExtra"
-            size={12}
-            color={focused ? "white" : argonTheme.COLORS.ERROR}
-          />
-        );
-      case "Articles":
-        return (
-          <Icon
-            name="spaceship"
-            family="ArgonExtra"
-            size={12}
-            color={focused ? "white" : argonTheme.COLORS.PRIMARY}
-          />
-        );
       case "Profile":
         return (
           <Icon
@@ -46,20 +28,10 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : argonTheme.COLORS.WARNING}
           />
         );
-      case "Account":
-        return (
-          <Icon
-            name="calendar-date"
-            family="ArgonExtra"
-            size={12}
-            color={focused ? "white" : argonTheme.COLORS.INFO}
-          />
-        );
       case "Log out":
           return (
               <Icon
                   name="logout"
-                  family="ArgonExtra"
                   size={12}
                   color={focused ? "white" : argonTheme.COLORS.INFO}
               />

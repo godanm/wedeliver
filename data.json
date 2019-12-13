@@ -4,27 +4,25 @@
       "thumbnail": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
       "name": "Christmas outing group",
       "members": {
-        "-2LvHs2Rw3_WK1sM127i8" : "Godan Mannazhi",
-        "-3LvHs2R13_WK1sM127i8" : "Sudha Godan"
+        "KDxW8MncixYVbXDrklvt2iyBxmN2" : "Godan Mannazhi"
       },
       "trips": {
-        "-2LvHs2Rw3_WK1sM127i8" : "Trip to Kohls Ranch"
+        "-4LvHs2Rw4_WK1sM127i8" : "Trip to Kohls Ranch"
       }
     },
     "-2LvHs2Rw3_WK1sM127i8": {
       "thumbnail": "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
       "name": "Yo.Yo.Yowwanam",
       "members": {
-        "-2LvHs2Rw3_WK1sM127i8" : "Godan Mannazhi",
-        "-3LvHs2R13_WK1sM127i8" : "Sudha Godan"
+        "KDxW8MncixYVbXDrklvt2iyBxmN2" : "Godan Mannazhi"
       },
       "trips": {
-        "-2LvHs2Rw3_WK1sM127i8" : "Trip to Yosemite"
+        "-6LvHs2Rw4_WK1sM127i8" : "Trip to Yosemite"
       }
     }
   },
   "members": {
-    "-2LvHs2Rw3_WK1sM127i8": {
+    "KDxW8MncixYVbXDrklvt2iyBxmN2": {
       "thumbnail": "https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
       "email": "reachgodan@gmail.com",
       "fname": "Godan",
@@ -33,45 +31,68 @@
       "phone": "609-996-2891",
       "status": true
     },
-    "-3LvHs2R13_WK1sM127i8": {
-      "thumbnail": "https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
-      "email": "knsudha@gmail.com",
-      "fname": "Sudha",
-      "lname": "Godan",
-      "name": "Sudha Godan",
-      "status": true
+    "TTeTWP0Jerfa0r7XSYDrisnrqd82" : {
+      "email" : "knsudha@gmail.com",
+      "fname" : "Sudha",
+      "lname" : "Godan",
+      "name" : " Sudha Godan",
+      "status" : true
     }
   },
   "trips": {
     "-4LvHs2Rw4_WK1sM127i8": {
       "name": "Trip to Kohls Ranch",
       "status": true,
-      "thumbnail": "https://images.unsplash.com/photo-1450226840871-893c2e0bf620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+      "thumbnail": "https://images.unsplash.com/photo-1450226840871-893c2e0bf620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "activities": {
+        "-9LvHs2Rw3_WK1sM127i8" : "Hike the Kohls ranch park"
+      },
+      "todos": {
+        "-09vHs2Rw3_WK1sM127i8" : "Cooking utensils"
+      }
     },
     "-6LvHs2Rw4_WK1sM127i8": {
       "name": "Trip to Yosemite",
       "status": true,
-      "thumbnail": "https://images.unsplash.com/photo-1518623380242-d992d3c57b37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+      "thumbnail": "https://images.unsplash.com/photo-1518623380242-d992d3c57b37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "activities": {
+        "-AALvHs2Rw3_WK1sM127i8" : "Half-dome hike"
+      },
+      "todos": {
+        "-ABvHs2Rw3_WK1sM127i8" : "Book flight tickets"
+      }
     }
   },
-  "grouptrips": {
-    "-1LvHs2Rw3_WK1sM127i8": {
-      "-4LvHs2Rw4_WK1sM127i8": "Trip to Kohls Ranch"
+  "activities": {
+    "-9LvHs2Rw3_WK1sM127i8": {
+      "name": "Hike the Kohls ranch park",
+      "status": true,
+      "thumbnail": "https://images.unsplash.com/photo-1450226840871-893c2e0bf620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "date": "25-Dec-2019",
+      "cost": "0.0"
     },
-    "-2LvHs2Rw3_WK1sM127i8": {
-      "-4LvHs2Rw4_WK1sM127i8": "Trip to Yosemite"
+    "-AALvHs2Rw3_WK1sM127i8": {
+      "name": "Half-dome hike",
+      "status": true,
+      "thumbnail": "https://images.unsplash.com/photo-1518623380242-d992d3c57b37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "date": "06-Jun-2020",
+      "cost": "80.0"
     }
   },
-  "tripmembers": {
-    "-4LvHs2Rw4_WK1sM127i8": {
-      "-2LvHs2Rw3_WK1sM127i8": true,
-      "-3LvHs2R13_WK1sM127i8": true
-    }
-  },
-  "groupmembers": {
-    "-1LvHs2Rw3_WK1sM127i8": {
-      "-2LvHs2Rw3_WK1sM127i8": "Godan Mannazhi",
-      "-3LvHs2R13_WK1sM127i8": "Sudha Godan"
+  "todos": {
+    "-09vHs2Rw3_WK1sM127i8": {
+      "name": "Cooking utensils",
+      "status": false,
+      "duedate": "20-Dec-2019",
+      "owner": "Sudha Godan",
+      "ownerid": "TTeTWP0Jerfa0r7XSYDrisnrqd82"
+    },
+    "-ABvHs2Rw3_WK1sM127i8": {
+      "name": "Book flight tickets",
+      "status": false,
+      "duedate": "31-Dec-2019",
+      "owner": "Godan Mannazhi",
+      "ownerid": "KDxW8MncixYVbXDrklvt2iyBxmN2"
     }
   },
   "mytrips": {

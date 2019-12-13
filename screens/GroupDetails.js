@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, FlatList, Image} from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, FlatList, Image, TouchableWithoutFeedback} from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
 import ItemComponent from '../components/ItemComponent';
 
@@ -46,7 +46,8 @@ class GroupDetails extends React.Component {
             let data = snapshot.val();
             let keys = Object.keys(data).toString();
             var temp = {
-                data: snapshot.val()
+                data: snapshot.val(),
+                id: snapshot.key
             };
             memberslist.push(temp)
             this.setState({ memberdata: memberslist });
@@ -55,7 +56,8 @@ class GroupDetails extends React.Component {
             let data = snapshot.val();
             let keys = Object.keys(data).toString();
             var temp = {
-                data: snapshot.val()
+                data: snapshot.val(),
+                id: snapshot.key
             };
             tripslist.push(temp)
             this.setState({ tripdata: tripslist });
@@ -97,9 +99,16 @@ class GroupDetails extends React.Component {
                                             keyExtractor={(item, index) => index.toString()}
                                             renderItem={({ item, index }) =>
                                                 <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
+                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.navigate("MemberDetails",
+                                                        {
+                                                            id: item.id,
+                                                            name: item.data
+                                                        }
+                                                    )}>
                                                     <Text style={styles.SectionListItemStyle}>
                                                         {`${item.data}`}
                                                     </Text>
+                                                    </TouchableWithoutFeedback>
                                                 </View>}
                                         />
                                     </View>
@@ -116,9 +125,16 @@ class GroupDetails extends React.Component {
                                             keyExtractor={(item, index) => index.toString()}
                                             renderItem={({ item, index }) =>
                                                 <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
+                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.navigate("TripDetails",
+                                                        {
+                                                            id: item.id,
+                                                            name: item.data
+                                                        }
+                                                    )}>
                                                     <Text style={styles.SectionListItemStyle}>
                                                         {`${item.data}`}
                                                     </Text>
+                                                    </TouchableWithoutFeedback>
                                                 </View>}
                                         />
                                     </View>
@@ -155,6 +171,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        marginTop: 65,
         marginHorizontal: 16,
     },
     item: {

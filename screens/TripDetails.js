@@ -1,36 +1,77 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, SectionList, Image} from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, FlatList, Image, TouchableWithoutFeedback} from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
 import ItemComponent from '../components/ItemComponent';
 
 import argonTheme from "../constants/Theme";
 import firebase from "../Firebase";
+import ActivityDetails from "./ActivityDetails";
+import TodoDetails from "./TodoDetails";
 
 const { width } = Dimensions.get('screen');
 
-const DATA = [
-    {
-        title: 'Members',
-        data: ['Godan Mannazhi', 'Sudha Godan'],
-    },
-    {
-        title: 'Activity',
-        data: ['Hike half-dome', 'Visit Redwood park', 'Visit springs'],
-    },
-    {
-        title: 'To Do(s)',
-        data: ['Book flight ticket', 'Book Van'],
-    },
-];
-
 class TripDetails extends React.Component {
-    state = {
-        items: []
-    };
-    componentDidMount() {
-        //const groupId = JSON.stringify(navigation.getParam('id', 'NO-ID'))
-        const tripId = '-1LvHs2Rw3_WK1sM127i8';
+    constructor(props) {
+        super(props);
     }
+    state = {
+        tododata: [],
+        activitydata: [],
+        loaded:false
+    };
+
+    componentDidMount() {
+        this.fetchData();
+        //const groupId = '-1LvHs2Rw3_WK1sM127i8';
+    }
+
+    renderHeader = (header) => {
+        //View to set in Header
+        return (
+            <View style={styles.SectionHeaderStyle}>
+                <Text style={styles.SectionHeaderStyle}>{header} </Text>
+            </View>
+        );
+    };
+
+    fetchData = async () => {
+        //const tripid = '-4LvHs2Rw4_WK1sM127i8';
+
+        const { navigation:navigate } = this.props;
+        const tripid = this.props.navigation.state.params.id;
+
+        let activitylist = [];
+        let todolist = [];
+
+        let activitiesref = firebase.database().ref('trips/'+tripid+"/activities");
+        let todosref = firebase.database().ref('trips/'+tripid+"/todos");
+
+        console.log(activitiesref)
+        activitiesref.on('child_added', snapshot => {
+            let data = snapshot.val();
+            let keys = Object.keys(data).toString();
+            var temp = {
+                data: snapshot.val(),
+                id: snapshot.key
+            };
+            activitylist.push(temp)
+            this.setState({ activitydata: activitylist });
+        });
+        todosref.on('child_added', snapshot => {
+            let data = snapshot.val();
+            let keys = Object.keys(data).toString();
+            var temp = {
+                data: snapshot.val(),
+                id: snapshot.key
+            };
+            todolist.push(temp)
+            this.setState({ tododata: todolist });
+            this.setState({ loaded: true });
+            console.log(this.state)
+        });
+
+    };
+
     render() {
         const { navigation, image, title, cta , horizontal, full, style, ctaColor, imageStyle } = this.props;
         const imageStyles = [
@@ -53,19 +94,59 @@ class TripDetails extends React.Component {
                                         <Image source={{uri: this.props.navigation.state.params.thumbnail}} style={imageStyles} />
                                     </Block>
                                     <Block flex space="between" style={styles.cardDescription}>
-                                        <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Trip Name - {this.props.navigation.state.params.name}</Text>
+                                        <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Group Name -{this.props.navigation.state.params.name}</Text>
                                     </Block>
                                 </Block>
-                                <SectionList
-                                    sections={DATA}
-                                    keyExtractor={(item, index) => item + index}
-                                    renderItem={({ item }) => <Item style={styles.SectionListItemStyle}
-                                                                    title={item} />}
-                                    renderSectionHeader={({ section: { title } }) => (
-                                        <Text style={styles.SectionHeaderStyle} bold size={24} color="#32325D">
-                                            {title}</Text>
-                                    )}
-                                />
+                                {this.state.loaded ? (
+                                    <View>
+                                        <FlatList
+                                            data={this.state.activitydata}
+                                            ListHeaderComponent={() => this.renderHeader('Activities')}
+                                            keyExtractor={(item, index) => index.toString()}
+                                            renderItem={({ item, index }) =>
+                                                <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
+                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.navigate("ActivityDetails",
+                                                        {
+                                                            id: item.id,
+                                                            name: item.data
+                                                        }
+                                                    )}>
+                                                        <Text style={styles.SectionListItemStyle}>
+                                                            {`${item.data}`}
+                                                        </Text>
+                                                    </TouchableWithoutFeedback>
+                                                </View>}
+                                        />
+                                    </View>
+                                ) : (
+                                    <ActivityIndicator size="large" color="#0000ff" />
+                                )}
+                                <Text/>
+                                <Text/>
+                                {this.state.loaded ? (
+                                    <View>
+                                        <FlatList
+                                            data={this.state.tododata}
+                                            ListHeaderComponent={() => this.renderHeader('To do(s)  ')}
+                                            keyExtractor={(item, index) => index.toString()}
+                                            renderItem={({ item, index }) =>
+                                                <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
+                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.navigate("TodoDetails",
+                                                        {
+                                                            id: item.id,
+                                                            name: item.data
+                                                        }
+                                                    )}>
+                                                        <Text style={styles.SectionListItemStyle}>
+                                                            {`${item.data}`}
+                                                        </Text>
+                                                    </TouchableWithoutFeedback>
+                                                </View>}
+                                        />
+                                    </View>
+                                ) : (
+                                    <ActivityIndicator size="large" color="#0000ff" />
+                                )}
                             </ScrollView>
                         </Block>
                     </View>
@@ -111,15 +192,16 @@ const styles = StyleSheet.create({
     },
     SectionHeaderStyle: {
         backgroundColor: '#5E72E4',
-        fontSize: 20,
+        fontSize: 16,
         padding: 5,
         color: '#fff',
+        fontWeight: 'bold',
     },
     SectionListItemStyle: {
-        fontSize: 15,
-        padding: 15,
+        fontSize: 13,
+        padding: 10,
         color: '#000',
-        backgroundColor: '#F5F5F5',
+        fontWeight: 'bold',
     },
     itemsList: {
         flex: 1,
@@ -188,4 +270,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TripDetails;
+export default TripDetails

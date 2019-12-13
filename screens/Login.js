@@ -6,12 +6,12 @@ import {
     StatusBar,
     Dimensions,
     Alert,
-    AsyncStorage
+    AsyncStorage,
+    View
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
-// AWS Amplify modular import
-import firebase from 'firebase';
+import firebase from "../Firebase";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -36,82 +36,56 @@ class Login extends React.Component {
             [key]: value
         })
     }
-    async storeToken(user) {
-        try {
-            await AsyncStorage.setItem("letsdoit", JSON.stringify(user));
-        } catch (error) {
-            console.log("Something went wrong", error);
-        }
-    }
+
     async getToken() {
         try {
-            let userData = await AsyncStorage.getItem("letsdoit");
-            let data = JSON.parse(userData);
+            return  await AsyncStorage.getItem("letsdoit");
         } catch (error) {
-            console.log("Something went wrong", error);
+            console.log("went wrong1", error);
         }
     }
         // Sign in users with Auth
-    async _onPressButton() {
+      _onPressButton() {
         const { email, password } = this.state
-        /* await Auth.signIn(username, password)
-            .then(user => {
-                this.setState({ user })
-                this.storeToken(user);
-                this.props.navigation.navigate("Home")
-            })
-            .catch(err => {
-                if (! err.message) {
-                    console.log('Error when signing in: ', err)
-                    Alert.alert('Error when signing in: ', err)
-                } else {
-                    if (err.code === 'UserNotConfirmedException') {
-                        Alert.alert('Account not verified yet')
-                    } else if (err.code === 'PasswordResetRequiredException') {
-                        Alert.alert('Existing user found. Please reset your password')
-                    } else if (err.code === 'NotAuthorizedException') {
-                        Alert.alert('Forgot Password?')
-                    } else if (err.code === 'UserNotFoundException') {
-                        Alert.alert('User does not exist!')
-                    } else {
-                        console.log('Error when signing in: ', err.message)
-                        Alert.alert('Error when signing in: ', err.message)
-                    }
-                }
-            }) */
         try {
             firebase
                 .auth()
                 .signInWithEmailAndPassword(email, password)
-                .then(() => this.props.navigation.navigate('Home'))
-                .catch(error => Alert.alert('Error when signing in: ', error.message))
+                .then(function(firebaseUser) {
+                    // Success
+                    AsyncStorage.setItem("letsdoit", firebaseUser.user.uid);
+                })
+                .catch(function(error) {
+                    console.log(error)
+                });
+                this.props.navigation.navigate('Home')
         }
         catch (err){
             Alert.alert('Error when signing in: ', err)
         }
 
     }
-    componentWillUnmount() {
-        if (!this.getToken()) {
+     async componentDidMount() {
+        var user = await this.getToken();
+        if (this.getToken()) {
             this.props.navigation.navigate('Home')
         }
     }
 
     render() {
         return (
-      <Block flex style={styles.container}>
-        <StatusBar hidden />
+      <View flex style={styles.container}>
         <Block flex center>
         <ImageBackground
             source={Images.Onboarding}
             style={{ height, width, zIndex: 1 }}
           />
         </Block>
-        <Block flex space="between" style={styles.padded}>
+        <Block flex space="around" style={styles.padded}>
             <Block flex space="around" style={{ zIndex: 2 }}>
               <Block style={styles.title}>
                 <Block>
-                  <Text color="white" size={70}>
+                  <Text color="white" size={50}>
                     Let's do It!
                   </Text>
                 </Block>
@@ -153,29 +127,30 @@ class Login extends React.Component {
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                             Sign In
                         </Text>
-
                     </Button>
                 </Block>
-              <Block center>
-                  <Button color="error" size="small"
-                          onPress={() => this.props.navigation.navigate("Signup")}
-                  >
-                      <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                          Sign Up
-                      </Text>
-
-                  </Button>
-              </Block>
+                {/*<Block center>
+                    <Button color="error" size="small"
+                            onPress={() => this.props.navigation.navigate("Signup")}
+                    >
+                        <Text bold size={14} color={argonTheme.COLORS.WHITE}>
+                            Sign Up
+                        </Text>
+                    </Button>
+                </Block>*/}
           </Block>
         </Block>
-      </Block>
+      </View>
     );
-  }
+    }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.COLORS.BLACK
+    backgroundColor: theme.COLORS.BLACK,
+    flex: 1,
+    justifyContent: 'flex-start',
+    position: "relative"
   },
   padded: {
     paddingHorizontal: theme.SIZES.BASE * 2,
@@ -194,12 +169,11 @@ const styles = StyleSheet.create({
   logo: {
     width: 200,
     height: 60,
-    zIndex: 2,
-    position: 'relative',
-    marginTop: '-50%'
+    zIndex: 2
   },
   title: {
-    marginTop:'-100%'
+    marginTop:1,
+    alignItems: 'center'
   },
   subTitle: {
     marginTop: 20

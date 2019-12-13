@@ -18,19 +18,23 @@ class Home extends React.Component {
         items: []
     };
     componentDidMount() {
-        var list = [];
-        itemsRef.once('value', snapshot => {
-            let data = snapshot.val();
-            let keys = Object.keys(data);
-            keys.forEach((key) => {
-                var temp = {
-                    currentitem: data[key],
-                    id : key
-                };
-                list.push(temp)
+        try {
+            var list = [];
+            itemsRef.once('value', snapshot => {
+                let data = snapshot.val();
+                let keys = Object.keys(data);
+                keys.forEach((key) => {
+                    var temp = {
+                        currentitem: data[key],
+                        id: key
+                    };
+                    list.push(temp)
+                });
+                this.setState({items: list});
             });
-            this.setState({items: list });
-        });
+        } catch (err) {
+            console.log(err)
+        }
     }
     render() {
         return (

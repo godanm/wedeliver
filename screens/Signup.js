@@ -10,8 +10,7 @@ import {
 import { Block, Text, theme } from "galio-framework";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 // AWS Amplify modular import
-import Auth from '@aws-amplify/auth'
-import firebase from 'firebase';
+import firebase from "../Firebase";
 
 const { height, width } = Dimensions.get("screen");
 import argonTheme from "../constants/Theme";
@@ -34,57 +33,36 @@ class Signup extends React.Component {
         })
     }
     async signUp()  {
-        const {password, email, phone_number, name, given_name} = this.state
-        /* await Auth.signUp({
-            username,
-            password,
-            attributes: { email, phone_number, name, given_name}
-        })
-            .then(() => {
-                console.log('sign up successful!')
-                this.showSignupBlock = false;
-                Alert.alert('Enter the confirmation code you received.')
+        const {password, email, phone_number, name, given_name} = this.state;
+        console.log(firebase.auth())
+        try {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(email, password)
+                .then(function (firebaseUser) {
+                    // Success
+                    let membersref = firebase.database().ref('members');
+                    firebase.database().ref('members/' + firebaseUser.user.uid).set({
+                        email: email,
+                        fname: name,
+                        lname: given_name,
+                        name: name + ' ' + given_name,
+                        status: true,
+                    })
+                })
+                .catch(error => Alert.alert('Error when signing up: ', error.message))
+            //this.props.navigation.navigate('Login')
+        }
+        catch (err) {
+            console.log(err)
+        }
 
-            })
-            .catch(err => {
-                if (! err.message) {
-                    console.log('Error when signing up: ', err)
-                    Alert.alert('Error when signing up: ', err)
-                } else {
-                    console.log('Error when signing up: ', err.message)
-                    Alert.alert('Error when signing up: ', err.message)
-                }
-            }) */
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then(() => this.props.navigation.navigate('Home'))
-            .catch(error => Alert.alert('Error when signing up: ', error.message))
-
-    }
-    // Confirm users and redirect them to the SignIn page
-    async confirmSignUp() {
-        const { username, authCode } = this.state
-        await Auth.confirmSignUp(username, authCode)
-            .then(() => {
-                this.props.navigation.navigate('Home')
-                console.log('Confirm sign up successful')
-            })
-            .catch(err => {
-                if (! err.message) {
-                    console.log('Error when entering confirmation code: ', err)
-                    Alert.alert('Error when entering confirmation code: ', err)
-                } else {
-                    console.log('Error when entering confirmation code: ', err.message)
-                    Alert.alert('Error when entering confirmation code: ', err.message)
-                }
-            })
     }
     componentDidMount() {
     }
 
     render() {
-              return (
+        return (
             <Block flex style={styles.container}>
                 <StatusBar hidden />
                 <Block flex center>
@@ -151,8 +129,8 @@ class Signup extends React.Component {
                                     Sign Up
                                 </Text>
                             </Button>
-                            </Block>
                         </Block>
+                    </Block>
                 </Block>
             </Block>
         );

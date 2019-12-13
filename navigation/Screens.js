@@ -1,5 +1,5 @@
 import React from "react";
-import { Easing, Animated } from "react-native";
+import { Easing, Animated, Alert } from "react-native";
 import {
     createStackNavigator,
     createDrawerNavigator,
@@ -15,9 +15,16 @@ import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import MyTodo from "../screens/MyTodo";
 import Login from "../screens/Login";
+import Logout from "../screens/Logout";
 import GroupDetails from "../screens/GroupDetails"
 import TripDetails from "../screens/TripDetails"
+import MemberDetails from "../screens/MemberDetails"
+import ActivityDetails from "../screens/ActivityDetails"
+import TodoDetails from "../screens/TodoDetails"
+
+
 import Adddata from "../screens/Adddata"
+
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -26,6 +33,7 @@ import DrawerItem from "../components/DrawerItem";
 import Header from "../components/Header";
 import Signup from "../screens/Signup";
 import MyTrips from "../screens/MyTrips";
+import Articles from "../screens/Articles";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
     transitionSpec: {
@@ -116,7 +124,7 @@ const HomeStack = createStackNavigator(
         Home: {
             screen: Home,
             navigationOptions: ({ navigation }) => ({
-                header: <Header search options title="My Groups" navigation={navigation} />
+                header: <Header options title="My Groups" navigation={navigation} />
             })
         },
         Signup: {
@@ -131,25 +139,43 @@ const HomeStack = createStackNavigator(
         MyTrips: {
             screen: MyTrips,
             navigationOptions: ({ navigation }) => ({
-                header: <Header search options title="My Trips" navigation={navigation} />
+                header: <Header options title="My Trips" navigation={navigation} />
             })
         },
         MyTodo: {
             screen: MyTodo,
             navigationOptions: ({ navigation }) => ({
-                header: <Header search options title="My Todo" navigation={navigation} />
+                header: <Header options title="My Todo" navigation={navigation} />
             })
         },
         GroupDetails: {
             screen: GroupDetails,
             navigationOptions: ({ navigation }) => ({
-                header: <Header search options title="Group Details" navigation={navigation} />
+                header: <Header options title="Group Details" navigation={navigation} />
             })
         },
         TripDetails: {
             screen: TripDetails,
             navigationOptions: ({ navigation }) => ({
-                header: <Header search options title="Trip Details" navigation={navigation} />
+                header: <Header options title="Trip Details" navigation={navigation} />
+            })
+        },
+        MemberDetails: {
+            screen: MemberDetails,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header options title="Member Details" navigation={navigation} />
+            })
+        },
+        ActivityDetails: {
+            screen: ActivityDetails,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header options title="Activity Details" navigation={navigation} />
+            })
+        },
+        TodoDetails: {
+            screen: TodoDetails,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header options title="To Do Details" navigation={navigation} />
             })
         },
     },
@@ -168,12 +194,12 @@ const AppStack = createDrawerNavigator(
             navigationOptions: {
                 drawerLabel: () => {}
             }
-            /* screen: Adddata,
+            /*screen: MyTodo,
             navigationOptions: navOpt => ({
                 drawerLabel: ({ focused }) => (
                     <DrawerItem focused={focused} title="Home" />
                 )
-            }) */
+            })*/
         },
         Profile: {
             screen: ProfileStack,
@@ -192,10 +218,10 @@ const AppStack = createDrawerNavigator(
             })
         },
         MyTrips: {
-            screen: ElementsStack,
+            screen: MyTrips,
             navigationOptions: navOpt => ({
                 drawerLabel: ({ focused }) => (
-                    <DrawerItem focused={focused} screen="MyTrips" title="My Trips" />
+                    <DrawerItem focused={focused} screen="Home" title="My Trips" />
                 )
             })
         },
@@ -203,12 +229,12 @@ const AppStack = createDrawerNavigator(
             screen: MyTodo,
             navigationOptions: navOpt => ({
                 drawerLabel: ({ focused }) => (
-                    <DrawerItem focused={focused} screen="MyTodo" title="My Todo" />
+                    <DrawerItem focused={focused} screen="Home" title="My Todo(s)" />
                 )
             })
         },
         Logout: {
-            screen: Login,
+            screen: Logout,
             navigationOptions: navOpt => ({
                 drawerLabel: ({ focused }) => (
                     <DrawerItem focused={focused} screen="Logout" title="Logout" />
