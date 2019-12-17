@@ -67,7 +67,6 @@ class TripDetails extends React.Component {
             todolist.push(temp)
             this.setState({ tododata: todolist });
             this.setState({ loaded: true });
-            console.log(this.state)
         });
 
     };
@@ -105,7 +104,7 @@ class TripDetails extends React.Component {
                                             keyExtractor={(item, index) => index.toString()}
                                             renderItem={({ item, index }) =>
                                                 <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
-                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.navigate("ActivityDetails",
+                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.push("ActivityDetails",
                                                         {
                                                             id: item.id,
                                                             name: item.data
@@ -131,7 +130,7 @@ class TripDetails extends React.Component {
                                             keyExtractor={(item, index) => index.toString()}
                                             renderItem={({ item, index }) =>
                                                 <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
-                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.navigate("TodoDetails",
+                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.push("TodoDetails",
                                                         {
                                                             id: item.id,
                                                             name: item.data

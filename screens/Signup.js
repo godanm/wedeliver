@@ -23,7 +23,7 @@ class Signup extends React.Component {
         email: '',
         phone_number: '',
         authCode: '',
-        name:'',
+        firstname:'',
         given_name:'',
         authcode:'',
     }
@@ -32,29 +32,39 @@ class Signup extends React.Component {
             [key]: value
         })
     }
-    async signUp()  {
-        const {password, email, phone_number, name, given_name} = this.state;
-        console.log(firebase.auth())
+    async signUp(navigate)  {
+        const {password, email, phone_number, firstname, given_name} = this.state;
         try {
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, password)
                 .then(function (firebaseUser) {
                     // Success
+                    user = firebase.auth().currentUser;
+                    //user.sendEmailVerification();
                     let membersref = firebase.database().ref('members');
-                    firebase.database().ref('members/' + firebaseUser.user.uid).set({
+                    firebase.database().ref('members/' + user.uid).set({
                         email: email,
-                        fname: name,
+                        fname: firstname,
                         lname: given_name,
-                        name: name + ' ' + given_name,
+                        name: firstname + ' ' + given_name,
                         status: true,
                     })
                 })
-                .catch(error => Alert.alert('Error when signing up: ', error.message))
+                .then(function () {
+                        user.updateProfile({
+                        displayName: firstname + ' ' + given_name
+                    });
+                })
+                .catch((error) => {
+                    Alert.alert("Error signing up:", error.message)
+                });
             //this.props.navigation.navigate('Login')
         }
         catch (err) {
-            console.log(err)
+            Alert.alert('Error when signing up: ', err)
+            console.log('Error when signing up: ', err)
+
         }
 
     }
@@ -88,6 +98,7 @@ class Signup extends React.Component {
                             <Input
                                 right
                                 ref="email"
+                                autoFocus={true}
                                 placeholder="Email"
                                 autoCapitalize = 'none'
                                 onChangeText={value => this.onChangeText('email', value)}

@@ -8,29 +8,26 @@ import {
     Alert,
     AsyncStorage
 } from "react-native";
-import { Block, Text, theme } from "galio-framework";
-import { Button, Select, Icon, Input, Header, Switch } from "../components/";
-import firebase from 'firebase';
+import firebase from '../Firebase';
+import { StackActions, NavigationActions, DrawerActions } from 'react-navigation';
 
-const { height, width } = Dimensions.get("screen");
 
-import argonTheme from "../constants/Theme";
-import Images from "../constants/Images";
-
-import Home from "../screens/Home";
 
 class Logout extends React.Component {
 
-    removeItem() {
-        try {
-           AsyncStorage.removeItem("letsdoit");
-        } catch (error) {
-            console.log("went wrong", error);
-        }
-    }
     componentDidMount() {
-        this.removeItem();
-        this.props.navigation.navigate('Login')
+        try {
+            AsyncStorage.removeItem('uid').then(() => {
+                firebase.auth().signOut().then(() => {
+                    //this.props.navigation.push('Login');
+                    this.props.navigation.dispatch(StackActions.popToTop());
+                });
+            });
+        }
+        catch(err) {
+            Alert.alert(err);
+            console.log(err);
+        }
     }
 
     render() {

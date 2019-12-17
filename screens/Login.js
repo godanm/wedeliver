@@ -12,6 +12,8 @@ import {
 import { Block, Text, theme } from "galio-framework";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 import firebase from "../Firebase";
+import { StackActions, NavigationActions } from 'react-navigation';
+
 
 const { height, width } = Dimensions.get("screen");
 
@@ -39,7 +41,7 @@ class Login extends React.Component {
 
     async getToken() {
         try {
-            return  await AsyncStorage.getItem("letsdoit");
+            return  await AsyncStorage.getItem("uid");
         } catch (error) {
             console.log("went wrong1", error);
         }
@@ -51,26 +53,30 @@ class Login extends React.Component {
             firebase
                 .auth()
                 .signInWithEmailAndPassword(email, password)
-                .then(function(firebaseUser) {
+                .then((firebaseUser) => {
                     // Success
-                    AsyncStorage.setItem("letsdoit", firebaseUser.user.uid);
+                    const displayName = firebaseUser.user.displayName ? firebaseUser.user.displayName : "No Name";
+                    AsyncStorage.setItem("uid", firebaseUser.user.uid);
+                    AsyncStorage.setItem("name", displayName);
+                    this.props.navigation.push("Home");
                 })
                 .catch(function(error) {
+                    Alert.alert('Error when signing in: ', error)
                     console.log(error)
                 });
-                this.props.navigation.navigate('Home')
         }
         catch (err){
             Alert.alert('Error when signing in: ', err)
+            console.log(err)
         }
 
     }
      async componentDidMount() {
-        var user = await this.getToken();
-        if (this.getToken()) {
-            this.props.navigation.navigate('Home')
-        }
-    }
+         await firebase.auth().onAuthStateChanged(user => {
+             this.props.navigation.navigate(user ? 'Home' : 'Login')
+             console.log("USER", user);
+         })
+     }
 
     render() {
         return (
@@ -129,7 +135,7 @@ class Login extends React.Component {
                         </Text>
                     </Button>
                 </Block>
-                {/*<Block center>
+                <Block center>
                     <Button color="error" size="small"
                             onPress={() => this.props.navigation.navigate("Signup")}
                     >
@@ -137,7 +143,7 @@ class Login extends React.Component {
                             Sign Up
                         </Text>
                     </Button>
-                </Block>*/}
+                </Block>
           </Block>
         </Block>
       </View>

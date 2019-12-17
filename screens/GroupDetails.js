@@ -99,7 +99,7 @@ class GroupDetails extends React.Component {
                                             keyExtractor={(item, index) => index.toString()}
                                             renderItem={({ item, index }) =>
                                                 <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
-                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.navigate("MemberDetails",
+                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.push("MemberDetails",
                                                         {
                                                             id: item.id,
                                                             name: item.data
@@ -125,7 +125,7 @@ class GroupDetails extends React.Component {
                                             keyExtractor={(item, index) => index.toString()}
                                             renderItem={({ item, index }) =>
                                                 <View style={{backgroundColor: index % 2 === 0 ? '#F5F5F5' : '#CCCCCC'}}>
-                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.navigate("TripDetails",
+                                                    <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.push("TripDetails",
                                                         {
                                                             id: item.id,
                                                             name: item.data

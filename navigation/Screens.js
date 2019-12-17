@@ -3,16 +3,15 @@ import { Easing, Animated, Alert } from "react-native";
 import {
     createStackNavigator,
     createDrawerNavigator,
-    createAppContainer
+    createAppContainer,
+    createSwitchNavigator
 } from "react-navigation";
 
 import { Block } from "galio-framework";
 
 // screens
 import Home from "../screens/Home";
-import Profile from "../screens/Profile";
-import Register from "../screens/Register";
-import Elements from "../screens/Elements";
+import Signup from "../screens/Signup";
 import MyTodo from "../screens/MyTodo";
 import Login from "../screens/Login";
 import Logout from "../screens/Logout";
@@ -31,9 +30,7 @@ import DrawerItem from "../components/DrawerItem";
 
 // header for screens
 import Header from "../components/Header";
-import Signup from "../screens/Signup";
 import MyTrips from "../screens/MyTrips";
-import Articles from "../screens/Articles";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
     transitionSpec: {
@@ -73,67 +70,28 @@ const transitionConfig = (transitionProps, prevTransitionProps) => ({
     }
 });
 
-const ElementsStack = createStackNavigator({
-    Elements: {
-        screen: Elements,
-        navigationOptions: ({ navigation }) => ({
-            header: <Header title="Elements" navigation={navigation} />
-        })
-    }
-},{
-    cardStyle: {
-        backgroundColor: "#F8F9FE"
-    },
-    transitionConfig
-});
-
-const TodoStack = createStackNavigator({
-    MyTodo: {
-        screen: MyTodo,
-        navigationOptions: ({ navigation }) => ({
-            header: <Header title="My Todo" navigation={navigation} />
-        })
-    }
-},{
-    cardStyle: {
-        backgroundColor: "#F8F9FE"
-    },
-    transitionConfig
-});
-
-const ProfileStack = createStackNavigator(
-    {
-        Profile: {
-            screen: Profile,
-            navigationOptions: ({ navigation }) => ({
-                header: (
-                    <Header white transparent title="Profile" iconColor={'#FFF'} navigation={navigation} />
-                ),
-                headerTransparent: true
-            })
-        }
-    },
-    {
-        cardStyle: { backgroundColor: "#FFFFFF" },
-        transitionConfig
-    }
-);
 
 const HomeStack = createStackNavigator(
     {
+        Login: {
+            screen: Login,
+            navigationOptions: {
+                header: null
+            }
+        },
+        Logout: {
+            screen: Logout,
+            navigationOptions: {
+                header: null
+            }
+        },
+        Signup: {
+            screen: Signup
+        },
         Home: {
             screen: Home,
             navigationOptions: ({ navigation }) => ({
                 header: <Header options title="My Groups" navigation={navigation} />
-            })
-        },
-        Signup: {
-            screen: Signup,
-            navigationOptions: ({ navigation }) => ({
-                header: (
-                    <Header left={<Block />} white transparent title="" navigation={navigation} />
-                ),
-                headerTransparent: true
             })
         },
         MyTrips: {
@@ -172,6 +130,12 @@ const HomeStack = createStackNavigator(
                 header: <Header options title="Activity Details" navigation={navigation} />
             })
         },
+        Profile: {
+            screen: ActivityDetails,
+            navigationOptions: ({ navigation }) => ({
+                header: <Header options title="My Profile" navigation={navigation} />
+            })
+        },
         TodoDetails: {
             screen: TodoDetails,
             navigationOptions: ({ navigation }) => ({
@@ -189,23 +153,11 @@ const HomeStack = createStackNavigator(
 
 const AppStack = createDrawerNavigator(
     {
-        Login: {
-            screen: Login,
-            navigationOptions: {
-                drawerLabel: () => {}
-            }
-            /*screen: MyTodo,
-            navigationOptions: navOpt => ({
-                drawerLabel: ({ focused }) => (
-                    <DrawerItem focused={focused} title="Home" />
-                )
-            })*/
-        },
         Profile: {
-            screen: ProfileStack,
+            screen: HomeStack,
             navigationOptions: navOpt => ({
                 drawerLabel: ({ focused }) => (
-                    <DrawerItem focused={focused} screen="Profile" title="Profile" />
+                    <DrawerItem focused={focused} screen="Profile" title="My Profile" />
                 )
             })
         },
@@ -218,7 +170,7 @@ const AppStack = createDrawerNavigator(
             })
         },
         MyTrips: {
-            screen: MyTrips,
+            screen: HomeStack,
             navigationOptions: navOpt => ({
                 drawerLabel: ({ focused }) => (
                     <DrawerItem focused={focused} screen="Home" title="My Trips" />
@@ -226,7 +178,7 @@ const AppStack = createDrawerNavigator(
             })
         },
         MyTodo: {
-            screen: MyTodo,
+            screen: HomeStack,
             navigationOptions: navOpt => ({
                 drawerLabel: ({ focused }) => (
                     <DrawerItem focused={focused} screen="Home" title="My Todo(s)" />

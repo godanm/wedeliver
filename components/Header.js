@@ -1,7 +1,8 @@
 import React from 'react';
 import { withNavigation } from 'react-navigation';
-import { TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
+import {TouchableOpacity, StyleSheet, Platform, Dimensions, AsyncStorage, ActivityIndicator} from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
+import { Header } from 'react-native-elements';
 
 import Icon from './Icon';
 import Input from './Input';
@@ -12,7 +13,8 @@ const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
 
 const BellButton = ({todoClicked, style, navigation}) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('MyTodo')}
+  <TouchableOpacity style={[styles.button, style]}
+                    onPress={() => navigation.navigate('MyTodo')}
         accessible={true}
         accessibilityLabel={"My Todo"}>
     <Icon
@@ -24,105 +26,78 @@ const BellButton = ({todoClicked, style, navigation}) => (
   </TouchableOpacity>
 );
 
-/* const BasketButton = ({isWhite, style, navigation}) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Pro')}>
-    <Icon
-      family="ArgonExtra"
-      size={16}
-      name="basket"
-      color={argonTheme.COLORS[isWhite ? 'WHITE' : 'ICON']}
-    />
-  </TouchableOpacity>
-); */
+class LDIHeader extends React.Component {
+    state = {
+        isLoading: true,
+        name : null
+    };
 
-const SearchButton = ({todoClicked, style, navigation}) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Pro')}>
-    <Icon
-      size={16}
-      family="Galio"
-      name="search-zoom-in"
-      color={theme.COLORS[todoClicked ? 'WHITE' : 'ICON']}
-    />
-  </TouchableOpacity>
-);
+    _logout = (props) => {
+        props.navigation.popToTop();
+    }
 
-class Header extends React.Component {
   handleLeftPress = () => {
     const { back, navigation } = this.props;
     return (back ? navigation.goBack() : navigation.openDrawer());
   }
+  async getToken() {
+        try {
+            return  await AsyncStorage.getItem("name");
+        } catch (error) {
+            console.log("went wrong1", error);
+        }
+    }
   renderRight = () => {
     const { title, navigation } = this.props;
     const { routeName } = navigation.state;
 
     if (title === 'Title') {
       return [
-        <BellButton key='chat-title' navigation={navigation}/>,
+        <BellButton style={styles.divider} key='chat-title' navigation={navigation}/>,
       ]
     }
     switch (routeName) {
       case 'Home':
         return ([
-          <BellButton key='chat-home' navigation={navigation} />,
+            <BellButton style={styles.divider} key='chat-home' navigation={navigation} />,
         ]);
       case 'MyTrips':
         return ([
-          <BellButton key='chat-categories' navigation={navigation} />,
+          <BellButton style={styles.divider} key='chat-categories' navigation={navigation} />,
         ]);
       case 'MyTodo':
         return ([
-          <BellButton key='chat-categories' navigation={navigation} todoClicked={true} />,
+          <BellButton style={styles.divider} key='chat-categories' navigation={navigation} todoClicked={true} />,
         ]);
       case 'Profile':
         return ([
-          <BellButton key='chat-profile' navigation={navigation} />,
+          <BellButton style={styles.divider} key='chat-profile' navigation={navigation} />,
         ]);
       case 'Search':
         return ([
-          <BellButton key='chat-search' navigation={navigation} />,
+          <BellButton style={styles.divider} key='chat-search' navigation={navigation} />,
         ]);
       case 'Settings':
         return ([
-          <BellButton key='chat-search' navigation={navigation} />,
+          <BellButton style={styles.divider} key='chat-search' navigation={navigation} />,
         ]);
       default:
         break;
     }
   }
-  renderSearch = () => {
-    const { navigation } = this.props;
-    return (
-      <Input
-        right
-        color="black"
-        style={styles.search}
-        placeholder="What are you looking for?"
-        placeholderTextColor={'#8898AA'}
-        onFocus={() => navigation.navigate('Pro')}
-        iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
-      />
-    );
-  }
+
   renderOptions = () => {
     const { navigation, optionLeft, optionRight } = this.props;
     const { routeName } = navigation.state;
     return (
-      <Block row style={styles.options}>
-        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Home')}>
-          <Block row middle>
-            <Icon name="diamond" family="ArgonExtra" style={{ paddingRight: 8 }}  />
-                <Text color={(routeName === 'Home' || (routeName === 'GroupDetails')) ? theme.COLORS.ERROR : theme.COLORS.ICON} size={16} style={styles.tabTitle}>{optionLeft || 'My Groups'}</Text>
-          </Block>
-        </Button>
-        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('MyTrips')}>
-          <Block row middle>
-              <Icon size={16} name="bag-17" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
-            <Text color={(routeName === 'MyTrips' || (routeName === 'TripDetails')) ? theme.COLORS.ERROR : theme.COLORS.ICON} size={16} style={styles.tabTitle}>{optionRight || 'My Trips'}</Text>
-          </Block>
-        </Button>
-      </Block>
+        <Block style={styles.title}>
+            <Text size={17} color={argonTheme.COLORS.BUTTON_COLOR} bold>Welcome {this.state.name}!
+          </Text>
+        </Block>
     );
+
   }
+
   renderTabs = () => {
     const { tabs, tabIndex, navigation } = this.props;
     const defaultTab = tabs && tabs[0] && tabs[0].id;
@@ -148,10 +123,16 @@ class Header extends React.Component {
       );
     }
   }
+    componentDidMount() {
+        AsyncStorage.getItem("name").then((value) => {
+            this.setState({"name": value});
+            this.setState({"isLoading": false});
+        });
+    }
   render() {
     const { back, title, white, transparent, bgColor, iconColor, titleColor, navigation, ...props } = this.props;
     const { routeName } = navigation.state;
-    const noShadow = ['Home', 'Categories', 'Deals', 'Pro', 'Profile'].includes(routeName);
+    const noShadow = ['Home', 'Profile'].includes(routeName);
     const headerStyles = [
       !noShadow ? styles.shadow : null,
       transparent ? { backgroundColor: 'rgba(0,0,0,0)' } : null,
@@ -162,7 +143,10 @@ class Header extends React.Component {
       bgColor && { backgroundColor: bgColor }
     ];
 
-    return (
+      if (this.state.isLoading) {
+          <ActivityIndicator size="large" color="#0000ff" />
+      }
+          return (
       <Block style={headerStyles}>
         <NavBar
           back={back}
@@ -258,4 +242,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(Header);
+export default withNavigation(LDIHeader);
