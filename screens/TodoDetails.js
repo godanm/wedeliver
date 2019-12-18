@@ -65,6 +65,7 @@ class TodoDetails extends React.Component {
             horizontal ? styles.horizontalStyles : styles.verticalStyles,
             styles.shadow
         ];
+        console.log(this.state)
         return (
             <Block flex style={styles.profile}>
                 <Block flex>
@@ -96,7 +97,7 @@ class TodoDetails extends React.Component {
                                             Owner: {this.state.tododata.owner}
                                         </Text>
                                         <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                                            Current status: {this.state.tododata.status}
+                                            Current status: {this.state.tododata.status ? "Complete" : "Pending"}
                                         </Text>
                                     </Block>
                                     <Block middle style={{ marginTop: 30, marginBottom: 16 }}>

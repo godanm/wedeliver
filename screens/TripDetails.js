@@ -93,7 +93,7 @@ class TripDetails extends React.Component {
                                         <Image source={{uri: this.props.navigation.state.params.thumbnail}} style={imageStyles} />
                                     </Block>
                                     <Block flex space="between" style={styles.cardDescription}>
-                                        <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Group Name -{this.props.navigation.state.params.name}</Text>
+                                        <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Trip Name -{this.props.navigation.state.params.name}</Text>
                                     </Block>
                                 </Block>
                                 {this.state.loaded ? (
