@@ -15,6 +15,7 @@ import firebase from "../Firebase";
 const { height, width } = Dimensions.get("screen");
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
+import {StackActions} from "react-navigation";
 
 class Signup extends React.Component {
     state = {
@@ -40,20 +41,25 @@ class Signup extends React.Component {
                 .createUserWithEmailAndPassword(email, password)
                 .then(function (firebaseUser) {
                     // Success
-                    user = firebase.auth().currentUser;
-                    //user.sendEmailVerification();
-                    let membersref = firebase.database().ref('members');
-                    firebase.database().ref('members/' + user.uid).set({
-                        email: email,
-                        fname: firstname,
-                        lname: given_name,
-                        name: firstname + ' ' + given_name,
-                        status: true,
-                    })
-                })
-                .then(function () {
-                        user.updateProfile({
+                    var user = firebase.auth().currentUser;
+                    user.updateProfile({
                         displayName: firstname + ' ' + given_name
+                    }).then(function() {
+                        //user.sendEmailVerification();
+                        let membersref = firebase.database().ref('members');
+                        firebase.database().ref('members/' + firebaseUser.user.uid).set({
+                            email: email,
+                            fname: firstname,
+                            lname: given_name,
+                            name: firstname + ' ' + given_name,
+                            status: true,
+                        })
+                        firebase.auth().signOut().then(() => {
+                            navigate('Login');
+                            Alert.alert("Welcome to Let's do It!");
+                        });
+                    }).catch(function(error) {
+                        console.log("Error", error)
                     });
                 })
                 .catch((error) => {
@@ -67,8 +73,6 @@ class Signup extends React.Component {
 
         }
 
-    }
-    componentDidMount() {
     }
 
     render() {
@@ -113,6 +117,7 @@ class Signup extends React.Component {
                                 right
                                 ref="firstname"
                                 placeholder="First Name"
+                                returnKeyType='next'
                                 autoCapitalize = 'words'
                                 onChangeText={value => this.onChangeText('firstname', value)}
                             />
@@ -133,7 +138,7 @@ class Signup extends React.Component {
                             <Text/>
                             <Button color="primary" size="small"
                                     style={styles.button}
-                                    onPress={() => this.signUp()}
+                                    onPress={() => this.signUp(this.props.navigation.navigate)}
 
                             >
                                 <Text bold size={14} color={argonTheme.COLORS.WHITE}>

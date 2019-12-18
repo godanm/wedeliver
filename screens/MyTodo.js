@@ -36,14 +36,14 @@ class MyTodo extends React.Component {
 
     async getToken() {
         try {
-            return  AsyncStorage.getItem("letsdoit");
+            return  AsyncStorage.getItem("uid");
         } catch (error) {
             console.log("went wrong1", error);
         }
     }
     fetchData = async () => {
-        //const userKey = 'KDxW8MncixYVbXDrklvt2iyBxmN2';
         const userKey = await this.getToken();
+        console.log("userKey", userKey)
         let todolist  = [];
         let todoref = firebase.database().ref()
         todoref.child('todos').orderByChild('ownerid').equalTo(userKey).once('value', snapshot => {

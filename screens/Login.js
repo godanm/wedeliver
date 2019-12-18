@@ -74,7 +74,6 @@ class Login extends React.Component {
      async componentDidMount() {
          await firebase.auth().onAuthStateChanged(user => {
              this.props.navigation.navigate(user ? 'Home' : 'Login')
-             console.log("USER", user);
          })
      }
 
@@ -135,15 +134,15 @@ class Login extends React.Component {
                         </Text>
                     </Button>
                 </Block>
-                <Block center>
+                {/*<Block center>
                     <Button color="error" size="small"
-                            onPress={() => this.props.navigation.navigate("Signup")}
+                            onPress={() => this.props.navigation.push("Signup")}
                     >
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                             Sign Up
                         </Text>
                     </Button>
-                </Block>
+                </Block>*/}
           </Block>
         </Block>
       </View>
