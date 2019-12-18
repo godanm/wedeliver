@@ -5,12 +5,13 @@ import {
     StyleSheet,
     StatusBar,
     Dimensions,
-    Alert, AsyncStorage, ActivityIndicator
+    Alert, AsyncStorage, ActivityIndicator,
+    View
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
 // AWS Amplify modular import
-import firebase from 'firebase';
+import firebase from '../Firebase';
 import { Card, ListItem } from 'react-native-elements'
 
 
@@ -25,9 +26,10 @@ class MyTodo extends React.Component {
         this.toggleSwitch = this.toggleSwitch.bind(this);
 
     }
+
     state = {
-        tododata: [],
-        loaded:false
+        tododata: null,
+        loaded: false
     };
 
     componentDidMount() {
@@ -36,33 +38,34 @@ class MyTodo extends React.Component {
 
     async getToken() {
         try {
-            return  AsyncStorage.getItem("uid");
+            return AsyncStorage.getItem("uid");
         } catch (error) {
             console.log("went wrong1", error);
         }
     }
+
     fetchData = async () => {
         const userKey = await this.getToken();
-        console.log("userKey", userKey)
-        let todolist  = [];
+        //const userKey = "Hw3rqkxmPZcoNdlop8kf6sacMfI3";
+        let todolist = [];
         let todoref = firebase.database().ref()
         todoref.child('todos').orderByChild('ownerid').equalTo(userKey).once('value', snapshot => {
-            console.log("snapshot", snapshot)
-            snapshot.forEach(function(child) {
+            snapshot.forEach(function (child) {
                 var temp = {
                     currentitem: child.val(),
                     id: child.key
                 };
                 todolist.push(temp)
             });
-            this.setState({ tododata: todolist});
-            this.setState({ loaded: true });
+            this.setState({tododata: todolist});
+            this.setState({loaded: true});
         });
 
     };
-    toggleSwitch(todo){
+
+    toggleSwitch(todo) {
         let todoref = firebase.database().ref();
-        todoref.child('todos/'+todo.id).set({
+        todoref.child('todos/' + todo.id).set({
             name: todo.currentitem.name,
             owner: todo.currentitem.owner,
             ownerid: todo.currentitem.ownerid,
@@ -71,8 +74,9 @@ class MyTodo extends React.Component {
         })
         this.fetchData();
     }
+
     render() {
-        const { navigation, image, title, cta , horizontal, full, style, ctaColor, imageStyle } = this.props;
+        const {navigation, image, title, cta, horizontal, full, style, ctaColor, imageStyle} = this.props;
         const imageStyles = [
             full ? styles.fullImage : styles.horizontalImage,
             imageStyle
@@ -82,34 +86,43 @@ class MyTodo extends React.Component {
             horizontal ? styles.horizontalStyles : styles.verticalStyles,
             styles.shadow
         ];
-        return (
-            <Block flex style={styles.container}>
-                {this.state.loaded &&
-                this.state.tododata.map((item, index) =>
-                        <Card title={item.currentitem.name} color={argonTheme.COLORS.ACTIVE} key={index}>
-                            <Switch
-                                style={styles.switch}
-                                value={item.currentitem.status}
-                                onValueChange={() => this.toggleSwitch(item)}
-                            >
-                            </Switch>
-                            <Text style={{marginBottom: 10}}>
-                                Status:{item.currentitem.status}
-                            </Text>
-                            <Text style={{marginBottom: 10}}>
-                                Due date:{item.currentitem.duedate}
-                            </Text>
-                            <Text style={{marginBottom: 10}}>
-                                Owner {item.currentitem.owner}
-                            </Text>
-                        </Card>
-                )}
-                {!this.state.loaded &&
-                <ActivityIndicator size="large" color="#0000ff"/>
-                }
-                    </Block>
+        console.log(this.state)
+        let context = null;
+        if (this.state.tododata === null) {
+            context = <ActivityIndicator size="large" color="#0000ff"/>
 
-        );
+        } else if (this.state.tododata.length > 0) {
+            this.state.tododata.map((item, index) =>
+                context = <Card title={item.currentitem.name} color={argonTheme.COLORS.ACTIVE} key={index}>
+                    <Switch
+                        style={styles.switch}
+                        value={item.currentitem.status}
+                        onValueChange={() => this.toggleSwitch(item)}
+                    >
+                    </Switch>
+                    <Text style={{marginBottom: 10}}>
+                        Status:{item.currentitem.status}
+                    </Text>
+                    <Text style={{marginBottom: 10}}>
+                        Due date:{item.currentitem.duedate}
+                    </Text>
+                    <Text style={{marginBottom: 10}}>
+                        Owner {item.currentitem.owner}
+                    </Text>
+                </Card>
+            )
+        } else  {
+            context = <Block style={styles.title1}>
+                <Text color={argonTheme.COLORS.ERROR} bold p style={{textAlignVertical: "center",textAlign: "center",}}>No task assigned to you!</Text>
+            </Block>
+        }
+        return (
+            <View style={styles.container}>
+                <Block flex style={styles.container}>
+                    {context}
+                </Block>
+            </View>
+        )
     }
 }
 const styles = StyleSheet.create({

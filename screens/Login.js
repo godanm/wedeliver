@@ -61,12 +61,12 @@ class Login extends React.Component {
                     this.props.navigation.push("Home");
                 })
                 .catch(function(error) {
-                    Alert.alert('Error when signing in: ', error)
+                    Alert.alert('Error when signing in: ', error.message)
                     console.log(error)
                 });
         }
         catch (err){
-            Alert.alert('Error when signing in: ', err)
+            Alert.alert('Error when signing in: ', err.message)
             console.log(err)
         }
 
