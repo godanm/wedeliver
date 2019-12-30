@@ -17,6 +17,7 @@ class TripDetails extends React.Component {
     state = {
         tododata: [],
         activitydata: [],
+        tripdata: [],
         loaded:false
     };
 
@@ -39,14 +40,17 @@ class TripDetails extends React.Component {
 
         const { navigation:navigate } = this.props;
         const tripid = this.props.navigation.state.params.id;
+        console.log("tripid", tripid)
 
         let activitylist = [];
         let todolist = [];
+        let triplist = [];
+
 
         let activitiesref = firebase.database().ref('trips/'+tripid+"/activities");
+        let tripref = firebase.database().ref('trips/'+tripid+"/thumbnail");
         let todosref = firebase.database().ref('trips/'+tripid+"/todos");
 
-        console.log(activitiesref)
         activitiesref.on('child_added', snapshot => {
             let data = snapshot.val();
             let keys = Object.keys(data).toString();
@@ -57,6 +61,17 @@ class TripDetails extends React.Component {
             activitylist.push(temp)
             this.setState({ activitydata: activitylist });
         });
+
+        tripref.on('value', snapshot => {
+            var temp = {
+                data: snapshot.val(),
+                id: snapshot.key
+            };
+            triplist.push(temp)
+            this.setState({ tripdata: triplist });
+
+        });
+
         todosref.on('child_added', snapshot => {
             let data = snapshot.val();
             let keys = Object.keys(data).toString();
@@ -88,16 +103,16 @@ class TripDetails extends React.Component {
                     <View style={styles.itemsList}>
                         <Block flex space="around" style={{ zIndex: 2 }}>
                             <ScrollView>
-                                <Block card flex style={cardContainer} >
-                                    <Block flex style={imgContainer}>
-                                        <Image source={{uri: this.props.navigation.state.params.thumbnail}} style={imageStyles} />
-                                    </Block>
-                                    <Block flex space="between" style={styles.cardDescription}>
-                                        <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Trip Name -{this.props.navigation.state.params.name}</Text>
-                                    </Block>
-                                </Block>
                                 {this.state.loaded ? (
                                     <View>
+                                        <Block card flex style={cardContainer} >
+                                            <Block flex style={imgContainer}>
+                                                <Image source={{uri: this.state.tripdata[0].data}} style={imageStyles} />
+                                            </Block>
+                                            <Block flex space="between" style={styles.cardDescription}>
+                                                <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>Trip Name -{this.props.navigation.state.params.name}</Text>
+                                            </Block>
+                                        </Block>
                                         <FlatList
                                             data={this.state.activitydata}
                                             ListHeaderComponent={() => this.renderHeader('Activities')}

@@ -6,7 +6,7 @@ import {
     StatusBar,
     Dimensions,
     Alert, AsyncStorage, ActivityIndicator,
-    View
+    ScrollView
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
@@ -86,14 +86,13 @@ class MyTodo extends React.Component {
             horizontal ? styles.horizontalStyles : styles.verticalStyles,
             styles.shadow
         ];
-        console.log(this.state)
         let context = null;
         if (this.state.tododata === null) {
             context = <ActivityIndicator size="large" color="#0000ff"/>
 
         } else if (this.state.tododata.length > 0) {
-            this.state.tododata.map((item, index) =>
-                context = <Card title={item.currentitem.name} color={argonTheme.COLORS.ACTIVE} key={index}>
+            context = this.state.tododata.map((item, index) =>
+                <Card title={item.currentitem.name} color={argonTheme.COLORS.ACTIVE} key={index}>
                     <Switch
                         style={styles.switch}
                         value={item.currentitem.status}
@@ -101,34 +100,34 @@ class MyTodo extends React.Component {
                     >
                     </Switch>
                     <Text style={{marginBottom: 10}}>
-                        Status:{item.currentitem.status}
+                        Status: {item.currentitem.status ? "Complete" : "Pending"}
                     </Text>
                     <Text style={{marginBottom: 10}}>
-                        Due date:{item.currentitem.duedate}
+                        Due date: {item.currentitem.duedate}
                     </Text>
                     <Text style={{marginBottom: 10}}>
-                        Owner {item.currentitem.owner}
+                        Owner: {item.currentitem.owner}
                     </Text>
                 </Card>
             )
         } else  {
             context = <Block style={styles.title1}>
-                <Text color={argonTheme.COLORS.ERROR} bold p style={{textAlignVertical: "center",textAlign: "center",}}>No task assigned to you!</Text>
+                <Text color={argonTheme.COLORS.ERROR} bold p style={{textAlignVertical: "center",textAlign: "center",}}>No task(s) assigned to you!</Text>
             </Block>
         }
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <Block flex style={styles.container}>
                     {context}
                 </Block>
-            </View>
+            </ScrollView>
         )
     }
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 65,
+        marginTop: 15,
         marginHorizontal: 16
     },
     padded: {

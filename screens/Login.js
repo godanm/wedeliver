@@ -49,6 +49,14 @@ class Login extends React.Component {
         // Sign in users with Auth
       _onPressButton() {
         const { email, password } = this.state
+          if (!email) {
+            Alert.alert("Please enter the email!");
+            return;
+          }
+          if (!password) {
+              Alert.alert("Please enter the password!");
+              return;
+          }
         try {
             firebase
                 .auth()
@@ -61,7 +69,7 @@ class Login extends React.Component {
                     this.props.navigation.push("Home");
                 })
                 .catch(function(error) {
-                    Alert.alert('Error when signing in: ', error.message)
+                    Alert.alert('Error Error when signing in: ', error.message)
                     console.log(error)
                 });
         }
@@ -98,12 +106,11 @@ class Login extends React.Component {
                   <Text color="white" size={24}>Your activities starts here.
                   </Text>
                 </Block>
-              </Block>
-                <Block>
                     <Input
                         right
                         ref="username"
                         autoFocus={true}
+                        isreq
                         placeholder="Email"
                         autoCapitalize = 'none'
                         onChangeText={value => this.onChangeText('email', value)}
@@ -151,12 +158,13 @@ class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.COLORS.BLACK,
-    flex: 1,
-    justifyContent: 'flex-start',
-    position: "relative"
-  },
+    container: {
+        backgroundColor: theme.COLORS.BLACK,
+        flex: 1,
+        justifyContent: 'center',
+        position: "relative",
+        flexDirection:'column'
+    },
   padded: {
     paddingHorizontal: theme.SIZES.BASE * 2,
     position: "relative",

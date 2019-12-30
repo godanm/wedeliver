@@ -109,25 +109,25 @@ const HomeStack = createStackNavigator(
         GroupDetails: {
             screen: GroupDetails,
             navigationOptions: ({ navigation }) => ({
-                header: <Header options title="Group Details" navigation={navigation} />
+                header: <Header back options title="Group Details" navigation={navigation} />
             })
         },
         TripDetails: {
             screen: TripDetails,
             navigationOptions: ({ navigation }) => ({
-                header: <Header options title="Trip Details" navigation={navigation} />
+                header: <Header back options title="Trip Details" navigation={navigation} />
             })
         },
         MemberDetails: {
             screen: MemberDetails,
             navigationOptions: ({ navigation }) => ({
-                header: <Header options title="Member Details" navigation={navigation} />
+                header: <Header back options title="Member Details" navigation={navigation} />
             })
         },
         ActivityDetails: {
             screen: ActivityDetails,
             navigationOptions: ({ navigation }) => ({
-                header: <Header options title="Activity Details" navigation={navigation} />
+                header: <Header back options title="Activity Details" navigation={navigation} />
             })
         },
         Profile: {
@@ -139,7 +139,7 @@ const HomeStack = createStackNavigator(
         TodoDetails: {
             screen: TodoDetails,
             navigationOptions: ({ navigation }) => ({
-                header: <Header options title="To Do Details" navigation={navigation} />
+                header: <Header back options title="To Do Details" navigation={navigation} />
             })
         },
     },

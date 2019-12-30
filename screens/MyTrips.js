@@ -5,11 +5,6 @@ import {
 } from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
 import ItemComponent from '../components/ItemComponent';
-
-
-import GroupDetails from './GroupDetails'
-
-import { Card, Button } from '../components';
 import argonTheme from "../constants/Theme";
 import firebase from "../Firebase";
 let itemsRef = firebase.database().ref('trips');
@@ -38,6 +33,7 @@ class MyTrips extends React.Component {
                         currentitem: snap.val(),
                         id: snap.key
                     };
+                    console.log("temp", temp)
                     list.push(temp);
                 }
                 this.setState({items: list});
@@ -64,7 +60,7 @@ class MyTrips extends React.Component {
             </Block>
         } else  {
             context = <Block style={styles.title1}>
-                <Text color={argonTheme.COLORS.ERROR} bold p style={{textAlignVertical: "center",textAlign: "center",}}>No groups available!</Text>
+                <Text color={argonTheme.COLORS.ERROR} bold p style={{textAlignVertical: "center",textAlign: "center",}}>No Trips available!</Text>
             </Block>
         }
         return (

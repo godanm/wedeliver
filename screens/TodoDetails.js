@@ -65,7 +65,6 @@ class TodoDetails extends React.Component {
             horizontal ? styles.horizontalStyles : styles.verticalStyles,
             styles.shadow
         ];
-        console.log(this.state)
         return (
             <Block flex style={styles.profile}>
                 <Block flex>

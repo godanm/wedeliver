@@ -2,10 +2,8 @@ import React from 'react';
 import { withNavigation } from 'react-navigation';
 import {TouchableOpacity, StyleSheet, Platform, Dimensions, AsyncStorage, ActivityIndicator} from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
-import { Header } from 'react-native-elements';
+import { Icon } from 'react-native-elements'
 
-import Icon from './Icon';
-import Input from './Input';
 import Tabs from './Tabs';
 import argonTheme from '../constants/Theme';
 
@@ -20,7 +18,8 @@ const BellButton = ({todoClicked, style, navigation}) => (
     <Icon
       family="ArgonExtra"
       size={16}
-      name="bell"
+      name="alarm"
+      raised={true}
       color={argonTheme.COLORS[todoClicked ? 'RED' : 'ICON']}
     />
   </TouchableOpacity>
@@ -149,7 +148,6 @@ class LDIHeader extends React.Component {
           return (
       <Block style={headerStyles}>
         <NavBar
-          back={back}
           title={title}
           style={navbarStyles}
           transparent={transparent}
@@ -157,9 +155,9 @@ class LDIHeader extends React.Component {
           rightStyle={{ alignItems: 'center' }}
           left={
             <Icon
-              name={back ? 'nav-left' : "menu-8"} family="ArgonExtra"
-              size={14} onPress={this.handleLeftPress}
-              color={iconColor || argonTheme.COLORS.ICON}/>
+                name={back ? 'arrow-back' : "arrow-back"} family="ArgonExtra"
+                size={18} onPress={this.handleLeftPress}
+                color={iconColor || argonTheme.COLORS.ICON}/>
           }
           leftStyle={{ paddingVertical: 12, flex: 0.2 }}
           titleStyle={[

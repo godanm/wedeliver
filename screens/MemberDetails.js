@@ -49,6 +49,7 @@ class MemberDetails extends React.Component {
 
         const { navigation:navigate } = this.props;
         const memberid = this.props.navigation.state.params.id;
+
         let groupmembersref = firebase.database().ref('members/'+memberid);
         groupmembersref.once('value', snapshot => {
             this.setState({ memberdata: snapshot.val() });
@@ -88,9 +89,6 @@ class MemberDetails extends React.Component {
                                     />
                                 </Block>
                                 <Block flex>
-                                    <Header
-                                        centerComponent={{ text: 'NAME', style: { color: '#fff' } }}
-                                    />
                                     <Block middle style={styles.nameInfo}>
                                         <Text bold size={28} color="#32325D">
                                             {this.props.navigation.state.params.name}
