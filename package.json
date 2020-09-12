@@ -1,7 +1,7 @@
 {
-  "name": "argon-react-native",
-  "version": "1.3.0",
-  "description": "Argon React Native, based on Argon Design System. Coded by Creative Tim",
+  "name": "we-deliver",
+  "version": "1.0.0",
+  "description": "We deliver",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -27,35 +27,20 @@
     "react": "16.8.3",
     "react-form-validator-core": "^0.6.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native-easy-grid": "^0.2.2",
     "react-native-gesture-handler": "~1.3.0",
     "react-native-modal-dropdown": "^0.6.2",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^3.11.0",
+    "react-smart-data-table": "^0.8.0",
     "toggle-switch-react-native": "^2.1.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.8.3",
     "babel-preset-expo": "^7.0.0"
   },
-  "keywords": [
-    "argon react native",
-    "argon design system",
-    "argon app react native",
-    "argon iOS",
-    "react native iOS",
-    "creative tim",
-    "argon Android",
-    "react native ui kit",
-    "react native expo",
-    "freebie",
-    "react native argon design",
-    "react native galio",
-    "galio argon free",
-    "galio react native free app",
-    "argon expo react native",
-    "react native ui template"
-  ],
-  "author": "Creative Tim <hello@creative-tim.com> (https://www.creative-tim.com/)",
+  "keywords": [],
+  "author": "Godan Mannazhi",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/creativetimofficial/argon-react-native/issues"

@@ -6,44 +6,8 @@ import Icon from "./Icon";
 import argonTheme from "../constants/Theme";
 
 class DrawerItem extends React.Component {
-  renderIcon = () => {
-    const { title, focused } = this.props;
-
-    switch (title) {
-      case "Home":
-        return (
-          <Icon
-            name="shop"
-            family="ArgonExtra"
-            size={10}
-            color={focused ? "white" : argonTheme.COLORS.PRIMARY}
-          />
-        );
-      case "Profile":
-        return (
-          <Icon
-            name="chart-pie-35"
-            family="ArgonExtra"
-            size={12}
-            color={focused ? "white" : argonTheme.COLORS.WARNING}
-          />
-        );
-      case "Log out":
-          return (
-              <Icon
-                  name="logout"
-                  size={12}
-                  color={focused ? "white" : argonTheme.COLORS.INFO}
-              />
-          );
-      default:
-        return null;
-    }
-  };
-
   render() {
-    const { focused, title } = this.props;
-
+    const { focused, title, screen } = this.props;
     const containerStyles = [
       styles.defaultStyle,
       focused ? [styles.activeStyle, styles.shadow] : null
@@ -51,9 +15,6 @@ class DrawerItem extends React.Component {
 
     return (
       <Block flex row style={containerStyles}>
-        <Block middle flex={0.1} style={{ marginRight: 5 }}>
-          {this.renderIcon()}
-        </Block>
         <Block row center flex={0.9}>
           <Text
             size={15}

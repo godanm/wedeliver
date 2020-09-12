@@ -7,7 +7,7 @@ import { Block, Text, theme } from 'galio-framework';
 import { argonTheme } from '../constants';
 
 
-class Card extends React.Component {
+class CustomCard extends React.Component {
   render() {
     const { navigation, image, title, cta , horizontal, full, style, ctaColor, imageStyle } = this.props;
     const imageStyles = [
@@ -33,7 +33,7 @@ class Card extends React.Component {
   }
 }
 
-Card.propTypes = {
+CustomCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string,
     cta: PropTypes.string,
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(Card);
+export default withNavigation(CustomCard);

@@ -12,16 +12,10 @@ const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 
 
 const BellButton = ({todoClicked, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]}
-                    onPress={() => navigation.navigate('MyTodo')}
+                    onPress={() => navigation.navigate('CartDetails')}
         accessible={true}
         accessibilityLabel={"My Todo"}>
-    <Icon
-      family="ArgonExtra"
-      size={16}
-      name="alarm"
-      raised={true}
-      color={argonTheme.COLORS[todoClicked ? 'RED' : 'ICON']}
-    />
+    <Icon type="ionicon" name={Platform.OS === "ios" ? "ios-cart" : "md-cart"} />
   </TouchableOpacity>
 );
 
@@ -59,26 +53,6 @@ class LDIHeader extends React.Component {
       case 'Home':
         return ([
             <BellButton style={styles.divider} key='chat-home' navigation={navigation} />,
-        ]);
-      case 'MyTrips':
-        return ([
-          <BellButton style={styles.divider} key='chat-categories' navigation={navigation} />,
-        ]);
-      case 'MyTodo':
-        return ([
-          <BellButton style={styles.divider} key='chat-categories' navigation={navigation} todoClicked={true} />,
-        ]);
-      case 'Profile':
-        return ([
-          <BellButton style={styles.divider} key='chat-profile' navigation={navigation} />,
-        ]);
-      case 'Search':
-        return ([
-          <BellButton style={styles.divider} key='chat-search' navigation={navigation} />,
-        ]);
-      case 'Settings':
-        return ([
-          <BellButton style={styles.divider} key='chat-search' navigation={navigation} />,
         ]);
       default:
         break;
@@ -155,8 +129,8 @@ class LDIHeader extends React.Component {
           rightStyle={{ alignItems: 'center' }}
           left={
             <Icon
-                name={back ? 'arrow-back' : "arrow-back"} family="ArgonExtra"
-                size={18} onPress={this.handleLeftPress}
+                name={back ? 'arrow-back' : "menu"} family="ArgonExtra"
+                size={22} onPress={this.handleLeftPress}
                 color={iconColor || argonTheme.COLORS.ICON}/>
           }
           leftStyle={{ paddingVertical: 12, flex: 0.2 }}

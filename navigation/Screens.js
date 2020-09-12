@@ -12,17 +12,12 @@ import { Block } from "galio-framework";
 // screens
 import Home from "../screens/Home";
 import Signup from "../screens/Signup";
-import MyTodo from "../screens/MyTodo";
 import Login from "../screens/Login";
 import Logout from "../screens/Logout";
-import GroupDetails from "../screens/GroupDetails"
-import TripDetails from "../screens/TripDetails"
-import MemberDetails from "../screens/MemberDetails"
-import ActivityDetails from "../screens/ActivityDetails"
-import TodoDetails from "../screens/TodoDetails"
+import CategoryDetails from "../screens/CategoryDetails"
+import ProductDetails from "../screens/ProductDetails"
+import CartDetails from "../screens/CartDetails"
 
-
-import Adddata from "../screens/Adddata"
 
 // drawer
 import Menu from "./Menu";
@@ -30,7 +25,7 @@ import DrawerItem from "../components/DrawerItem";
 
 // header for screens
 import Header from "../components/Header";
-import MyTrips from "../screens/MyTrips";
+
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
     transitionSpec: {
@@ -91,57 +86,28 @@ const HomeStack = createStackNavigator(
         Home: {
             screen: Home,
             navigationOptions: ({ navigation }) => ({
-                header: <Header options title="My Groups" navigation={navigation} />
+                header: <Header options title="Home" navigation={navigation} />
             })
         },
-        MyTrips: {
-            screen: MyTrips,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header options title="My Trips" navigation={navigation} />
-            })
-        },
-        MyTodo: {
-            screen: MyTodo,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header options title="My Todo" navigation={navigation} />
-            })
-        },
-        GroupDetails: {
-            screen: GroupDetails,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header back options title="Group Details" navigation={navigation} />
-            })
-        },
-        TripDetails: {
-            screen: TripDetails,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header back options title="Trip Details" navigation={navigation} />
-            })
-        },
-        MemberDetails: {
-            screen: MemberDetails,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header back options title="Member Details" navigation={navigation} />
-            })
-        },
-        ActivityDetails: {
-            screen: ActivityDetails,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header back options title="Activity Details" navigation={navigation} />
-            })
-        },
-        Profile: {
-            screen: ActivityDetails,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header options title="My Profile" navigation={navigation} />
-            })
-        },
-        TodoDetails: {
-            screen: TodoDetails,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header back options title="To Do Details" navigation={navigation} />
-            })
-        },
+      CategoryDetails: {
+        screen: CategoryDetails,
+        navigationOptions: ({ navigation }) => ({
+          header: <Header back options title="Item Details " navigation={navigation} />
+        })
+      },
+      CartDetails: {
+        screen: CartDetails,
+        navigationOptions: ({ navigation }) => ({
+          header: <Header back options title="Cart Details " navigation={navigation} />
+        })
+      },
+      ProductDetails: {
+        screen: ProductDetails,
+        navigationOptions: ({ navigation }) => ({
+          header: <Header back options title="Product Details " navigation={navigation} />
+        })
+      },
+
     },
     {
         cardStyle: {
@@ -153,46 +119,30 @@ const HomeStack = createStackNavigator(
 
 const AppStack = createDrawerNavigator(
     {
-        Profile: {
-            screen: HomeStack,
-            navigationOptions: navOpt => ({
-                drawerLabel: ({ focused }) => (
-                    <DrawerItem focused={focused} screen="Profile" title="My Profile" />
-                )
-            })
-        },
         Home: {
-            screen: HomeStack,
-            navigationOptions: navOpt => ({
-                drawerLabel: ({ focused }) => (
-                    <DrawerItem focused={focused} screen="Home" title="My Groups" />
-                )
-            })
+          screen: HomeStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem screen="Home" title="Home" />
+              )
+          })
         },
-        MyTrips: {
-            screen: HomeStack,
-            navigationOptions: navOpt => ({
-                drawerLabel: ({ focused }) => (
-                    <DrawerItem focused={focused} screen="Home" title="My Trips" />
-                )
-            })
-        },
-        MyTodo: {
-            screen: HomeStack,
-            navigationOptions: navOpt => ({
-                drawerLabel: ({ focused }) => (
-                    <DrawerItem focused={focused} screen="Home" title="My Todo(s)" />
-                )
-            })
-        },
-        Logout: {
-            screen: Logout,
-            navigationOptions: navOpt => ({
-                drawerLabel: ({ focused }) => (
-                    <DrawerItem focused={focused} screen="Logout" title="Logout" />
-                )
-            })
-        }
+      CartDetails: {
+        screen: HomeStack,
+        navigationOptions: navOpt => ({
+          drawerLabel: ({ focused }) => (
+            <DrawerItem screen="CartDetails" title="Cart Details" />
+          )
+        })
+      },
+      Logout: {
+          screen: Logout,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem screen="Logout" title="Logout" />
+              )
+          })
+      }
     },
     Menu
 );

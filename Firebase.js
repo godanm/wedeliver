@@ -3,12 +3,13 @@ import * as firebase from 'firebase';
 const settings = {timestampsInSnapshots: true};
 
 const config = {
-    apiKey: "AIzaSyDQOa99HjQu1WRWUsHo518Q0sOk8t6pglE",
-    authDomain: "letsdoit-dcf60.firebaseapp.com",
-    databaseURL: "https://letsdoit-dcf60.firebaseio.com",
-    projectId: "letsdoit-dcf60",
-    storageBucket: "letsdoit-dcf60.appspot.com",
-    messagingSenderId: "965799141885"
+    apiKey: "AIzaSyAuggkCZqSWYULZGBCHnr8tz11gdKinjrg",
+    authDomain: "we-deliver-1e721.firebaseapp.com",
+    databaseURL: "https://we-deliver-1e721.firebaseio.com/",
+    projectId: "we-deliver-1e721",
+    storageBucket: "we-deliver-1e721.appspot.com",
+    messagingSenderId: "294088430774",
+    appId: "1:294088430774:web:0bc94751fef540f94a0217"
 };
 firebase.initializeApp(config);
 

@@ -66,6 +66,7 @@ class Login extends React.Component {
                     const displayName = firebaseUser.user.displayName ? firebaseUser.user.displayName : "No Name";
                     AsyncStorage.setItem("uid", firebaseUser.user.uid);
                     AsyncStorage.setItem("name", displayName);
+                    global.uid = firebaseUser.user.uid;
                     this.props.navigation.push("Home");
                 })
                 .catch(function(error) {
@@ -81,6 +82,7 @@ class Login extends React.Component {
     }
      async componentDidMount() {
          await firebase.auth().onAuthStateChanged(user => {
+            global.uid = user.uid;
              this.props.navigation.navigate(user ? 'Home' : 'Login')
          })
      }
@@ -98,12 +100,12 @@ class Login extends React.Component {
             <Block flex space="around" style={{ zIndex: 2 }}>
               <Block style={styles.title}>
                 <Block>
-                  <Text color="white" size={50}>
-                    Let's do It!
+                  <Text color="white" size={40}>
+                    Spice Hub!
                   </Text>
                 </Block>
                 <Block style={styles.subTitle}>
-                  <Text color="white" size={24}>Your activities starts here.
+                  <Text color="white" size={24}>For all your grocery needs.
                   </Text>
                 </Block>
                     <Input

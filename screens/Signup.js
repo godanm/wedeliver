@@ -56,7 +56,7 @@ class Signup extends React.Component {
                         })
                         firebase.auth().signOut().then(() => {
                             navigate('Login');
-                            Alert.alert("Welcome to Let's do It!");
+                            Alert.alert("Welcome to We Deliver!");
                         });
                     }).catch(function(error) {
                         console.log("Error", error)
@@ -90,11 +90,11 @@ class Signup extends React.Component {
                         <Block style={styles.title}>
                             <Block>
                                 <Text color="white" size={70}>
-                                    Let's do It!
+                                    We Deliver!
                                 </Text>
                             </Block>
                             <Block style={styles.subTitle}>
-                                <Text color="white" size={24}>Your activities starts here.
+                                <Text color="white" size={24}>For all your grocery needs.
                                 </Text>
                             </Block>
                         </Block>

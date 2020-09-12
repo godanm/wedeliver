@@ -1,6 +1,7 @@
 // local imgs
 const Onboarding = require("../assets/imgs/bg.jpeg");
 const Logo = require("../assets/imgs/LDI.png");
+const MenuLogo = require("../assets/imgs/LDI.jpeg");
 const LogoOnboarding = require("../assets/imgs/logo.png");
 const ProfileBackground = require("../assets/imgs/profile-screen-bg.png");
 const RegisterBackground = require("../assets/imgs/register-bg.png");
@@ -28,6 +29,7 @@ const Products = {
 export default {
   Onboarding,
   Logo,
+  MenuLogo,
   LogoOnboarding,
   ProfileBackground,
   ProfilePicture,

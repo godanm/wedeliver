@@ -1,205 +1,24 @@
-{
-  "activities" : {
-    "-9LvHs2Rw3_WK1sM127i8" : {
-      "cost" : "0.0",
-      "date" : "25-Dec-2019",
-      "name" : "Hike the Kohls ranch park",
-      "status" : true,
-      "thumbnail" : "https://images.unsplash.com/photo-1450226840871-893c2e0bf620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-    },
-    "-AALvHs2Rw3_WK1sM127i8" : {
-      "cost" : "80.0",
-      "date" : "06-Jun-2020",
-      "name" : "Half-dome hike",
-      "status" : true,
-      "thumbnail" : "https://images.unsplash.com/photo-1518623380242-d992d3c57b37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-    }
+[
+  "Categories": [
+  {
+    "title": "Brown eggs",
+    "type": "dairy",
+    "description": "Raw organic brown eggs in a basket",
+    "filename": "0.jpg",
+    "height": 600,
+    "width": 400,
+    "price": 28.1,
+    "rating": 4
   },
-  "groups" : {
-    "-1LvHs2Rw3_WK1sM127i8" : {
-      "members" : {
-        "Hw3rqkxmPZcoNdlop8kf6sacMfI3" : "Godan Mannazhi",
-        "1x1q2CVvdgPOpCQHa7agRmRQPCj1" : "Neena Sajesh",
-        "M497WYzGFzU8eEosXdMuCYA33i02" : "Sudha Godan",
-        "RYWsvV62rBb2fBPZta5d2U5Up2h2" : "Sajesh Enampurath"
-
-      },
-      "name" : "Christmas outing group",
-      "thumbnail" : "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      "trips" : {
-        "-4LvHs2Rw4_WK1sM127i8" : "Trip to Kohls Ranch"
-      }
-    },
-    "-2LvHs2Rw3_WK1sM127i8" : {
-      "members" : {
-        "Hw3rqkxmPZcoNdlop8kf6sacMfI3" : "Godan Mannazhi",
-        "M497WYzGFzU8eEosXdMuCYA33i02" : "Sudha Godan"
-      },
-      "name" : "Yo.Yo.Yowwanam",
-      "thumbnail" : "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      "trips" : {
-        "-6LvHs2Rw4_WK1sM127i8" : "Trip to Yosemite"
-      }
-    }
-  },
-  "members" : {
-    "1x1q2CVvdgPOpCQHa7agRmRQPCj1" : {
-      "email" : "neena.thekkoot@yahoo.com",
-      "fname" : "Neena",
-      "lname" : "Sajesh",
-      "name" : "Neena Sajesh",
-      "status" : true
-    },
-    "Hw3rqkxmPZcoNdlop8kf6sacMfI3" : {
-      "email" : "reachgodan@gmail.com",
-      "fname" : "Godan",
-      "lname" : "Mannazhi",
-      "name" : "Godan Mannazhi",
-      "status" : true
-    },
-    "M497WYzGFzU8eEosXdMuCYA33i02" : {
-      "email" : "knsudha@gmail.com",
-      "fname" : "Sudha",
-      "lname" : "Godan",
-      "name" : "Sudha Godan",
-      "status" : true
-    },
-    "RYWsvV62rBb2fBPZta5d2U5Up2h2" : {
-      "email" : "sajesh.enampurath@gmail.com",
-      "fname" : "Sajesh",
-      "lname" : "Enampurath",
-      "name" : "Sajesh Enampurath",
-      "status" : true
-    }
-  },
-  "todos" : {
-    "-ABvHs2Rw3_WK1sM127i8" : {
-      "duedate" : "31-Dec-2019",
-      "name" : "Book flight tickets",
-      "owner" : "Godan Mannazhi",
-      "ownerid" : "Hw3rqkxmPZcoNdlop8kf6sacMfI3",
-      "status" : false
-    },
-    "-09vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Cooking vessels",
-      "owner" : "Sudha Godan",
-      "ownerid" : "M497WYzGFzU8eEosXdMuCYA33i02",
-      "status" : false
-    },
-    "-01vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Dosa Batter",
-      "owner" : "Neena Sajesh",
-      "ownerid" : "1x1q2CVvdgPOpCQHa7agRmRQPCj1",
-      "status" : false
-    },
-    "-02vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Stuffed chicken",
-      "owner" : "Neena Sajesh",
-      "ownerid" : "1x1q2CVvdgPOpCQHa7agRmRQPCj1",
-      "status" : false
-    },
-    "-03vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Moru curry",
-      "owner" : "Sudha Godan",
-      "ownerid" : "M497WYzGFzU8eEosXdMuCYA33i02",
-      "status" : false
-    },
-    "-04vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Sambar",
-      "owner" : "Sudha Godan",
-      "ownerid" : "M497WYzGFzU8eEosXdMuCYA33i02",
-      "status" : false
-    },
-    "-05vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Fish marinate",
-      "owner" : "Neena Sajesh",
-      "ownerid" : "1x1q2CVvdgPOpCQHa7agRmRQPCj1",
-      "status" : false
-    },
-    "-06vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Waffle maker",
-      "owner" : "Sudha Godan",
-      "ownerid" : "M497WYzGFzU8eEosXdMuCYA33i02",
-      "status" : false
-    },
-    "-07vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Breakfast - Eggs & Bread",
-      "owner" : "Sudha Godan",
-      "ownerid" : "M497WYzGFzU8eEosXdMuCYA33i02",
-      "status" : false
-    },
-    "-08vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Cutleries",
-      "owner" : "Godan Mannazhi",
-      "ownerid" : "Hw3rqkxmPZcoNdlop8kf6sacMfI3",
-      "status" : false
-    },
-    "-09vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Rice, Onions & Vegs",
-      "owner" : "Godan Mannazhi",
-      "ownerid" : "Hw3rqkxmPZcoNdlop8kf6sacMfI3",
-      "status" : false
-    },
-    "-10vHs2Rw3_WK1sM127i8" : {
-      "duedate" : "20-Dec-2019",
-      "name" : "Chicken curry",
-      "owner" : "Godan Mannazhi",
-      "ownerid" : "Hw3rqkxmPZcoNdlop8kf6sacMfI3",
-      "status" : false
-    }
-  },
-  "trips" : {
-    "-4LvHs2Rw4_WK1sM127i8" : {
-      "activities" : {
-        "-9LvHs2Rw3_WK1sM127i8" : "Hike the Kohls ranch park"
-      },
-      "name" : "Trip to Kohls Ranch",
-      "status" : true,
-      "thumbnail" : "https://images.unsplash.com/photo-1450226840871-893c2e0bf620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      "todos" : {
-        "-09vHs2Rw3_WK1sM127i8" : "Cooking vessels",
-        "-01vHs2Rw3_WK1sM127i8" : "Dosa Batter",
-        "-02vHs2Rw3_WK1sM127i8" : "Stuffed chicken",
-        "-03vHs2Rw3_WK1sM127i8" : "Moru curry",
-        "-04vHs2Rw3_WK1sM127i8" : "Sambar",
-        "-05vHs2Rw3_WK1sM127i8" : "Fish marinate",
-        "-06vHs2Rw3_WK1sM127i8" : "Waffle maker",
-        "-07vHs2Rw3_WK1sM127i8" : "Breakfast - Eggs & Bread",
-        "-08vHs2Rw3_WK1sM127i8" : "Cutleries",
-        "-09vHs2Rw3_WK1sM127i8" : "Rice, Onions & Vegs",
-        "-10vHs2Rw3_WK1sM127i8" : "Chicken curry"
-      },
-      "members" : {
-        "Hw3rqkxmPZcoNdlop8kf6sacMfI3" : "Godan Mannazhi",
-        "M497WYzGFzU8eEosXdMuCYA33i02" : "Sudha Godan",
-        "1x1q2CVvdgPOpCQHa7agRmRQPCj1" : "Neena Sajesh",
-        "RYWsvV62rBb2fBPZta5d2U5Up2h2" : "Sajesh Enampurath"
-      }
-    },
-    "-6LvHs2Rw4_WK1sM127i8" : {
-      "activities" : {
-        "-AALvHs2Rw3_WK1sM127i8" : "Half-dome hike"
-      },
-      "name" : "Trip to Yosemite",
-      "status" : true,
-      "thumbnail" : "https://images.unsplash.com/photo-1518623380242-d992d3c57b37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      "todos" : {
-        "-ABvHs2Rw3_WK1sM127i8" : "Book flight tickets"
-      },
-      "members" : {
-        "Hw3rqkxmPZcoNdlop8kf6sacMfI3" : "Godan Mannazhi",
-        "M497WYzGFzU8eEosXdMuCYA33i02" : "Sudha Godan"
-      }
-    }
+  {
+    "title": "Sweet fresh stawberry",
+    "type": "fruit",
+    "description": "Sweet fresh stawberry on the wooden table",
+    "filename": "1.jpg",
+    "height": 450,
+    "width": 299,
+    "price": 29.45,
+    "rating": 4
+  ],
   }
-}
+]
