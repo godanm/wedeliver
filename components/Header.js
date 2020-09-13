@@ -14,7 +14,7 @@ const BellButton = ({todoClicked, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]}
                     onPress={() => navigation.navigate('CartDetails')}
         accessible={true}
-        accessibilityLabel={"My Todo"}>
+        accessibilityLabel={"Carts"}>
     <Icon type="ionicon" name={Platform.OS === "ios" ? "ios-cart" : "md-cart"} />
   </TouchableOpacity>
 );
@@ -64,7 +64,7 @@ class LDIHeader extends React.Component {
     const { routeName } = navigation.state;
     return (
         <Block style={styles.title}>
-            <Text size={17} color={argonTheme.COLORS.BUTTON_COLOR} bold>Welcome {this.state.name}!
+            <Text size={17} color={argonTheme.COLORS.HEADER} bold>Welcome {this.state.name}!
           </Text>
         </Block>
     );

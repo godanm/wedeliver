@@ -30,7 +30,8 @@ export default class CartDetails extends React.Component {
     this.state = {
       selectAll: false,
       cartsLoaded: false,
-      cartItems: null
+      cartItems: null,
+      total: 0
     }
   }
 
@@ -43,8 +44,11 @@ export default class CartDetails extends React.Component {
     var cartsRef = firebase.database().ref('/orders/'+uid);
     cartsRef.once('value', function(snapshot) {
       snapshot.forEach(function(userSnapshot) {
-        var orders = userSnapshot.val().orderlist;
-        orderlist.push(orders);
+        var temp = {
+          currentitem: userSnapshot.val(),
+          id: userSnapshot.key
+        };
+        orderlist.push(temp);
       }.bind(this));
       this.setState({cartsLoaded: true});
       this.setState({cartItems: orderlist});
@@ -97,88 +101,16 @@ export default class CartDetails extends React.Component {
     );
   }
 }
-  class RenderOrders extends React.Component {
-    render() {
-      const styles = StyleSheet.create({
-        itemsList: {
-          flex: 1,
-          flexDirection: 'column',
-          width: '90%',
-          marginHorizontal: 20,
-          paddingVertical: theme.SIZES.BASE,
-          justifyContent: 'center'
-        },
-        itemtext: {
-          fontSize: 24,
-          fontWeight: 'bold',
-          textAlign: 'center',
-          width: '90%',
-          marginHorizontal: 20,
-          paddingVertical: theme.SIZES.BASE,
-          justifyContent: 'center'
-        },
-        card: {
-          backgroundColor: theme.COLORS.WHITE,
-          marginVertical: theme.SIZES.BASE,
-          borderWidth: 0,
-          minHeight: 114,
-          marginBottom: 16
-        },
-        cardTitle: {
-          flex: 1,
-          flexWrap: 'wrap',
-          paddingBottom: 6,
-          justifyContent: 'center'
+class RenderOrders extends React.Component {
+  render() {
+    const styles = StyleSheet.create({
 
-        },
-        cardDescription: {
-          padding: theme.SIZES.BASE / 2
-        },
-        imageContainer: {
-          borderRadius: 3,
-          elevation: 1,
-          overflow: 'hidden',
-        },
-        image: {
-          // borderRadius: 3,
-        },
-        horizontalImage: {
-          height: 122,
-          width: 'auto',
-        },
-        horizontalStyles: {
-          borderTopRightRadius: 0,
-          borderBottomRightRadius: 0,
-        },
-        verticalStyles: {
-          borderBottomRightRadius: 0,
-          borderBottomLeftRadius: 0
-        },
-        fullImage: {
-          height: 215
-        },
-        shadow: {
-          shadowColor: theme.COLORS.BLACK,
-          shadowOffset: { width: 0, height: 2 },
-          shadowRadius: 4,
-          shadowOpacity: 0.1,
-          elevation: 2,
-        },
-      });
-      const { navigation, image, title, cta , horizontal, full, style, ctaColor, imageStyle } = this.props;
-      const imageStyles = [
-        full ? styles.fullImage : styles.horizontalImage,
-        imageStyle
-      ];
-      const cardContainer = [styles.card, styles.shadow, style];
-      const imgContainer = [styles.imageContainer,
-        horizontal ? styles.horizontalStyles : styles.verticalStyles,
-        styles.shadow
-      ];
-
+    });
+    var orderArray = Object.values(this.props.orders);
       return (
-        <ScrollView>
-          {this.props.orders.map((item, index) => {
+      <ScrollView>
+        {orderArray.map((item, index) => {
+          if (item.brand != undefined) {
             return (
               <TouchableHighlight
                 onPress={() => Alert.alert(
@@ -188,36 +120,39 @@ export default class CartDetails extends React.Component {
                     {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
                     {text: 'OK', onPress: () => console.log('Ok Pressed!')},
                   ],
-                  { cancelable: false }
+                  {cancelable: false}
                 )}
                 style={{paddingRight: 10}} key={index}>
-              <View style={{flexDirection: 'row', backgroundColor: '#fff', marginBottom: 2, height: 120}}>
-                <View style={{flexDirection: 'row', flexGrow: 1, flexShrink: 1, alignSelf: 'center'}}>
-                    <Image source={{uri: item.thumbnail}} style={[styles.centerElement, {height: 60, width: 60, backgroundColor: '#eeeeee'}]} />
-                  <View style={{flexGrow: 1, flexShrink: 1, alignSelf: 'center'}}>
-                    <Text numberOfLines={1} style={{fontSize: 15}}>{item.brand}</Text>
-                    <Text numberOfLines={1} style={{color: '#333333'}}>{item.description}</Text>
-                    <Text numberOfLines={1} style={{color: '#333333', marginBottom: 10}}>Sub total - ${item.subtotal.toFixed(2)}</Text>
-                    <View style={{flexDirection: 'row'}}>
-                      <TouchableOpacity onPress={() => this.quantityHandler('less', i)} style={{ borderWidth: 1, borderColor: '#cccccc' }}>
-                        <MaterialIcons name="remove" size={22} color="#cccccc" />
-                      </TouchableOpacity>
-                      <Text style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#cccccc', paddingHorizontal: 7, paddingTop: 3, color: '#bbbbbb', fontSize: 13 }}>{item.qty}</Text>
-                      <TouchableOpacity onPress={() => this.quantityHandler('more', i)} style={{ borderWidth: 1, borderColor: '#cccccc' }}>
-                        <MaterialIcons name="add" size={22} color="#cccccc" />
-                      </TouchableOpacity>
+                <View style={{flexDirection: 'row', backgroundColor: '#fff', marginBottom: 2, height: 120}}>
+                  <View style={{flexDirection: 'row', flexGrow: 1, flexShrink: 1, alignSelf: 'center'}}>
+                    <Image source={{uri: item.thumbnail}}
+                           style={[styles.centerElement, {height: 60, width: 60, backgroundColor: '#eeeeee'}]}/>
+                    <View style={{flexGrow: 1, flexShrink: 1, alignSelf: 'center'}}>
+                      <Text numberOfLines={1} style={{fontSize: 15}}><Text style={{color: '#d61e6e'}} bold={true}>Brand - </Text>{item.brand}</Text>
+                      <Text numberOfLines={1} style={{color: '#333333'}}><Text style={{color: '#d61e6e'}} bold={true}>Description - </Text>{item.description}</Text>
+                      <Text numberOfLines={1} style={{color: '#333333', marginBottom: 10}}><Text style={{color: '#d61e6e'}} bold={true}>Sub total - </Text>
+                        ${item.subtotal.toFixed(2)}</Text>
+                      <View style={{flexDirection: 'row'}}>
+                        <Text style={{
+                          borderTopWidth: 1,
+                          borderBottomWidth: 1,
+                          borderColor: '#cccccc',
+                          paddingHorizontal: 7,
+                          paddingTop: 3,
+                          color: '#4107e3',
+                          fontSize: 13
+                      }}>Qty - {item.qty} / Price - ${item.price}</Text>
+                      </View>
                     </View>
                   </View>
-              </View>
-                <View style={[styles.centerElement, {width: 60}]}>
                 </View>
-              </View>
               </TouchableHighlight>
 
             )
-          })}
-        </ScrollView>
+          }
+        })}
+      </ScrollView>
 
-      );
+    );
   }
 }

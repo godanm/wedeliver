@@ -67,7 +67,8 @@ class Login extends React.Component {
                     AsyncStorage.setItem("uid", firebaseUser.user.uid);
                     AsyncStorage.setItem("name", displayName);
                     global.uid = firebaseUser.user.uid;
-                    this.props.navigation.push("Home");
+                  global.email = firebaseUser.user.email;
+                  this.props.navigation.push("Home");
                 })
                 .catch(function(error) {
                     Alert.alert('Error Error when signing in: ', error.message)
@@ -82,8 +83,9 @@ class Login extends React.Component {
     }
      async componentDidMount() {
          await firebase.auth().onAuthStateChanged(user => {
-            global.uid = user.uid;
-             this.props.navigation.navigate(user ? 'Home' : 'Login')
+           global.uid = user ? user.uid : null;
+           global.email = user ? user.email :null;
+           this.props.navigation.navigate(user ? 'Home' : 'Login')
          })
      }
 

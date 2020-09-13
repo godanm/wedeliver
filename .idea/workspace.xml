@@ -4,22 +4,24 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e99973ad-c258-4e81-93cc-d2b82e33d54a" name="Default" comment="">
+    <list default="true" id="e99973ad-c258-4e81-93cc-d2b82e33d54a" name="Default" comment="Merge branch 'master' of https://github.com/godanm/wedeliver&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/Firebase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/imgs/bg.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/imgs/bg.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Card.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/DrawerItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/DrawerItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constants/Images.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/Images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/Theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/Theme.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/navigation/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/Menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/Screens.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/Screens.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/newdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/newdata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/ActivityDetails.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Articles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/CartDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/CartDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/CategoryDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/CategoryDetails.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/GroupDetails.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Login.js" afterDir="false" />
@@ -125,7 +127,7 @@
       <workItem from="1599071623320" duration="67000" />
       <workItem from="1599105247831" duration="8624000" />
       <workItem from="1599159143515" duration="88000" />
-      <workItem from="1599159258992" duration="83192000" />
+      <workItem from="1599159258992" duration="105377000" />
     </task>
     <task id="LOCAL-00001" summary="Chaanges done">
       <created>1574587735105</created>
@@ -282,6 +284,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="Dynamic trips now showing" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="390" y="48" key="CommitChangelistDialog2" timestamp="1599870657567">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="390" y="48" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1599870657567" />
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1599900371040">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1599900371040" />
+    <state x="341" y="164" key="SettingsEditor" timestamp="1599950178463">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="341" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1599950178463" />
     <state x="541" y="280" width="598" height="490" key="find.popup" timestamp="1599869541886">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

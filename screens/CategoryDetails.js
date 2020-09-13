@@ -11,28 +11,45 @@ export default class Cart extends React.Component {
     this.txtSum = React.createRef();
     this.state = {
       selectAll: false,
-      cartItemsIsLoading: false,
+      cartsLoaded: false,
       totalcartprice:0
     }
   }
   componentDidMount() {
     this.fetchData();
   }
+  loadData(path) {
+    return firebase.database().ref(path).once("value");
+  };
   fetchData = async () => {
+    let qty = 0;
+    let itemslist = [];
     const { navigation:navigate } = this.props;
     const categoryId = this.props.navigation.state.params.id;
-    let itemslist = [];
-    let itemsref = firebase.database().ref('categories/'+categoryId+"/");
-    itemsref.on('child_added', snapshot => {
-      var temp = {
-        currentitem: snapshot.val(),
-        itemId: snapshot.key,
-        qty:0
-      };
-      itemslist.push(temp)
-      this.setState({ cartItems: itemslist });
+    this.loadData('/categories/'+categoryId+'/').then((snapshot) => {
+      snapshot.forEach(function(childSnapshot) {
+        var key = childSnapshot.key;
+        var childData = childSnapshot.val();
+        let qtyref =  firebase.database().ref('orders/'+global.uid+"/"+key);
+        this.loadData('orders/'+global.uid+"/"+key).then((snap) => {
+          if (snap.exists()) {
+          qty = snap.val().qty ? snap.val().qty : 0;
+        } else {
+          qty = 0;
+        }
+          var temp = {
+            currentitem: childData,
+            itemId: key,
+            qty:qty
+          };
+          itemslist.push(temp)
+          this.setState({ cartItems: itemslist });
+          this.setState({ cartsLoaded: true });
+        });
+      }.bind(this));
     });
   };
+
   selectHandler = (index, value) => {
     const newItems = [...this.state.cartItems]; // clone the array
     newItems[index]['checked'] = value == 1 ? 0 : 1; // set the new value
@@ -89,38 +106,27 @@ export default class Cart extends React.Component {
     }
     return 0;
   }
-
   handleCart = () => {
     const { cartItems } = this.state;
-    var recordfound = false;
     var uid = global.uid;
-    var orderlist = [];
     if (this.sum === 0) {
       Alert.alert("Please add at least one item to cart!");
       return;
     } else {
       cartItems.map((item, i) => {
         if (item.qty > 0) {
-          recordfound = true;
-          var order = {
-            email: 'reachgodan@gmail.com',
+          firebase.database().ref('orders/'+ uid + '/'  + item.itemId).set({
+            email: global.email,
             brand: item.currentitem.brand,
             description: item.currentitem.description,
             price: item.currentitem.price,
             qty: item.qty,
             subtotal: (item.qty * item.currentitem.price.toFixed(2)),
-            uid:uid,
-            thumbnail:item.currentitem.thumbnail ? item.currentitem.thumbnail : null
-          };
-          orderlist.push(order)
+            uid: uid,
+            thumbnail: item.currentitem.thumbnail ? item.currentitem.thumbnail : null,
+            itemid: item.itemId
+          })
         }
-      })
-    }
-
-    var uid = global.uid;
-    if (recordfound) {
-      firebase.database().ref('orders/'+ uid + '/'  + this.props.navigation.state.params.id).set({
-        orderlist
       })
     }
   }
@@ -130,7 +136,7 @@ export default class Cart extends React.Component {
       centerElement: {justifyContent: 'center', alignItems: 'center'},
     });
 
-    const { cartItems, cartItemsIsLoading, selectAll } = this.state;
+    const { cartItems, cartsLoaded, selectAll } = this.state;
 
     return (
       <View style={{flex: 1, backgroundColor: '#f6f6f6'}}>
@@ -142,7 +148,7 @@ export default class Cart extends React.Component {
             <Text color={argonTheme.COLORS.ACTIVE}>Items available in {this.props.navigation.state.params.id}</Text>
           </View>
         </View>
-        {cartItemsIsLoading ? (
+        {!cartsLoaded ? (
           <View style={[styles.centerElement, {height: 300}]}>
             <ActivityIndicator size="large" color="#ef5739" />
           </View>
@@ -162,16 +168,14 @@ export default class Cart extends React.Component {
                     <Text numberOfLines={1} style={{color: '#333333', marginBottom: 10}}>Price - ${item.currentitem.price}</Text>
                     <View style={{flexDirection: 'row'}}>
                       <TouchableOpacity onPress={() => this.quantityHandler('less', i)} style={{ borderWidth: 1, borderColor: '#054a85' }}>
-                        <MaterialIcons name="remove" size={22} color="red" />
+                        <MaterialIcons name="remove" size={22} color="#ff6b36" />
                       </TouchableOpacity>
-                      <Text style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#054a85', paddingHorizontal: 7, paddingTop: 3, color: '#bbbbbb', fontSize: 13 }}>{item.qty}</Text>
+                      <Text style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#054a85', paddingHorizontal: 7, paddingTop: 3, color: '#4107e3', fontSize: 13 }}>{item.qty}</Text>
                       <TouchableOpacity onPress={() => this.quantityHandler('more', i)} style={{ borderWidth: 1, borderColor: '#054a85' }}>
-                        <MaterialIcons name="add" size={22} color="red" />
+                        <MaterialIcons name="add" size={22} color="#ff6b36" />
                       </TouchableOpacity>
                     </View>
                   </View>
-                </View>
-                <View style={[styles.centerElement, {width: 60}]}>
                 </View>
               </View>
               )}
@@ -179,7 +183,7 @@ export default class Cart extends React.Component {
           </ScrollView>
         )}
 
-        {!cartItemsIsLoading &&
+        {cartsLoaded &&
         <View style={{backgroundColor: '#fff', borderTopWidth: 2, borderColor: '#f6f6f6', paddingVertical: 5}}>
           <View style={{flexDirection: 'row', flexGrow: 1, flexShrink: 1, justifyContent: 'space-between', alignItems: 'center'}}>
             <Text></Text>
