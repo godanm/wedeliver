@@ -17,9 +17,6 @@ const Drawer = props => (
     <Block flex={0.05} style={styles.header}>
       <Image styles={styles.logo} source={Images.Logo} />
     </Block>
-      <Block middle style={{ marginTop: 30, marginBottom: 0 }}>
-          <Block style={styles.divider} />
-      </Block>
       <Block flex>
       <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, color:'white' }}>
         <DrawerItems {...props} />

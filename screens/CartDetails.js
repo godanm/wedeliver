@@ -21,6 +21,12 @@ import moment from 'moment';
 import argonTheme from "../constants/Theme";
 import Icon from "../components/Icon";
 import Input from "../components/Input";
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded
+} from 'expo-ads-admob';
 
 
 
@@ -37,7 +43,18 @@ export default class CartDetails extends React.Component {
       totalcartprice:0
     }
   }
+  showInterstitial = async () => {
+    AdMobInterstitial.setAdUnitID('ca-app-pub-6090383329079788/1869826770');
 
+    try{
+      await AdMobInterstitial.requestAdAsync();
+      await AdMobInterstitial.showAdAsync();
+      console.log('Ad shown');
+    }
+    catch(e){
+      console.log('Error', e);
+    }
+  }
   componentDidMount() {
     this.fetchData();
   }
@@ -86,16 +103,15 @@ export default class CartDetails extends React.Component {
     const SUBJECT = "Thank you for your order with Spice Hub AZ!";
     const sendRequest = sendGridEmail(SENDGRIDAPIKEY, TOMEMAIL, FROMEMAIL, SUBJECT, emailBody, "text/html")
     sendRequest.then((response) => {
-      console.log("Success", response)
     }).catch((error) =>{
       console.log(error)
     });
     const date = moment()
       .utcOffset('+05:30')
       .format('YYYY-MM-DD-hh:mm:ss-a');
-    console.log('date', date);
     this.moveOrders('/orders/'+uid,'/ordertransactions/'+uid+'/'+date);
-    this.props.navigation.navigate('Home');
+    this.showInterstitial();
+    this.props.navigation.push("Home");
   }
   moveOrders(oldRefPath, newRefPath) {
     var oldRef = firebase.database().ref(oldRefPath);

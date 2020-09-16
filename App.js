@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import { Block, GalioProvider } from 'galio-framework';
@@ -13,11 +13,21 @@ const assetImages = [
   Images.Onboarding,
   Images.LogoOnboarding,
   Images.Logo,
-  Images.Pro,
-  Images.ArgonLogo,
   Images.iOSLogo,
   Images.androidLogo
 ];
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  adContainer: {
+  },
+  bottomBanner: {
+    position: 'absolute',
+    bottom: 0,
+  },
+});
 
 function cacheImages(images) {
   return images.map(image => {
@@ -31,11 +41,11 @@ function cacheImages(images) {
 export default class App extends React.Component {
   constructor(){
     super();
+    console.ignoredYellowBox = ['Setting a timer'];
   }
   state = {
     isLoadingComplete: false,
   }
-
   render() {
     if(!this.state.isLoadingComplete) {
       return (

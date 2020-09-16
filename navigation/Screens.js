@@ -1,10 +1,9 @@
 import React from "react";
-import { Easing, Animated, Alert } from "react-native";
+import { Easing} from "react-native";
 import {
     createStackNavigator,
     createDrawerNavigator,
-    createAppContainer,
-    createSwitchNavigator
+    createAppContainer
 } from "react-navigation";
 
 import { Block } from "galio-framework";
@@ -33,8 +32,7 @@ import Header from "../components/Header";
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
     transitionSpec: {
         duration: 400,
-        easing: Easing.out(Easing.poly(4)),
-        timing: Animated.timing
+        easing: Easing.out(Easing.poly(4))
     },
     screenInterpolator: sceneProps => {
         const { layout, position, scene } = sceneProps;

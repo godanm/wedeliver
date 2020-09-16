@@ -43,7 +43,7 @@ class Login extends React.Component {
         try {
             return  await AsyncStorage.getItem("uid");
         } catch (error) {
-            console.log("went wrong1", error);
+            console.log("went wrong", error);
         }
     }
         // Sign in users with Auth
@@ -63,7 +63,7 @@ class Login extends React.Component {
                 .signInWithEmailAndPassword(email, password)
                 .then((firebaseUser) => {
                     // Success
-                    const displayName = firebaseUser.user.displayName ? firebaseUser.user.displayName : "No Name";
+                    const displayName = firebaseUser.user.displayName ? firebaseUser.user.displayName : email;
                     AsyncStorage.setItem("uid", firebaseUser.user.uid);
                     AsyncStorage.setItem("name", displayName);
                     global.uid = firebaseUser.user.uid;
@@ -77,7 +77,6 @@ class Login extends React.Component {
         }
         catch (err){
             Alert.alert('Error when signing in: ', err.message)
-            console.log(err)
         }
 
     }
@@ -93,9 +92,9 @@ class Login extends React.Component {
         return (
       <View flex style={styles.container}>
         <Block flex center>
-        <ImageBackground
+          <ImageBackground
             source={Images.Onboarding}
-            style={{ height, width, zIndex: 1 }}
+            style={{ height:300, width:300, zIndex: 1, marginTop:50 }}
           />
         </Block>
         <Block flex space="around" style={styles.padded}>

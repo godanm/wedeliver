@@ -3,7 +3,7 @@
     "name": "Spice Hub Shopping!",
     "slug": "spice-hub-az",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
+    "sdkVersion": "38.0.0",
     "platforms": [
       "ios",
       "android"
@@ -11,7 +11,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/imgs/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -24,6 +24,12 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Spice Hub Shopping - For all your Indian grocery shopping in Arizona!"
+    "description": "Spice Hub Shopping - For all your Indian grocery shopping in Arizona!",
+    "android": {
+      "package": "com.godan.spicehubaz",
+      "permissions": [
+        "READ_CONTACTS"
+        ]
+    }
   }
 }

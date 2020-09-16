@@ -5,7 +5,6 @@ import { Button, Block, NavBar, Text, theme } from 'galio-framework';
 
 import { Icon } from 'react-native-elements'
 
-import Tabs from './Tabs';
 import Input from './Input';
 import argonTheme from '../constants/Theme';
 
@@ -75,18 +74,6 @@ class LDIHeader extends React.Component {
       />
     );
   }
-  renderTabs = () => {
-    const { tabs, tabIndex, navigation } = this.props;
-    const defaultTab = tabs && tabs[0] && tabs[0].id;
-    if (!tabs) return null;
-
-    return (
-      <Tabs
-        data={tabs || []}
-        initialIndex={tabIndex || defaultTab}
-        onChange={id => navigation.setParams({ tabId: id })} />
-    )
-  }
   renderHeader = () => {
     const { search, options, tabs } = this.props;
     if (search || tabs || options) {
@@ -132,7 +119,7 @@ class LDIHeader extends React.Component {
           rightStyle={{ alignItems: 'center' }}
           left={
             <Icon
-              name={back ? 'chevron-left' : "menu"} family="entypo"
+              name={back ? 'chevron-left' : "menu"} family="fontello"
               size={20} onPress={this.handleLeftPress}
               color={iconColor || (white ? argonTheme.COLORS.WHITE : argonTheme.COLORS.ICON)}
               style={{ marginTop: 2 }}
