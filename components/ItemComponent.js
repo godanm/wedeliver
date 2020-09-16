@@ -30,7 +30,7 @@ import {withNavigation} from "react-navigation";
                     <View style={styles.itemsList}>
                         {this.props.items.map((item, index) => {
                             return (
-                                <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.navigate(cta,
+                                <TouchableWithoutFeedback key={index} onPress={() => this.props.navigation.push(cta,
                                     {
                                         id: item.id,
                                         name: item.currentitem.name,

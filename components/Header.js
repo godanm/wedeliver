@@ -2,9 +2,11 @@ import React from 'react';
 import { withNavigation } from 'react-navigation';
 import {TouchableOpacity, StyleSheet, Platform, Dimensions, AsyncStorage, ActivityIndicator} from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
+
 import { Icon } from 'react-native-elements'
 
 import Tabs from './Tabs';
+import Input from './Input';
 import argonTheme from '../constants/Theme';
 
 const { height, width } = Dimensions.get('window');
@@ -59,7 +61,20 @@ class LDIHeader extends React.Component {
     );
 
   }
-
+  renderSearch = () => {
+    const { navigation } = this.props;
+    return (
+      <Input
+        right
+        color="black"
+        style={styles.search}
+        placeholder="What are you looking for?"
+        placeholderTextColor={'#8898AA'}
+        onChangeText={(search) => this.search()}
+        iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
+      />
+    );
+  }
   renderTabs = () => {
     const { tabs, tabIndex, navigation } = this.props;
     const defaultTab = tabs && tabs[0] && tabs[0].id;
@@ -117,9 +132,11 @@ class LDIHeader extends React.Component {
           rightStyle={{ alignItems: 'center' }}
           left={
             <Icon
-                name={back ? 'arrow-back' : "menu"} family="ArgonExtra"
-                size={24} onPress={this.handleLeftPress}
-                color={iconColor || argonTheme.COLORS.ICON}/>
+              name={back ? 'chevron-left' : "menu"} family="entypo"
+              size={20} onPress={this.handleLeftPress}
+              color={iconColor || (white ? argonTheme.COLORS.WHITE : argonTheme.COLORS.ICON)}
+              style={{ marginTop: 2 }}
+            />
           }
           leftStyle={{ paddingVertical: 12, flex: 0.2 }}
           titleStyle={[

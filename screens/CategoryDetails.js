@@ -1,8 +1,12 @@
 import React from 'react';
-import { StyleSheet, Button, Text, View, TouchableOpacity, ScrollView, Image, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, ScrollView, Image, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons, AntDesign, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Container, Header, Item, Button, Text } from 'native-base';
 import firebase from "../Firebase";
 import argonTheme from "../constants/Theme";
+import Icon from "../components/Icon";
+import {theme} from "galio-framework";
+import Input from '../components/Input';
 
 export default class Cart extends React.Component {
   constructor(props){
@@ -12,11 +16,22 @@ export default class Cart extends React.Component {
     this.state = {
       selectAll: false,
       cartsLoaded: false,
+      cartItems:null,
+      cartItemsBackup:null,
       totalcartprice:0
     }
   }
   componentDidMount() {
     this.fetchData();
+  }
+  search(value) {
+    let newItems = [...this.state.cartItemsBackup]; // clone the array
+    newItems = newItems.filter(l => {
+      if (l.currentitem.description !== undefined)
+        return l.currentitem.description.toLowerCase().match( value.toLowerCase());
+    });
+    this.setState({ cartItems: newItems });
+    this.setState({ cartsLoaded: true });
   }
   loadData(path) {
     return firebase.database().ref(path).once("value");
@@ -34,12 +49,12 @@ export default class Cart extends React.Component {
         let qtyref =  firebase.database().ref('orders/'+global.uid+"/"+key);
         this.loadData('orders/'+global.uid+"/"+key).then((snap) => {
           if (snap.exists()) {
-          qty = snap.val().qty ? snap.val().qty : 0;
+            qty = snap.val().qty ? snap.val().qty : 0;
             totalPrice = totalPrice + (snap.val().qty * snap.val().price);
           } else {
-          qty = 0;
+            qty = 0;
             totalPrice=0;
-        }
+          }
           var temp = {
             currentitem: childData,
             itemId: key,
@@ -47,6 +62,7 @@ export default class Cart extends React.Component {
           };
           itemslist.push(temp)
           this.setState({ cartItems: itemslist });
+          this.setState({ cartItemsBackup: itemslist });
           this.setState({ cartsLoaded: true });
           this.setState({ totalcartprice: totalPrice + this.state.totalcartprice });
 
@@ -135,7 +151,7 @@ export default class Cart extends React.Component {
       return;
     } else {
       Alert.alert('Items added succesfully!')
-      this.props.navigation.navigate('Home');
+      this.props.navigation.push("Home");
     }
   }
 
@@ -162,6 +178,16 @@ export default class Cart extends React.Component {
           </View>
         ) : (
           <ScrollView>
+            <Input
+              right
+              color="black"
+              autoFocus={true}
+              style={styles.search}
+              placeholder="What are you looking for?"
+              placeholderTextColor={'#8898AA'}
+              onChangeText={this.search.bind(this)}
+              iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
+            />
             {cartItems && cartItems.map((item, i) => {
               if (item.currentitem.brand !== undefined) {
                 return (

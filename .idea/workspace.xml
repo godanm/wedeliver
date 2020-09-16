@@ -25,10 +25,12 @@
     <list default="true" id="e99973ad-c258-4e81-93cc-d2b82e33d54a" name="Default" comment="Merge branch 'master' of https://github.com/godanm/wedeliver&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/imgs/LDI.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/imgs/LDI.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/components/DrawerItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/DrawerItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ItemComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ItemComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/SendMail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/SendMail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constants/Images.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/Images.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constants/articles.js" beforeDir="false" />
@@ -43,6 +45,7 @@
       <change beforePath="$PROJECT_DIR$/screens/CategoryDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/CategoryDetails.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Elements.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/FAQ.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/FAQ.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Profile.js" beforeDir="false" />
     </list>
@@ -161,7 +164,7 @@
       <workItem from="1599159258992" duration="129024000" />
       <workItem from="1600108156083" duration="192000" />
       <workItem from="1600108411098" duration="6369000" />
-      <workItem from="1600118554171" duration="22222000" />
+      <workItem from="1600118554171" duration="33127000" />
     </task>
     <task id="LOCAL-00001" summary="Chaanges done">
       <created>1574587735105</created>

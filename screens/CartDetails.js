@@ -19,6 +19,8 @@ import { Block, Text, theme } from "galio-framework";
 import { sendGridEmail } from 'react-native-sendgrid';
 import moment from 'moment';
 import argonTheme from "../constants/Theme";
+import Icon from "../components/Icon";
+import Input from "../components/Input";
 
 
 
@@ -31,6 +33,7 @@ export default class CartDetails extends React.Component {
       itemsAvailable: false,
       cartsLoaded: false,
       cartItems: null,
+      cartItemsBackup: null,
       totalcartprice:0
     }
   }
@@ -55,6 +58,7 @@ export default class CartDetails extends React.Component {
       this.setState({cartsLoaded: true});
       this.setState({itemsAvailable: orderlist.length > 0 ? true : false });
       this.setState({cartItems: orderlist});
+      this.setState({cartItemsBackup: orderlist});
       this.setState({totalcartprice: totalprice});
     }.bind(this));
   };
@@ -80,12 +84,12 @@ export default class CartDetails extends React.Component {
     const FROMEMAIL = "spicehubaz@gmail.com";
     const TOMEMAIL = global.email;
     const SUBJECT = "Thank you for your order with Spice Hub AZ!";
-    /*const sendRequest = sendGridEmail(SENDGRIDAPIKEY, TOMEMAIL, FROMEMAIL, SUBJECT, emailBody, "text/html")
+    const sendRequest = sendGridEmail(SENDGRIDAPIKEY, TOMEMAIL, FROMEMAIL, SUBJECT, emailBody, "text/html")
     sendRequest.then((response) => {
       console.log("Success", response)
     }).catch((error) =>{
       console.log(error)
-    });*/
+    });
     const date = moment()
       .utcOffset('+05:30')
       .format('YYYY-MM-DD-hh:mm:ss-a');
@@ -144,8 +148,15 @@ export default class CartDetails extends React.Component {
     emailBody = emailBody + "</footer></div></body></html>\n";
     return emailBody;
   }
-
-    render() {
+  search(value) {
+    let newItems = [...this.state.cartItemsBackup]; // clone the array
+    newItems = newItems.filter(l => {
+      if (l.currentitem.description !== undefined)
+        return l.currentitem.description.toLowerCase().match( value.toLowerCase() );
+    });
+    this.setState({ cartItems: newItems });
+  }
+  render() {
     const styles = StyleSheet.create({
       centerElement: {justifyContent: 'center', alignItems: 'center'},
       paddingLeft: config.deviceWidth * 0.5,
@@ -170,9 +181,23 @@ export default class CartDetails extends React.Component {
           <ActivityIndicator size="large" color="#ef5739"/>
         </View>
         }
+        {cartsLoaded && itemsAvailable &&
+        <View style={styles.container}  >
+          <Input
+            right
+            color="black"
+            autoFocus={true}
+            style={styles.search}
+            placeholder="What are you looking for?"
+            placeholderTextColor={'#8898AA'}
+            onChangeText={this.search.bind(this)}
+            iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
+          />
+        </View>
+        }
         {cartItems && cartItems.map((prop, key) => {
           return (
-            <RenderOrders orders={prop} key={key} />
+              <RenderOrders orders={prop} key={key} fetchData={this.fetchData} />
           );
         })}
         {cartsLoaded && itemsAvailable &&
@@ -190,21 +215,38 @@ export default class CartDetails extends React.Component {
           </View>
         </View>
         }
+        {cartsLoaded && !itemsAvailable &&
+        <Block style={{marginTop:100}}>
+            <Text color={argonTheme.COLORS.ERROR} p style={{textAlignVertical: "center",textAlign: "center",}}>Nothing available!</Text>
+        </Block>
+        }
       </View>
       </ScrollView>
     );
   }
 }
 class RenderOrders extends React.Component {
+  deleteHandler = (itemid) => {
+      var cartsRef = firebase.database().ref('/orders/'+uid+'/'+itemid);
+      cartsRef.remove().then(()=>{
+        this.props.fetchData();
+      })
+  }
   render() {
     const styles = StyleSheet.create({
-
+      container: {
+        flex: 1,
+        justifyContent: 'center',
+        position: "relative",
+        borderRadius: 4,
+      },
     });
     var orderArray = Object.values(this.props.orders);
       return (
       <ScrollView>
-        {orderArray.map((item, index) => {
+          {orderArray.map((item, index) => {
           if (item.brand != undefined) {
+            const itemid = item.itemid;
             return (
               <TouchableHighlight
                 onPress={() => Alert.alert(
@@ -212,7 +254,7 @@ class RenderOrders extends React.Component {
                   'Are you sure you want to delete this item from cart?',
                   [
                     {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                    {text: 'OK', onPress: () => console.log('Ok Pressed!')},
+                    {text: 'OK', onPress: () => this.deleteHandler(itemid)},
                   ],
                   {cancelable: false}
                 )}

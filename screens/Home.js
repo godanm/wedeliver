@@ -10,14 +10,17 @@ import { Card, Button } from '../components';
 import argonTheme from "../constants/Theme";
 import firebase from "../Firebase";
 import ItemComponent from '../components/ItemComponent';
+import Icon from "../components/Icon";
+import Input from "../components/Input";
 
 
 const { width } = Dimensions.get('screen');
 
 class Home extends React.Component {
     state = {
-        categorydata: null,
-        norecordsfound:true
+      categorydata: null,
+      categorydataBackup:null,
+      norecordsfound:true
     };
     async getToken() {
         try {
@@ -38,10 +41,19 @@ class Home extends React.Component {
           categorylist.push(temp)
         });
         this.setState({categorydata: categorylist});
+        this.setState({categorydataBackup: categorylist});
       });
     };
     componentDidMount() {
         this.fetchData();
+    }
+    search(value) {
+      let newItems = [...this.state.categorydataBackup]; // clone the array
+      newItems = newItems.filter(l => {
+        if (l.currentitem.name !== undefined)
+          return l.currentitem.name.toLowerCase().match( value.toLowerCase() );
+      });
+      this.setState({ categorydata: newItems });
     }
     render() {
       let context = null;
@@ -57,11 +69,21 @@ class Home extends React.Component {
           </Block>
         } else  {
             context = <Block style={styles.title1}>
-                <Text color={argonTheme.COLORS.ERROR} bold p style={{textAlignVertical: "center",textAlign: "center",}}>No Categories available!</Text>
+                <Text color={argonTheme.COLORS.ERROR} p style={{textAlignVertical: "center",textAlign: "center",}}>Nothing available!</Text>
             </Block>
         }
         return (
             <View style={styles.container}>
+              <Input
+                right
+                color="black"
+                autoFocus={true}
+                style={styles.search}
+                placeholder="What are you looking for?"
+                placeholderTextColor={'#8898AA'}
+                onChangeText={this.search.bind(this)}
+                iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
+              />
                 {context}
             </View>
         );

@@ -106,7 +106,7 @@ const HomeStack = createStackNavigator(
       CartDetails: {
         screen: CartDetails,
         navigationOptions: ({ navigation }) => ({
-          header: <Header options title="Cart Details " navigation={navigation} />
+          header: <Header back options title="Cart Details " navigation={navigation} />
         })
       },
       OrderHistory: {
