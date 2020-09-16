@@ -17,6 +17,9 @@ import Logout from "../screens/Logout";
 import CategoryDetails from "../screens/CategoryDetails"
 import ProductDetails from "../screens/ProductDetails"
 import CartDetails from "../screens/CartDetails"
+import OrderHistory from "../screens/OrderHistory"
+import FAQ from "../screens/FAQ"
+import ContactUs from "../screens/ContactUs"
 
 
 // drawer
@@ -65,30 +68,35 @@ const transitionConfig = (transitionProps, prevTransitionProps) => ({
     }
 });
 
-
 const HomeStack = createStackNavigator(
     {
-        Login: {
-            screen: Login,
-            navigationOptions: {
-                header: null
-            }
-        },
-        Logout: {
-            screen: Logout,
-            navigationOptions: {
-                header: null
-            }
-        },
-        Signup: {
-            screen: Signup
-        },
-        Home: {
-            screen: Home,
-            navigationOptions: ({ navigation }) => ({
-                header: <Header options title="Home" navigation={navigation} />
-            })
-        },
+      Login: {
+          screen: Login,
+          navigationOptions: {
+              header: null
+          }
+      },
+      Logout: {
+          screen: Logout,
+          navigationOptions: {
+              header: null
+          }
+      },
+      Signup: {
+          screen: Signup
+      },
+      Home: {
+        screen: Home,
+        navigationOptions: ({ navigation }) => ({
+          header: <Header options title="Home" navigation={navigation} />
+        })
+      },
+      CategoryLists: {
+        screen: Home,
+        navigationOptions: ({ navigation }) => ({
+          header: <Header options title="Home " navigation={navigation} />
+        })
+      },
       CategoryDetails: {
         screen: CategoryDetails,
         navigationOptions: ({ navigation }) => ({
@@ -98,7 +106,25 @@ const HomeStack = createStackNavigator(
       CartDetails: {
         screen: CartDetails,
         navigationOptions: ({ navigation }) => ({
-          header: <Header back options title="Cart Details " navigation={navigation} />
+          header: <Header options title="Cart Details " navigation={navigation} />
+        })
+      },
+      OrderHistory: {
+        screen: OrderHistory,
+        navigationOptions: ({ navigation }) => ({
+          header: <Header options title="Order History " navigation={navigation} />
+        })
+      },
+      FAQ: {
+        screen: FAQ,
+        navigationOptions: ({ navigation }) => ({
+          header: <Header options title="Frequently Asked Questions " navigation={navigation} />
+        })
+      },
+      ContactUs: {
+        screen: ContactUs,
+        navigationOptions: ({ navigation }) => ({
+          header: <Header options title="Contact Us " navigation={navigation} />
         })
       },
       ProductDetails: {
@@ -119,19 +145,51 @@ const HomeStack = createStackNavigator(
 
 const AppStack = createDrawerNavigator(
     {
-        Home: {
-          screen: HomeStack,
-          navigationOptions: navOpt => ({
-              drawerLabel: ({ focused }) => (
-                  <DrawerItem screen="Home" title="Home" />
-              )
-          })
-        },
+      Home: {
+        screen: HomeStack,
+        navigationOptions: navOpt => ({
+            drawerLabel: ({ focused }) => (
+                <DrawerItem screen="Home" title="MyHome" />
+            )
+        })
+      },
+      CategoryLists: {
+        screen: HomeStack,
+        navigationOptions: navOpt => ({
+          drawerLabel: ({ focused }) => (
+            <DrawerItem screen="Home" title="Home" />
+          )
+        })
+      },
       CartDetails: {
         screen: HomeStack,
         navigationOptions: navOpt => ({
           drawerLabel: ({ focused }) => (
             <DrawerItem screen="CartDetails" title="Cart Details" />
+          )
+        })
+      },
+      OrderHistory: {
+        screen: HomeStack,
+        navigationOptions: navOpt => ({
+          drawerLabel: ({ focused }) => (
+            <DrawerItem screen="OrderHistory" title="Order History" />
+          )
+        })
+      },
+      FAQ: {
+        screen: HomeStack,
+        navigationOptions: navOpt => ({
+          drawerLabel: ({ focused }) => (
+            <DrawerItem screen="FAQ" title="Frequently Asked Questions" />
+          )
+        })
+      },
+      ContactUs: {
+        screen: HomeStack,
+        navigationOptions: navOpt => ({
+          drawerLabel: ({ focused }) => (
+            <DrawerItem screen="ContactUs" title="Contact Us" />
           )
         })
       },

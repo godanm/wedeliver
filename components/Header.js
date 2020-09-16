@@ -43,20 +43,9 @@ class LDIHeader extends React.Component {
   renderRight = () => {
     const { title, navigation } = this.props;
     const { routeName } = navigation.state;
-
-    if (title === 'Title') {
-      return [
-        <BellButton style={styles.divider} key='chat-title' navigation={navigation}/>,
-      ]
-    }
-    switch (routeName) {
-      case 'Home':
-        return ([
-            <BellButton style={styles.divider} key='chat-home' navigation={navigation} />,
-        ]);
-      default:
-        break;
-    }
+        return (
+            <BellButton style={styles.divider} key='chat-home' navigation={navigation} />
+        )
   }
 
   renderOptions = () => {
@@ -74,7 +63,6 @@ class LDIHeader extends React.Component {
   renderTabs = () => {
     const { tabs, tabIndex, navigation } = this.props;
     const defaultTab = tabs && tabs[0] && tabs[0].id;
-
     if (!tabs) return null;
 
     return (
@@ -130,7 +118,7 @@ class LDIHeader extends React.Component {
           left={
             <Icon
                 name={back ? 'arrow-back' : "menu"} family="ArgonExtra"
-                size={22} onPress={this.handleLeftPress}
+                size={24} onPress={this.handleLeftPress}
                 color={iconColor || argonTheme.COLORS.ICON}/>
           }
           leftStyle={{ paddingVertical: 12, flex: 0.2 }}

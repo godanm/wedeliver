@@ -1,47 +1,28 @@
-import React, { Component } from 'react';
-import { View, Alert, Button } from 'react-native';
-import Mailer from 'react-native-mail';
+import { sendGridEmail } from 'react-native-sendgrid';
+import {withNavigation} from "react-navigation";
+import React from 'react';
 
-export default class SendMail extends Component {
+const SENDGRIDAPIKEY = "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\n";
+const FROMEMAIL = "test@test.com";
+const TOMEMAIL = "me@test.com";
+const SUBJECT = "You have a new message";
 
-  handleEmail = () => {
-    Mailer.mail({
-      subject: 'need help',
-      recipients: ['reachgodan@gmail.com'],
-      ccRecipients: [],
-      bccRecipients: [],
-      body: '<b>A Bold Body</b>',
-      customChooserTitle: "This is my new title", // Android only (defaults to "Send Mail")
-      isHTML: true,
-      attachments: [{
-        path: '',  // The absolute path of the file from which to read data.
-        type: '',   // Mime Type: jpg, png, doc, ppt, html, pdf, csv
-        // mimeType - use only if you want to use custom type
-        name: '',   // Optional: Custom filename for attachment
-      }]
-    }, (error, event) => {
-      Alert.alert(
-        error,
-        event,
-        [
-          {text: 'Ok', onPress: () => console.log('OK: Email Error Response')},
-          {text: 'Cancel', onPress: () => console.log('CANCEL: Email Error Response')}
-        ],
-        { cancelable: true }
-      )
+class SendMail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {name : "Godan", email: "reachgodan@gmail.com", phone:"609-977-0877"};
+  }
+
+  sendMail(){
+
+    const ContactDetails = "Contact Data: " + this.state.name + " Mail: "+ this.state.email+" Phone: "+this.state.phone
+    const sendRequest = sendGridEmail(SENDGRIDAPIKEY, TOMEMAIL, FROMEMAIL, SUBJECT, ContactDetails )
+    sendRequest.then((response) => {
+      console.log("Success")
+    }).catch((error) =>{
+      console.log(error)
     });
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Button
-          onPress={this.handleEmail}
-          title="Email Me"
-          color="#841584"
-          accessabilityLabel="Purple Email Me Button"
-        />
-      </View>
-    );
-  }
 }
+export default withNavigation(SendMail);

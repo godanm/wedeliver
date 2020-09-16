@@ -118,14 +118,6 @@ class Login extends React.Component {
                         placeholder="Email"
                         autoCapitalize = 'none'
                         onChangeText={value => this.onChangeText('email', value)}
-                        iconContent={
-                            <Icon
-                                size={11}
-                                color={argonTheme.COLORS.ICON}
-                                name="search-zoom-in"
-                                family="ArgonExtra"
-                            />
-                        }
                     />
                     <Input
                         right

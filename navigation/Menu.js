@@ -15,12 +15,13 @@ const { width } = Dimensions.get("screen");
 const Drawer = props => (
   <Block style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
     <Block flex={0.05} style={styles.header}>
+      <Image styles={styles.logo} source={Images.Logo} />
     </Block>
       <Block middle style={{ marginTop: 30, marginBottom: 0 }}>
           <Block style={styles.divider} />
       </Block>
       <Block flex>
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, color:'white' }}>
         <DrawerItems {...props} />
       </ScrollView>
     </Block>
@@ -29,7 +30,7 @@ const Drawer = props => (
 
 const Menu = {
   contentComponent: props => <Drawer {...props} />,
-  drawerBackgroundColor: "white",
+  drawerBackgroundColor: "black",
   drawerWidth: width * 0.8,
   contentOptions: {
     activeTintColor: "white",
@@ -37,7 +38,7 @@ const Menu = {
     activeBackgroundColor: "transparent",
     itemStyle: {
       width: width * 0.75,
-      backgroundColor: "transparent"
+      backgroundColor: "white"
     },
     labelStyle: {
       fontSize: 18,

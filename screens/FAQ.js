@@ -1,41 +1,30 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity
-} from 'react-native';
-import {MaterialIcons} from "@expo/vector-icons";
+import { Container, Header, Content, Accordion } from "native-base";
 import firebase from "../Firebase";
-import Accordion from 'react-native-collapsible/Accordion';
+import {
+  StyleSheet,
+  Button,
+  View,
+  ScrollView,
+  Image,
+  ActivityIndicator,
+  TextInput,
+  Alert,
+  FlatList,
+  TouchableHighlight,
+  ListView,
+  TouchableOpacity, TouchableWithoutFeedback, Dimensions
+} from 'react-native';
+import {Block, Text} from "galio-framework";
+import argonTheme from "../constants/Theme";
 
-const styles = {
-  // bgColor: 'white',
-  titleTextColor: "blue",
-  rowTitleColor: "blue",
-  // rowContentColor: 'grey',
-  // arrowColor: "red",
-};
-const config = {
-  // animate: true,
-  // arrowIcon: "V",
-};
-const SECTIONS = [
-  {
-    question: 'First',
-    answer: 'Lorem ipsum...',
-  },
-  {
-    question: 'Second',
-    answer: 'Lorem ipsum...',
-  },
-];
+const { width } = Dimensions.get('screen');
 
-class FAQ extends React.Component {
+class FAQ extends Component {
   constructor(props){
     super(props);
     this.state = {
-      faqItems: null,
-      faqsLoaded: false
+      faqItems: null
     }
   }
   componentDidMount() {
@@ -46,69 +35,64 @@ class FAQ extends React.Component {
     var faqRef = firebase.database().ref('/faqs');
     faqRef.once('value', function(snapshot) {
       snapshot.forEach(function (faqSnapshot) {
-        var temp = {
-          currentitem: faqSnapshot.val(),
-          id: faqSnapshot.key
-        };
-        faqlist.push(temp);
+        faqlist.push(faqSnapshot.val());
       }.bind(this));
-      this.setState({faqsLoaded: true});
       this.setState({faqItems: faqlist});
     }.bind(this))
   }
-
-  state = {
-    activeSections: [],
-  };
-
-  _renderSectionTitle = section => {
-    return (
-      <View style={styles.content}>
-        <Text>{section.answer}</Text>
-      </View>
-    );
-  };
-
-  _renderHeader = section => {
-    return (
-      <View style={styles.header}>
-        <Text style={styles.headerText}>{section.question}</Text>
-      </View>
-    );
-  };
-
-  _renderContent = section => {
-    return (
-      <View style={styles.content}>
-        <Text>{section.answer}</Text>
-      </View>
-    );
-  };
-
-  _updateSections = activeSections => {
-    this.setState({ activeSections });
-    console.log('GODAN');
-  };
-
   render() {
-    const {faqItems, faqsLoaded} = this.state;
-    return (
-      <View style={styles.container}>
-        {faqItems && faqItems.map((prop, key) => {
-          return (
-            <Accordion key={key}
-                       activeSections={[0]}
-                       sections={SECTIONS}
-              renderSectionTitle={this._renderSectionTitle}
-              renderHeader={this._renderHeader}
-              renderContent={this._renderContent}
-              onChange={this._updateSections}
+    const { faqItems } = this.state;
+    let context = null;
+    if (faqItems === null) {
+      context =  <ActivityIndicator size="large" color="#0000ff" />
+    } else if (faqItems.length > 0) {
+      var faqArray = Object.values(faqItems);
+      context = <Container>
+          <Content>
+            <Accordion icon="add"
+                       style={{marginTop:50}}
+                       expandedIcon="remove"
+                 dataArray={faqArray}
+                 iconStyle={{ color: "green" }}
+                 expandedIconStyle={{ color: "red" }}
+                 expanded={0}
             />
-          );
-        })}
-      </View>
+          </Content>
+        </Container>
+    } else  {
+      context = <Block style={styles.title}>
+        <Text color={argonTheme.COLORS.ERROR} bold style={{textAlignVertical: "center",textAlign: "center",}}>No FAQs available!</Text>
+      </Block>
+    }
+    return (
+      <ScrollView>
+        {context}
+      </ScrollView>
     );
   }
-};
+}
+const styles = StyleSheet.create({
+  home: {
+    width: width,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    position: "relative",
+    borderRadius: 4,
+  },
+  item: {
+    width: '50%' // is 50% of container width
+  },
+  title: {
+    width: '100%',
+    fontSize: 16,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    borderWidth: 10,
+    borderColor: "#E9ECEF",
+    borderRadius: 4
+  }
+});
 
 export default FAQ;

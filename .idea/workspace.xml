@@ -3,40 +3,60 @@
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="3" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e99973ad-c258-4e81-93cc-d2b82e33d54a" name="Default" comment="Merge branch 'master' of https://github.com/godanm/wedeliver&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/Firebase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/bg.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/imgs/bg.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/imgs/LDI.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/imgs/LDI.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/components/DrawerItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/DrawerItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/SendMail.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/SendMail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constants/Images.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/Images.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants/Theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/Theme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/articles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/tabs.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/navigation/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navigation/Screens.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/Screens.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navigation/navigationService.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/navigationService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/newdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/newdata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/ActivityDetails.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Articles.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/CartDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/CartDetails.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/CategoryDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/CategoryDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/GroupDetails.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Elements.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/FAQ.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/FAQ.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/MemberDetails.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/MyTodo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/MyTrips.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/TodoDetails.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/TripDetails.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/aws-exports.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Profile.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,6 +102,7 @@
     <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/gmannaz/Projects/React/argon-react-native-master/config.js" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
@@ -96,6 +117,16 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Email.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/wedeliver/screens/Email.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.Email.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
@@ -127,7 +158,10 @@
       <workItem from="1599071623320" duration="67000" />
       <workItem from="1599105247831" duration="8624000" />
       <workItem from="1599159143515" duration="88000" />
-      <workItem from="1599159258992" duration="105377000" />
+      <workItem from="1599159258992" duration="129024000" />
+      <workItem from="1600108156083" duration="192000" />
+      <workItem from="1600108411098" duration="6369000" />
+      <workItem from="1600118554171" duration="22222000" />
     </task>
     <task id="LOCAL-00001" summary="Chaanges done">
       <created>1574587735105</created>
@@ -255,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577741222164</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Merge branch 'master' of https://github.com/godanm/wedeliver&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;README.md">
+      <created>1600119679080</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1600119679080</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -270,6 +311,43 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Chaanges done" />
     <MESSAGE value="New schema" />
@@ -281,13 +359,22 @@
     <MESSAGE value="Signup / Todo implemented" />
     <MESSAGE value="Dynamic groups now showing" />
     <MESSAGE value="Dynamic trips now showing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dynamic trips now showing" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/godanm/wedeliver&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/godanm/wedeliver&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;README.md" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="390" y="48" key="CommitChangelistDialog2" timestamp="1599870657567">
+    <state x="717" y="395" key="#Notifications" timestamp="1600108469345">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="390" y="48" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1599870657567" />
+    <state x="717" y="395" key="#Notifications/0.0.1680.1050@0.0.1680.1050" timestamp="1600108469345" />
+    <state x="578" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1600110337111">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="578" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1600110337111" />
+    <state x="390" y="48" key="CommitChangelistDialog2" timestamp="1600119678503">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="390" y="48" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1600119678503" />
     <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1599900371040">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -300,9 +387,9 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="541" y="280" width="598" height="490" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1599869541886" />
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1599587006412">
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1600205505670">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1599587006412" />
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1600205505670" />
   </component>
 </project>

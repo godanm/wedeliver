@@ -5,7 +5,7 @@ import { Asset } from 'expo-asset';
 import { Block, GalioProvider } from 'galio-framework';
 
 import Screens from './navigation/Screens';
-import { Images, articles, argonTheme } from './constants';
+import { Images, argonTheme } from './constants';
 
 
 // cache app images
@@ -18,8 +18,6 @@ const assetImages = [
   Images.iOSLogo,
   Images.androidLogo
 ];
-
-articles.map(article => assetImages.push(article.image));
 
 function cacheImages(images) {
   return images.map(image => {

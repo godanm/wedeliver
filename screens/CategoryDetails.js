@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Button, Text, View, TouchableOpacity, ScrollView, Image, ActivityIndicator, TextInput, Alert } from 'react-native';
+import { StyleSheet, Button, Text, View, TouchableOpacity, ScrollView, Image, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons, AntDesign, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import firebase from "../Firebase";
 import argonTheme from "../constants/Theme";
@@ -28,14 +28,17 @@ export default class Cart extends React.Component {
     const categoryId = this.props.navigation.state.params.id;
     this.loadData('/categories/'+categoryId+'/').then((snapshot) => {
       snapshot.forEach(function(childSnapshot) {
+        let totalPrice = 0;
         var key = childSnapshot.key;
         var childData = childSnapshot.val();
         let qtyref =  firebase.database().ref('orders/'+global.uid+"/"+key);
         this.loadData('orders/'+global.uid+"/"+key).then((snap) => {
           if (snap.exists()) {
           qty = snap.val().qty ? snap.val().qty : 0;
-        } else {
+            totalPrice = totalPrice + (snap.val().qty * snap.val().price);
+          } else {
           qty = 0;
+            totalPrice=0;
         }
           var temp = {
             currentitem: childData,
@@ -45,6 +48,8 @@ export default class Cart extends React.Component {
           itemslist.push(temp)
           this.setState({ cartItems: itemslist });
           this.setState({ cartsLoaded: true });
+          this.setState({ totalcartprice: totalPrice + this.state.totalcartprice });
+
         });
       }.bind(this));
     });
@@ -84,38 +89,28 @@ export default class Cart extends React.Component {
     const newItems = [...this.state.cartItems]; // clone the array
 
     let currentQty = newItems[index]['qty'];
-
+    let totalPrice = this.state.totalcartprice;
+    totalPrice = totalPrice - (newItems[index]['qty'] * newItems[index].currentitem['price']);
     if(action == 'more'){
       newItems[index]['qty'] = currentQty + 1;
     } else if(action == 'less'){
       newItems[index]['qty'] = currentQty > 1 ? currentQty - 1 : 0;
     }
-
+    totalPrice = totalPrice + (newItems[index]['qty'] * newItems[index].currentitem['price']);
+    this.setState({ totalcartprice: totalPrice});
     this.setState({ cartItems: newItems }); // set new state
   }
 
-  subtotalPrice = () => {
-    const { cartItems } = this.state;
-    if(cartItems){
-      cartItems.map((item) => {
-        if (item.currentitem.brand !== undefined) {
-          this.sum = this.sum  + (item.qty * item.currentitem.price);
-        }
-      });
-      return this.sum;
-    }
-    return 0;
-  }
   handleCart = () => {
+
     const { cartItems } = this.state;
+    var recordFound = false;
     var uid = global.uid;
-    if (this.sum === 0) {
-      Alert.alert("Please add at least one item to cart!");
-      return;
-    } else {
+    try {
       cartItems.map((item, i) => {
         if (item.qty > 0) {
-          firebase.database().ref('orders/'+ uid + '/'  + item.itemId).set({
+          recordFound = true;
+          firebase.database().ref('orders/' + uid + '/' + item.itemId).set({
             email: global.email,
             brand: item.currentitem.brand,
             description: item.currentitem.description,
@@ -126,8 +121,21 @@ export default class Cart extends React.Component {
             thumbnail: item.currentitem.thumbnail ? item.currentitem.thumbnail : null,
             itemid: item.itemId
           })
+        } else {
+          firebase.database().ref('orders/' + uid + '/' + item.itemId).remove();
         }
       })
+    }
+    catch (err){
+      Alert.alert('Error when adding to cart in: ', err.message)
+      console.log(err)
+    }
+    if (!recordFound) {
+      Alert.alert("Please add at least one item to cart!");
+      return;
+    } else {
+      Alert.alert('Items added succesfully!')
+      this.props.navigation.navigate('Home');
     }
   }
 
@@ -189,20 +197,12 @@ export default class Cart extends React.Component {
             <Text></Text>
             <View style={{flexDirection: 'row', paddingRight: 20, alignItems: 'center'}}>
               <Text style={{color: '#8f8f8f'}}>SubTotal: </Text>
-              <Text ref={this.txtSum}>${this.subtotalPrice().toFixed(2)}</Text>
+              <Text ref={this.txtSum}>${this.state.totalcartprice.toFixed(2)}</Text>
             </View>
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'flex-end', height: 32, paddingRight: 20, alignItems: 'center'}}>
             <TouchableOpacity style={[styles.centerElement, {backgroundColor: '#0faf9a', width: 100, height: 25, borderRadius: 5}]}
-                onPress={() => Alert.alert(
-                  'Spicehub',
-                  'Are you sure you want to add these items to cart?',
-                  [
-                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                    {text: 'OK', onPress: this.handleCart()},
-                  ],
-                  { cancelable: false }
-                )}
+                              onPress={() => this.handleCart()}
             >
               <Text style={{color: '#ffffff'}}>Add to Cart</Text>
             </TouchableOpacity>
