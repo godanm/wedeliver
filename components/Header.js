@@ -45,7 +45,7 @@ class LDIHeader extends React.Component {
     const { title, navigation } = this.props;
     const { routeName } = navigation.state;
         return (
-            <BellButton style={styles.divider} key='chat-home' navigation={navigation} />
+            <BellButton style={styles.divider} key='cart' navigation={navigation} />
         )
   }
 
@@ -133,7 +133,6 @@ class LDIHeader extends React.Component {
           ]}
           {...props}
         />
-        {this.renderHeader()}
       </Block>
     );
   }

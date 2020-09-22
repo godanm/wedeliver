@@ -41,6 +41,7 @@ export default class Cart extends React.Component {
     let itemslist = [];
     const { navigation:navigate } = this.props;
     const categoryId = this.props.navigation.state.params.id;
+    console.log('categoryId', categoryId)
     this.loadData('/categories/'+categoryId+'/').then((snapshot) => {
       snapshot.forEach(function(childSnapshot) {
         let totalPrice = 0;

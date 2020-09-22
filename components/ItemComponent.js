@@ -36,7 +36,7 @@ class ItemComponent extends Component {
                     {item[0] &&
                     <TouchableWithoutFeedback onPress={() => this.props.navigation.push(cta,
                       {
-                        id: item[0].id,
+                        id: item[0].name,
                         name: item[0].name,
                         thumbnail: item[0].thumbnail
                       }
@@ -53,7 +53,7 @@ class ItemComponent extends Component {
                     {item[1] &&
                       <TouchableWithoutFeedback onPress={() => this.props.navigation.push(cta,
                         {
-                          id: item[1].id,
+                          id: item[1].name,
                           name: item[1].name,
                           thumbnail: item[1].thumbnail
                         }

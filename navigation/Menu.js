@@ -27,7 +27,7 @@ const Drawer = props => (
 
 const Menu = {
   contentComponent: props => <Drawer {...props} />,
-  drawerBackgroundColor: "black",
+  drawerBackgroundColor: "#000000",
   drawerWidth: width * 0.8,
   contentOptions: {
     activeTintColor: "white",
