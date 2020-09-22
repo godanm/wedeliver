@@ -1,0 +1,72 @@
+[
+  {
+    "description": "\u00a0Fried Rava",
+    "brand": "Brahmins",
+    "weight": "1 kg\u00a0",
+    "price": "$ 3.99\u00a0",
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  },
+  {
+    "description": "Premium Wheat flour",
+    "brand": "Brahmins",
+    "weight": "1 kg\u00a0",
+    "price": "$ 3.99\u00a0",
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  },
+  {
+    "description": "White Puttu Podi",
+    "brand": "Brahmins",
+    "weight": "1 kg\u00a0",
+    "price": "$ 3.99\u00a0",
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  },
+  {
+    "description": "Chemba Puttu Podi",
+    "brand": "Brahmins",
+    "weight": "1 kg\u00a0",
+    "price": "$ 3.99\u00a0",
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  },
+  {
+    "description": "Wheat Puttu Podi",
+    "brand": "Brahmins",
+    "weight": "1 kg\u00a0",
+    "price": "$ 3.99\u00a0",
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  },
+  {
+    "description": "Easy Palappam Mix",
+    "brand": "Brahmins",
+    "weight": "1 kg\u00a0",
+    "price": "$ 4.49\u00a0",
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  },
+  {
+    "description": "Appam \/ Idiyappam Podi",
+    "brand": "Brahmins",
+    "weight": "1 kg\u00a0",
+    "price": "$ 3.99\u00a0",
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  },
+  {
+    "description": "Instant Idli Mix",
+    "brand": "Periyar",
+    "weight": "1 kg\u00a0",
+    "price": "$ 3.89\u00a0",
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  },
+  {
+    "description": "Instant Dosa Mix",
+    "brand": "Periyar",
+    "weight": "1 kg\u00a0",
+    "price": "$ 3.89\u00a0",
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  },
+  {
+    "description": null,
+    "brand": null,
+    "weight": null,
+    "price": null,
+    "thumbnail": "https:\/\/images.unsplash.com\/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  }
+]

@@ -28,7 +28,7 @@ export default class Cart extends React.Component {
     let newItems = [...this.state.cartItemsBackup]; // clone the array
     newItems = newItems.filter(l => {
       if (l.currentitem.description !== undefined)
-        return l.currentitem.description.toLowerCase().match( value.toLowerCase());
+        return l.currentitem.description.toLowerCase().match( value.toLowerCase()) || l.currentitem.brand.toLowerCase().match( value.toLowerCase());
     });
     this.setState({ cartItems: newItems });
     this.setState({ cartsLoaded: true });
@@ -181,7 +181,6 @@ export default class Cart extends React.Component {
             <Input
               right
               color="black"
-              autoFocus={true}
               style={styles.search}
               placeholder="What are you looking for?"
               placeholderTextColor={'#8898AA'}
@@ -202,11 +201,11 @@ export default class Cart extends React.Component {
                     <Text numberOfLines={1} style={{color: '#333333', marginBottom: 10}}>Price - ${item.currentitem.price}</Text>
                     <View style={{flexDirection: 'row'}}>
                       <TouchableOpacity onPress={() => this.quantityHandler('less', i)} style={{ borderWidth: 1, borderColor: '#054a85' }}>
-                        <MaterialIcons name="remove" size={22} color="#ff6b36" />
+                        <MaterialIcons name="remove" size={28} color="#ff6b36" />
                       </TouchableOpacity>
-                      <Text style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#054a85', paddingHorizontal: 7, paddingTop: 3, color: '#4107e3', fontSize: 13 }}>{item.qty}</Text>
+                      <Text style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#054a85', paddingHorizontal: 7, paddingTop: 3, color: '#4107e3', fontSize: 18 }}>{item.qty}</Text>
                       <TouchableOpacity onPress={() => this.quantityHandler('more', i)} style={{ borderWidth: 1, borderColor: '#054a85' }}>
-                        <MaterialIcons name="add" size={22} color="#ff6b36" />
+                        <MaterialIcons name="add" size={28} color="#ff6b36" />
                       </TouchableOpacity>
                     </View>
                   </View>

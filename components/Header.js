@@ -13,7 +13,7 @@ const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 
 
 const BellButton = ({todoClicked, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]}
-                    onPress={() => navigation.navigate('CartDetails')}
+                    onPress={() => navigation.push('CartDetails')}
         accessible={true}
         accessibilityLabel={"Carts"}>
     <Icon type="ionicon" name={Platform.OS === "ios" ? "ios-cart" : "md-cart"} />
@@ -120,7 +120,7 @@ class LDIHeader extends React.Component {
           left={
             <Icon
               name={back ? 'chevron-left' : "menu"} family="fontello"
-              size={20} onPress={this.handleLeftPress}
+              size={24} onPress={this.handleLeftPress}
               color={iconColor || (white ? argonTheme.COLORS.WHITE : argonTheme.COLORS.ICON)}
               style={{ marginTop: 2 }}
             />

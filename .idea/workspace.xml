@@ -24,48 +24,28 @@
   <component name="ChangeListManager">
     <list default="true" id="e99973ad-c258-4e81-93cc-d2b82e33d54a" name="Default" comment="Merge branch 'master' of https://github.com/godanm/wedeliver&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/Firebase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Issues.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Issues.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/amplify-meta.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/build/cloudformation-template.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/build/parameters.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/build/schema.graphql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/build/stacks/CustomResources.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/parameters.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/schema.graphql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/stacks/CustomResources.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/api/letsdoit/transform.conf.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/auth/letsdoitb6b075fd/letsdoitb6b075fd-cloudformation-template.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/auth/letsdoitb6b075fd/parameters.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/#current-cloud-backend/backend-config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/.config/local-aws-info.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/.config/local-env-info.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/.config/project-config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/amplify-meta.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/awscloudformation/nested-cloudformation-stack.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/backend-config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/team-provider-info.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/bg.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/getPro-bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/getPro-bg@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/oldsplash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Card.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Tabs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants/Images.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/Images.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ItemComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ItemComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/navigation/Screens.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/Screens.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/newdata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Adddata.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/CartDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/CartDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/CategoryDetails copy 2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/CategoryDetails copy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/CategoryDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/CategoryDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ContactUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ContactUs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/FAQ.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/FAQ.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/OrderHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/OrderHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Helper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/aws-exports.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/mutations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/queries.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/schema.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/subscriptions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/~$Issues.xlsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +113,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -183,6 +164,8 @@
       <workItem from="1600108156083" duration="192000" />
       <workItem from="1600108411098" duration="6369000" />
       <workItem from="1600118554171" duration="53324000" />
+      <workItem from="1600460309079" duration="287000" />
+      <workItem from="1600461324597" duration="29528000" />
     </task>
     <task id="LOCAL-00001" summary="Chaanges done">
       <created>1574587735105</created>
@@ -396,21 +379,29 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="390" y="48" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1600119678503" />
-    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1600242053520">
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1600735242287">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1600242053520" />
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1600735242287" />
+    <state x="620" y="234" key="RollbackChangesDialog" timestamp="1600716752299">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="620" y="234" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1600716752299" />
     <state x="341" y="164" key="SettingsEditor" timestamp="1599950178463">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="341" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1599950178463" />
-    <state x="541" y="280" width="598" height="490" key="find.popup" timestamp="1600279539768">
+    <state x="240" y="203" width="1065" height="612" key="find.popup" timestamp="1600702346549">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="541" y="280" width="598" height="490" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1600279539768" />
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1600275112086">
+    <state x="240" y="203" width="1065" height="612" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1600702346549" />
+    <state x="624" y="306" key="refactoring.ChangeSignatureDialog" timestamp="1600725707380">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1600275112086" />
+    <state x="624" y="306" key="refactoring.ChangeSignatureDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1600725707380" />
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1600720881511">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1600720881511" />
   </component>
 </project>

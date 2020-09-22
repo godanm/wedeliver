@@ -6,7 +6,7 @@ import {
   Button,
   View,
   ScrollView,
-  Image,
+  SafeAreaView,
   ActivityIndicator,
   TextInput,
   Alert,
@@ -17,6 +17,11 @@ import {
 } from 'react-native';
 import {Block, Text} from "galio-framework";
 import argonTheme from "../constants/Theme";
+import { YellowBox } from 'react-native'
+
+YellowBox.ignoreWarnings([
+  'VirtualizedLists should never be nested', // TODO: Remove when fixed
+])
 
 const { width } = Dimensions.get('screen');
 

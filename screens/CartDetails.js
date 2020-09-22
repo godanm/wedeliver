@@ -11,6 +11,8 @@ import {
   FlatList,
   TouchableHighlight,
   ListView,
+  Keyboard,
+  KeyboardAvoidingView,
   TouchableOpacity, TouchableWithoutFeedback
 } from 'react-native';
 import firebase from "../Firebase";
@@ -19,8 +21,9 @@ import { Block, Text, theme } from "galio-framework";
 import { sendGridEmail } from 'react-native-sendgrid';
 import moment from 'moment';
 import argonTheme from "../constants/Theme";
-import Icon from "../components/Icon";
+import { Icon } from 'react-native-elements';
 import Input from "../components/Input";
+
 import {
   AdMobBanner,
   AdMobInterstitial,
@@ -28,7 +31,7 @@ import {
   AdMobRewarded
 } from 'expo-ads-admob';
 
-
+const SENDGRIDAPIKEY = "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";
 
 export default class CartDetails extends React.Component {
   constructor(props){
@@ -52,6 +55,12 @@ export default class CartDetails extends React.Component {
       console.log('Ad shown');
     }
     catch(e){
+      const sendRequest = sendGridEmail(SENDGRIDAPIKEY, "reachgodan@gmail.com", "spicehubaz@gmail.com", "Error Displaying Ad", e.toString(), "text/html")
+      sendRequest.then((response) => {
+        console.log('Error showing Ad mail', response);
+      }).catch((error) =>{
+        console.log(error)
+      });
       console.log('Error', e);
     }
   }
@@ -97,12 +106,18 @@ export default class CartDetails extends React.Component {
   sendMail = async () => {
     const uid = global.uid;
     const emailBody = this.createEmailBody();
-    const SENDGRIDAPIKEY = "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";
-    const FROMEMAIL = "spicehubaz@gmail.com";
     const TOMEMAIL = global.email;
-    const SUBJECT = "Thank you for your order with Spice Hub AZ!";
+    const FROMEMAIL = "spicehubaz@gmail.com";
+    const SUBJECT = "Thank you for your order with Spice Hub AZ! --- " + global.email;
     const sendRequest = sendGridEmail(SENDGRIDAPIKEY, TOMEMAIL, FROMEMAIL, SUBJECT, emailBody, "text/html")
     sendRequest.then((response) => {
+      console.log('response', response);
+    }).catch((error) =>{
+      console.log(error)
+    });
+    const sendCopyRequest = sendGridEmail(SENDGRIDAPIKEY, FROMEMAIL, FROMEMAIL, SUBJECT, emailBody, "text/html")
+    sendCopyRequest.then((response) => {
+      console.log('response', response);
     }).catch((error) =>{
       console.log(error)
     });
@@ -168,7 +183,7 @@ export default class CartDetails extends React.Component {
     let newItems = [...this.state.cartItemsBackup]; // clone the array
     newItems = newItems.filter(l => {
       if (l.currentitem.description !== undefined)
-        return l.currentitem.description.toLowerCase().match( value.toLowerCase() );
+        return l.currentitem.description.toLowerCase().match( value.toLowerCase()) || l.currentitem.brand.toLowerCase().match( value.toLowerCase());
     });
     this.setState({ cartItems: newItems });
   }
@@ -190,7 +205,11 @@ export default class CartDetails extends React.Component {
     ];
     const { cartItems, cartsLoaded, itemsAvailable } = this.state;
     return (
-      <ScrollView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : null}
+        style={{ flex: 1 }}
+      >
+        <ScrollView>
       <View>
         {!cartsLoaded &&
         <View>
@@ -202,12 +221,13 @@ export default class CartDetails extends React.Component {
           <Input
             right
             color="black"
-            autoFocus={true}
+            onBlur={(e) => Keyboard.dismiss()}
             style={styles.search}
             placeholder="What are you looking for?"
             placeholderTextColor={'#8898AA'}
             onChangeText={this.search.bind(this)}
-            iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
+            blurOnSubmit={ false }
+            iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search" type='font-awesome' />}
           />
         </View>
         }
@@ -238,6 +258,7 @@ export default class CartDetails extends React.Component {
         }
       </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -297,6 +318,7 @@ class RenderOrders extends React.Component {
                       </View>
                     </View>
                   </View>
+                  <Icon size={25} color={theme.COLORS.ERROR} name="delete-forever" family="Galio" />
                 </View>
               </TouchableHighlight>
 

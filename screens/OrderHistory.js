@@ -17,13 +17,9 @@ import {
 import firebase from "../Firebase";
 import config from './config';
 import { Block, Text, theme } from "galio-framework";
-import { sendGridEmail } from 'react-native-sendgrid';
+import {NavigationEvents} from 'react-navigation';
 import moment from 'moment';
 import {  Picker, Icon } from "native-base";
-
-this.state = {
-  country: 'uk'
-}
 
 export default class OrderHistory extends React.Component {
   constructor(props){
@@ -38,9 +34,14 @@ export default class OrderHistory extends React.Component {
       totalcartprice:0
     }
   }
-
   componentDidMount() {
-    this.fetchOrders();
+    this.focusListner = this.props.navigation.addListener("didFocus",() => {
+      this.fetchOrders();
+    })
+  }
+  componentWillUnmount() {
+    // remove event listener
+    this.focusListner.remove();
   }
   fetchOrders = async () => {
     const uid = global.uid;

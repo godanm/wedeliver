@@ -1,10 +1,12 @@
 import React from 'react';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
-import { StyleSheet, Dimensions, Image, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Image, Linking } from 'react-native';
 import { Block, Text, theme } from 'galio-framework';
+import { Icon } from 'react-native-elements';
 
 import { argonTheme } from '../constants';
+import Input from "./Input";
 
 
 class CustomCard extends React.Component {
@@ -26,8 +28,17 @@ class CustomCard extends React.Component {
               <Image source={{uri: image}} style={imageStyles} />
           </Block>
           <Block flex space="between" style={styles.cardDescription}>
-            <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>{title}</Text>
+            <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.HEADER} bold>Name:{"           "}{this.props.title}</Text>
           </Block>
+          <Block flex space="between" style={styles.cardDescription}>
+            <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.HEADER} bold>Email:{"           "}{this.props.email}</Text>
+          </Block>
+        <Block flex space="between" style={styles.cardDescription}>
+          <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.HEADER} bold>Phone:{"           "}{this.props.phone}</Text>
+        </Block>
+        <Block flex space="between" style={styles.cardDescription}>
+          <Text size={13} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.HEADER} bold>Whatsapp:{"     "}{this.props.whatsapp}</Text>
+        </Block>
       </Block>
     );
   }

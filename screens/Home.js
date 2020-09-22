@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-    StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, TouchableWithoutFeedback,
-    AsyncStorage, FlatList
+  StyleSheet, Dimensions, ScrollView, TouchableOpacity, View, ActivityIndicator, TouchableWithoutFeedback,
+  AsyncStorage, FlatList, Keyboard, Alert
 } from 'react-native';
 import { Block, theme, Text } from 'galio-framework';
 
@@ -29,31 +29,44 @@ class Home extends React.Component {
             console.log("went wrong", error);
         }
     }
+    transformArray (categoryarray) {
+      const rows = categoryarray.reduce(function (rows, key, index) {
+        return (index % 2 == 0 ? rows.push([key])
+          : rows[rows.length-1].push(key)) && rows;
+      }, []);
+      return rows;
+    }
     fetchData = async () => {
-      var categorylist = [];
-      let categoriesRef = firebase.database().ref('/categories');
-      categoriesRef.on("value", snap => {
-        snap.forEach(function (child) {
-          var temp = {
-            currentitem: child.val(),
-            id: child.key
-          };
-          categorylist.push(temp)
+      try {
+        var categorylist = [];
+        let categoriesRef = firebase.database().ref('/maincategories');
+        categoriesRef.once("value", snap => {
+          const rows = this.transformArray(Object.values(snap.val()));
+          this.setState({categorydata: rows});
+          this.setState({categorydataBackup: rows});
         });
-        this.setState({categorydata: categorylist});
-        this.setState({categorydataBackup: categorylist});
-      });
+
+      }
+      catch (err){
+        Alert.alert('Error retrieving data! Please try again! ', err.message)
+      }
     };
     componentDidMount() {
         this.fetchData();
     }
     search(value) {
       let newItems = [...this.state.categorydataBackup]; // clone the array
-      newItems = newItems.filter(l => {
-        if (l.currentitem.name !== undefined)
-          return l.currentitem.name.toLowerCase().match( value.toLowerCase() );
-      });
-      this.setState({ categorydata: newItems });
+      let searchResults = [];
+      for (let category of newItems) {
+        if (category[0].name.toLowerCase().match(value.toLowerCase())) {
+          searchResults.push(category[0]);
+        }
+        if (category[1] !== undefined && category[1].name.toLowerCase().match(value.toLowerCase())) {
+          searchResults.push(category[1]);
+        }
+      }
+      searchResults = this.transformArray(searchResults);
+      this.setState({ categorydata: searchResults});
     }
     render() {
       let context = null;
@@ -77,8 +90,8 @@ class Home extends React.Component {
               <Input
                 right
                 color="black"
-                autoFocus={true}
                 style={styles.search}
+                onBlur={(e) => Keyboard.dismiss()}
                 placeholder="What are you looking for?"
                 placeholderTextColor={'#8898AA'}
                 onChangeText={this.search.bind(this)}

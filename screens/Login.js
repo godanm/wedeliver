@@ -1,13 +1,12 @@
 import React from "react";
 import {
-    ImageBackground,
-    Image,
-    StyleSheet,
-    StatusBar,
-    Dimensions,
-    Alert,
-    AsyncStorage,
-    View
+  ImageBackground,
+  StyleSheet,
+  StatusBar,
+  Dimensions,
+  Alert,
+  AsyncStorage,
+  View, Keyboard
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
@@ -90,7 +89,7 @@ class Login extends React.Component {
 
     render() {
         return (
-      <View flex style={styles.container}>
+      <View flex style={styles.container} accessible={true}>
         <Block flex center>
           <ImageBackground
             source={Images.Onboarding}
@@ -112,17 +111,22 @@ class Login extends React.Component {
                     <Input
                         right
                         ref="username"
-                        autoFocus={true}
                         isreq
                         placeholder="Email"
                         autoCapitalize = 'none'
+                        returnKeyType="next"
+                        onSubmitEditing={(event) => {
+                          this['password'].focusOnTextInput();
+                        }}
                         onChangeText={value => this.onChangeText('email', value)}
                     />
                     <Input
                         right
-                        ref="password"
+                        ref = {password => (this.password = password)}
                         placeholder="Password"
+                        blurOnSubmit={false}
                         onSubmitEditing={this._onPressButton}
+                        onBlur={(e) => Keyboard.dismiss()}
                         onChangeText={value => this.onChangeText('password', value)}
                         password viewPass/>
                     <Text/>

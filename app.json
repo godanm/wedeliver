@@ -2,6 +2,7 @@
   "expo": {
     "name": "Spice Hub Shopping!",
     "slug": "spice-hub-az",
+    "icon": "./assets/icon.png",
     "privacy": "public",
     "sdkVersion": "38.0.0",
     "platforms": [
@@ -11,7 +12,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "splash": {
-      "image": "./assets/imgs/splash.png",
+      "image": "./assets/imgs/splash.jpeg",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },

@@ -1,52 +1,141 @@
 {
-  "Groups" : {
-    "Group" : {
-      "avatar" : "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      "groupName" : "Christmas outing group",
-      "members" : [ {
-        "avatar" : "https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
-        "email" : "reachgodan@gmail.com",
-        "fName" : "Godan",
-        "lName" : "Mannazhi",
-        "phone" : "609-996-2891",
-        "status" : true
-      }, {
-        "avatar" : "https://lh3.googleusercontent.com/-A2N4h5IpkNM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8-AA23jV_C9hvzzazytk25fXh1g.CMID/s64-c/photo.jpg",
-        "email" : "knsudha@gmail.com",
-        "fName" : "Sudha",
-        "lName" : "Godan",
-        "status" : true
-      } ],
-      "trips" : [ {
-        "activity" : [ {
-          "activityName" : "Hike near cabin",
-          "cost" : 0,
-          "location" : "",
-          "plannedDate" : "12/25/2019"
-        }, {
-          "activityName" : "Visit Sedona",
-          "cost" : 0,
-          "location" : "",
-          "plannedDate" : "12/26/2019"
-        } ],
-        "remarks" : "Trip to Kohls Ranch",
-        "status" : true,
-        "thumpbnails" : "https://images.unsplash.com/photo-1450226840871-893c2e0bf620?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "todo" : [ {
-          "dueDate" : "12/10/2019",
-          "owner" : "knsudha@gmail.com",
-          "status" : "pending",
-          "task" : "Finalize on food"
-        }, {
-          "dueDate" : "12/23/2019",
-          "owner" : "reachgodan@gmail.com",
-          "status" : "pending",
-          "task" : "Buy groceries"
-        } ],
-        "tripdestination" : "Kohls Ranch",
-        "tripend" : "12/27/2019",
-        "tripstart" : "12/24/2019"
-      } ]
+  'Rice': {
+    '1': {
+      'brand': 'Nirapara',
+      'description': ' Matta Rice',
+      'weight': '10 kg ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 19.99 '
+    },
+    '2': {
+      'brand': 'Double Horse',
+      'description': 'Matta Rice',
+      'weight': '10 kg ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 19.99 '
+    },
+    '3': {
+      'brand': 'Pavizham',
+      'description': 'Matta Rice',
+      'weight': '10 kg ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 19.99 '
+    },
+    '4': {
+      'brand': 'Robin Food',
+      'description': 'Red Bran Matta Rice',
+      'weight': '10 kg ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 19.99 '
+    },
+    '5': {
+      'brand': 'Double Horse',
+      'description': 'Jaya Rice',
+      'weight': '10 kg ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 19.99 '
+    },
+    '6': {
+      'brand': 'Nirapara',
+      'description': 'Jeerakasala Rice (Out of Stock)',
+      'weight': '2 kg ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 8.99 '
+    },
+    '7': {
+      'brand': 'Par Excellence',
+      'description': 'Parboiled Rice',
+      'weight': '25 lb ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 17.99 '
+    },
+    '8': {
+      'brand': 'Double Horse',
+      'description': 'Samba Broken Wheat',
+      'weight': '1 kg ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 4.49 '
+    },
+    '9': {
+      'brand': 'Par Excellence',
+      'description': 'White Long Grain Rice (Pachari)',
+      'weight': '10 lb ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 9.99 '
+    },
+    '10': {
+      'brand': 'Brahmins',
+      'description': 'Broken Wheat',
+      'weight': '1 kg ',
+      'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      'price': '$ 3.49 '
     }
   }
+},
+{
+'Flour': {
+'1000': {
+'brand': 'Brahmins',
+'description': ' Fried Rava',
+'weight': '1 kg ',
+'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+'price': '$ 3.99 '
+},
+'1001': {
+'brand': 'Brahmins',
+'description': 'Premium Wheat flour',
+'weight': '1 kg ',
+'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+'price': '$ 3.99 '
+},
+'1002': {
+'brand': 'Brahmins',
+'description': 'White Puttu Podi',
+'weight': '1 kg ',
+'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+'price': '$ 3.99 '
+},
+'1003': {
+'brand': 'Brahmins',
+'description': 'Chemba Puttu Podi',
+'weight': '1 kg ',
+'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+'price': '$ 3.99 '
+},
+'1004': {
+'brand': 'Brahmins',
+'description': 'Wheat Puttu Podi',
+'weight': '1 kg ',
+'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+'price': '$ 3.99 '
+},
+'1005': {
+'brand': 'Brahmins',
+'description': 'Easy Palappam Mix',
+'weight': '1 kg ',
+'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+'price': '$ 4.49 '
+},
+'1006': {
+'brand': 'Brahmins',
+'description': 'Appam / Idiyappam Podi',
+'weight': '1 kg ',
+'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+'price': '$ 3.99 '
+},
+'1007': {
+'brand': 'Periyar',
+'description': 'Instant Idli Mix',
+'weight': '1 kg ',
+'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+'price': '$ 3.89 '
+},
+'1008': {
+'brand': 'Periyar',
+'description': 'Instant Dosa Mix',
+'weight': '1 kg ',
+'thumbnail': 'https://images.unsplash.com/photo-1568879844413-7827cbf81261?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+'price': '$ 3.89 '
+}
+}
 }

@@ -6,8 +6,6 @@ import {
     createAppContainer
 } from "react-navigation";
 
-import { Block } from "galio-framework";
-
 // screens
 import Home from "../screens/Home";
 import Signup from "../screens/Signup";
@@ -67,7 +65,7 @@ const transitionConfig = (transitionProps, prevTransitionProps) => ({
 });
 
 const HomeStack = createStackNavigator(
-    {
+{
       Login: {
           screen: Login,
           navigationOptions: {
